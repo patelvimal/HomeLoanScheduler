@@ -7,8 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-
-
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import LoanResult from './LoanResult';
 import './App.scss';
 
 function App() {
@@ -21,30 +22,54 @@ function App() {
 					</IconButton>
 					<Typography variant="h6">
 						Home Loan Calculator
-    			</Typography>
-					<Button color="inherit">Login</Button>
+	    			</Typography>		
 				</Toolbar>
 			</AppBar>
-			<Container maxWidth="lg">
-				<TextField
-					required
-					id="filled-required"
-					label="Loan Amount"
-					variant="filled"
-				/>
-				<TextField
-					required
-					id="filled-required"
-					label="Interest Rate"
-					variant="filled"
-				/>
-				<TextField
-					required
-					id="filled-required"
-					label="Loan Tenure"
-					variant="filled"
-				/>
-				<Button variant="contained" color="primary">Calculate</Button>
+			<Container maxWidth="lg" className="calc-form">
+				<Grid container spacing={3}>
+					<Grid item xs={3}>
+						<TextField
+							required
+							id="filled-required"
+							label="Loan Amount"
+							variant="outlined"
+							size="small"
+						/>
+					</Grid>
+					<Grid item xs={3}>
+						<TextField
+							required
+							id="filled-required"
+							label="Interest Rate"
+							variant="outlined"
+							size="small"
+						/>
+					</Grid>
+					<Grid item xs={3}>
+						<TextField
+							required
+							id="filled-required"
+							label="Loan Tenure"
+							variant="outlined"
+							size="small"
+						/>
+					</Grid>
+					<Grid item xs={3}>
+					<TextField
+							required
+							id="filled-required"
+							label="PrePayment/Month"
+							variant="outlined"
+							size="small"
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<Button variant="contained" color="primary">Calculate</Button>
+					</Grid>
+					<Grid item xs={12}>
+						<LoanResult/>
+					</Grid>
+				</Grid>
 			</Container>
 		</React.Fragment>
 	);
