@@ -13,33 +13,31 @@ export default class LoanResult extends Component {
     constructor(){
         super();
         this.state= {
-            rows : [{name:'Demo',calories:'45',fat:54,protein:45}]   
+            rows : this.props   
         }
     }
     render() {
-        const {rows} = this.state;
+        const {dataSource} = this.props;
         return (
             <TableContainer component={Paper}>
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Dessert (100g serving)</TableCell>
-                            <TableCell align="right">Calories</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                            <TableCell align="right">principal</TableCell>
+                            <TableCell align="right">interest</TableCell>
+                            <TableCell align="right">balance</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => (
+                        {dataSource && dataSource.map(row => (
                             <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell>
+                                <TableCell align="right">{row.principal}</TableCell>
+                                <TableCell align="right">{row.interest}</TableCell>
+                                <TableCell align="right">{row.balance}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

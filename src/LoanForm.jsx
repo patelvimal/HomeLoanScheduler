@@ -28,7 +28,9 @@ export default class LoanForm extends Component {
     }
     onSubmit=()=> {
         var result = calcHomeLoan(this.state.loanAmount,this.state.emi,this.state.interestRate);
-        alert(JSON.stringify(result));
+        this.setState({
+            rows:result
+        })
     }
 
     render() {
@@ -92,7 +94,7 @@ export default class LoanForm extends Component {
 						<Button variant="contained" color="primary" onClick={this.onSubmit}>Calculate</Button>
 					</Grid>
 					<Grid item xs={12}>
-						<LoanResult/>
+                        <LoanResult dataSource={rows}/>
 					</Grid>
 				</Grid>
 			</Container>
