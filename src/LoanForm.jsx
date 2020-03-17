@@ -21,16 +21,19 @@ export default class LoanForm extends Component {
     }
 
     onChange=(event)=>{
-        console.log(event);
-        //this.state[event.name]
+        //console.log(event);
+        this.setState({
+            [event.target.name]:event.target.value
+        })
     }
-    onSubmit() {
+    onSubmit=()=> {
         var result = calcHomeLoan(this.state.loanAmount,this.state.emi,this.state.interestRate);
         alert(JSON.stringify(result));
     }
 
     render() {
         const {rows} = this.state;
+        console.log(JSON.stringify(this.state));
         return (
             <Container maxWidth="lg" className="calc-form">
 				<Grid container spacing={3}>
@@ -41,6 +44,7 @@ export default class LoanForm extends Component {
 							label="Loan Amount"
 							variant="outlined"
                             size="small"
+                            name="loanAmount"
                             onChange={this.onChange}
 						/>
 					</Grid>
@@ -50,7 +54,9 @@ export default class LoanForm extends Component {
 							id="filled-required"
 							label="Interest Rate"
 							variant="outlined"
-							size="small"
+                            size="small"
+                            name="interestRate"
+                            onChange={this.onChange}
 						/>
 					</Grid>
 					<Grid item xs={3}>
@@ -68,7 +74,9 @@ export default class LoanForm extends Component {
 							id="filled-required"
 							label="EMI"
 							variant="outlined"
-							size="small"
+                            size="small"
+                            name="emi"
+                            onChange={this.onChange}
 						/>
 					</Grid>
                     <Grid item xs={3}>
