@@ -13,7 +13,7 @@ export default class LoanForm extends Component {
     constructor(){
         super();
         this.state= {
-            rows : [{name:'Demo',calories:'45',fat:54,protein:45}]  ,
+            rows :null  ,
             interestRate:null,
             emi:null,
             loanAmount:null 
@@ -35,10 +35,18 @@ export default class LoanForm extends Component {
 
     render() {
         const {rows} = this.state;
-        console.log(JSON.stringify(this.state));
+        const resultView =()=>{
+			return 	<Grid container spacing="3">
+						<Grid item xs={12}>
+							<LoanResult dataSource={rows}/>
+						</Grid>
+					</Grid>
+		};
         return (
             <Container maxWidth="lg" className="calc-form">
-				<Grid container spacing={3}>
+				
+				{ !rows ? 
+					<Grid container spacing={3}>
 					<Grid item xs={3}>
 						<TextField
 							required
@@ -93,10 +101,9 @@ export default class LoanForm extends Component {
 					<Grid item xs={12}>
 						<Button variant="contained" color="primary" onClick={this.onSubmit}>Calculate</Button>
 					</Grid>
-					<Grid item xs={12}>
-                        <LoanResult dataSource={rows}/>
-					</Grid>
 				</Grid>
+	:
+				resultView()}
 			</Container>
         )
     }
