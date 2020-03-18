@@ -2,11 +2,16 @@ function calculateInterest(){
 
 }
 
-export const calcHomeLoan = (loadAmount,emi,interestRate,prepayment,startDate) => {
+export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) => {
     var result=[];
-    var perdayInterestAmount= (loadAmount * (interestRate/100))/365;
-    var monthlyInterest = perdayInterestAmount *30;
-    result.push({principal:emi-monthlyInterest,interest:monthlyInterest,balance:loadAmount-(emi-monthlyInterest) });
+    var loanBalance=loanAmount;
+    while( 0 < loanBalance) {
+        var perdayInterestAmount= ((loanBalance * (interestRate/100))/365).toFixed(2);
+        var monthlyInterest = (perdayInterestAmount *30).toFixed(2);
+        loanBalance = (loanBalance-(emi-monthlyInterest)).toFixed(2);
+        result.push({principal:(emi-monthlyInterest).toFixed(2),interest:monthlyInterest,balance: loanBalance});
+    }
+    console.log(result);
     return result;
 }
 
