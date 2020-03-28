@@ -59,8 +59,8 @@ export default class LoanForm extends Component {
                 <Typography component="h6" variant="h4" align="center" color="textPrimary" gutterBottom>
                     Loan Information
                 </Typography>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} md={6}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} >
                         <TextField
                             required
                             error={formSubmitted && !loanAmount}
@@ -76,7 +76,7 @@ export default class LoanForm extends Component {
                             helperText={(formSubmitted && !loanAmount)? "Loan Amount is Required!" : null}
 						/>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12}>
                         <TextField
                             required
                             error={formSubmitted && !emi}
@@ -89,7 +89,7 @@ export default class LoanForm extends Component {
                             helperText={(formSubmitted && !emi)? "EMI is Required!" : null}
 						/>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12}>
                         <TextField
                             required
                             error={formSubmitted && !interestRate}
@@ -105,7 +105,7 @@ export default class LoanForm extends Component {
                             helperText={(formSubmitted && !interestRate)? "Interest Rate is Required!" : null}
 						/>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12}>
                         <TextField
 							required
 							id="filled-required"

@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {calcHomeLoan} from './shared/calculate-service';
-
+import Grid from '@material-ui/core/Grid';
 import './assets/App.scss';
 
 export default class App extends Component {
@@ -37,12 +37,14 @@ export default class App extends Component {
 						</Typography>
 					</Toolbar>
 				</AppBar>
-				<div className="container">
-					<LoanForm onSubmit={this.onFormSubmit} />
-				</div>
-				<div className="">
-					{this.state.showResult ? <LoanReport result={this.state.loanScheduleResult}/> : null}
-				</div>
+				<Grid container spacing={3} className="grid-container">
+                    <Grid item xs={12} md={4} className="form">
+						<LoanForm onSubmit={this.onFormSubmit} />
+					</Grid>
+					<Grid item xs={12} md={8}>
+						{this.state.showResult ? <LoanReport result={this.state.loanScheduleResult}/> : null}
+					</Grid>
+				</Grid>
 			</React.Fragment >
 		)
 	}

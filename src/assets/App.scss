@@ -19,3 +19,12 @@ code {
   width: 40%;
   margin: 50px auto;
 }
+
+.grid-container {
+  margin: 25px auto;
+
+  > div {
+    padding: 25px;
+  }
+
+}
