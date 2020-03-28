@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import './LoanForm.scss';
 
 export default class LoanForm extends Component {
@@ -24,10 +25,13 @@ export default class LoanForm extends Component {
     }
 
     onChange = (event) => {
-        //console.log(event);
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+        const re = /^[0-9\b]+$/;
+        if (event.target.value === '' || re.test(event.target.value)) {
+            console.log(re.test(event.target.value));
+            this.setState({
+                [event.target.name]: event.target.value
+            })
+        }
     }
     onSubmit = () => {
         this.setState({
@@ -49,10 +53,11 @@ export default class LoanForm extends Component {
 
     render() {
         const { formSubmitted,loanAmount,emi,interestRate,prePayment } = this.state;
+
         return (
             <React.Fragment>
-                <Typography variant="h6" gutterBottom className="form-title">
-                    Loan Details
+                <Typography component="h6" variant="h4" align="center" color="textPrimary" gutterBottom>
+                    Loan Information
                 </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
@@ -65,6 +70,10 @@ export default class LoanForm extends Component {
                             name="loanAmount"
                             onChange={this.onChange}
                             fullWidth
+                            InputProps={{
+                                // startAdornment: <InputAdornment>(In Lakh)</InputAdornment>,
+                            }}
+                            helperText={(formSubmitted && !loanAmount)? "Loan Amount is Required!" : null}
 						/>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -77,6 +86,7 @@ export default class LoanForm extends Component {
                             name="emi"
                             onChange={this.onChange}
                             fullWidth
+                            helperText={(formSubmitted && !emi)? "EMI is Required!" : null}
 						/>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -89,6 +99,10 @@ export default class LoanForm extends Component {
                             name="interestRate"
                             onChange={this.onChange}
                             fullWidth
+                            InputProps={{
+                                endAdornment: <InputAdornment>%</InputAdornment>,
+                            }}
+                            helperText={(formSubmitted && !interestRate)? "Interest Rate is Required!" : null}
 						/>
                     </Grid>
                     <Grid item xs={12} md={6}>

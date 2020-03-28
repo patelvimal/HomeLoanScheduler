@@ -7,33 +7,41 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {calcHomeLoan} from '../../shared/calculate-service';
+
 import './LoanReport.scss';
+
 export default class LoanResult extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state= {
-            rows : this.props   
+            result : null
         }
     }
+
+    componentDidMount=()=>{
+        
+    }
+
     render() {
-        const {dataSource} = this.props;
+        const {result} = this.props;
         return (
             <TableContainer component={Paper}>
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Dessert (100g serving)</TableCell>
+                            <TableCell>Month - Year</TableCell>
                             <TableCell align="right">principal</TableCell>
                             <TableCell align="right">interest</TableCell>
                             <TableCell align="right">balance</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {dataSource && dataSource.map(row => (
-                            <TableRow key={row.name}>
+                        {result && result.map(row => (
+                            <TableRow key={row.monthYear}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {row.monthYear}
                                 </TableCell>
                                 <TableCell align="right">{row.principal}</TableCell>
                                 <TableCell align="right">{row.interest}</TableCell>
