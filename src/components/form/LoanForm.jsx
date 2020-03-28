@@ -12,12 +12,15 @@ import './LoanForm.scss';
 export default class LoanForm extends Component {
     constructor() {
         super();
+       
         this.state = {
-            rows: null,
             interestRate: null,
             emi: null,
-            loanAmount: null
-        }
+            loanAmount: null,
+            prePayment:null,
+            formSubmitted:false
+        };
+        this.initialState = this.state;
     }
 
     onChange = (event) => {
@@ -27,15 +30,25 @@ export default class LoanForm extends Component {
         })
     }
     onSubmit = () => {
-        this.props.onSubmit(this.state);
-        // var result = calcHomeLoan(this.state.loanAmount, this.state.emi, this.state.interestRate);
-        // this.setState({
-        //     rows: result
-        // })
+        this.setState({
+            formSubmitted: true
+        });
+        if (this.isFormValid()) {
+            this.props.onSubmit(this.state);
+        }
+    }
+
+    isFormValid =()=> {
+        const { loanAmount,emi,interestRate } = this.state;
+        return !!(loanAmount && emi && interestRate);
+    }
+
+    onReset = () => {
+        this.setState(this.initialState);
     }
 
     render() {
-        const { rows } = this.state;
+        const { formSubmitted,loanAmount,emi,interestRate,prePayment } = this.state;
         return (
             <React.Fragment>
                 <Typography variant="h6" gutterBottom className="form-title">
@@ -44,7 +57,8 @@ export default class LoanForm extends Component {
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
                         <TextField
-							required
+                            required
+                            error={formSubmitted && !loanAmount}
 							id="filled-required"
 							label="Loan Amount"
                             size="small"
@@ -55,7 +69,8 @@ export default class LoanForm extends Component {
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <TextField
-							required
+                            required
+                            error={formSubmitted && !emi}
 							id="filled-required"
 							label="EMI"
                             size="small"
@@ -66,7 +81,8 @@ export default class LoanForm extends Component {
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <TextField
-							required
+                            required
+                            error={formSubmitted && !interestRate}
 							id="filled-required"
 							label="Interest Rate"
                             size="small"
@@ -81,10 +97,12 @@ export default class LoanForm extends Component {
 							id="filled-required"
 							label="PrePayment/Month"
                             size="small"
+                            name="prePayment"
                             fullWidth
 						/>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="action-buttons">
+                        <Button  onClick={this.onReset}>Reset</Button>
                         <Button variant="contained" color="primary" onClick={this.onSubmit}>Calculate</Button>
                     </Grid>
                 </Grid>

@@ -9,13 +9,15 @@ export default class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-
+			showResult:false
 		};
 	}
 
-
 	onFormSubmit = (loanDetails) => {
 		console.log(loanDetails);
+		this.setState({
+			showResult:true
+		});
 	}
 
 	render() {
@@ -25,7 +27,7 @@ export default class App extends Component {
 					<LoanForm onSubmit={this.onFormSubmit} />
 				</div>
 				<div className="">
-					{/* <LoanReport /> */}
+					{this.state.showResult ? <LoanReport /> : null}
 				</div>
 			</React.Fragment >
 		)
