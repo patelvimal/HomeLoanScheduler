@@ -1,29 +1,34 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import React,{Component} from 'react';
+import LoanForm from './components/form/LoanForm';
+import LoanReport from './components/report/LoanReport';
 
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import LoanForm from './LoanForm';
-import './App.scss';
+import './assets/App.scss';
 
-function App() {
-	return (
-		<React.Fragment>
-			<AppBar position="static">
-				<Toolbar>
-					<IconButton edge="start" color="inherit" aria-label="menu">
-						<MenuIcon />
-					</IconButton>
-					<Typography variant="h6">
-						Home Loan Calculator
-	    			</Typography>		
-				</Toolbar>
-			</AppBar>
-			<LoanForm/>
-		</React.Fragment>
-	);
+export default class App extends Component {
+
+	constructor() {
+		super();
+		this.state = {
+
+		};
+	}
+
+
+	onFormSubmit = (loanDetails) => {
+		console.log(loanDetails);
+	}
+
+	render() {
+		return (
+			<React.Fragment>
+				<div className="container">
+					<LoanForm onSubmit={this.onFormSubmit} />
+				</div>
+				<div className="">
+					{/* <LoanReport /> */}
+				</div>
+			</React.Fragment >
+		)
+	}
+
 }
-
-export default App;
