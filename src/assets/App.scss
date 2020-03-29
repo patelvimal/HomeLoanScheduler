@@ -21,10 +21,15 @@ code {
 }
 
 .grid-container {
-  margin: 25px auto;
+  margin: 15px auto !important;
 
   > div {
-    padding: 25px;
+    padding: 25px !important;
+    
+    &:first-child {
+      BORDER-RIGHT: SOLID 1PX rgba(0, 0, 0, 0.26) !important;  
+    }
   }
+  
 
 }
