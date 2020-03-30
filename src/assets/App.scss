@@ -3,13 +3,17 @@
 body {
   margin: 0;
   padding: 0;
-  //font-family: $roboto-regular;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: $roboto-regular !important;
+  //font-family: $segoe-ui-light !important;
+  //font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   letter-spacing: -0.00833em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+h6 {
+  font-family: $segoe-ui-light !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

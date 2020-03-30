@@ -56,7 +56,7 @@ export default class LoanForm extends Component {
 
         return (
             <React.Fragment>
-                <Typography component="h6" variant="h4" align="center" color="textPrimary" gutterBottom>
+                <Typography component="h5" variant="h5" align="center" color="textPrimary" gutterBottom>
                     Loan Information
                 </Typography>
                 <Grid container spacing={2}>
@@ -65,7 +65,7 @@ export default class LoanForm extends Component {
                             required
                             error={formSubmitted && !loanAmount}
 							id="filled-required"
-							label="Loan Amount"
+							label="Outstanding Loan Amount"
                             size="small"
                             name="loanAmount"
                             onChange={this.onChange}
@@ -73,7 +73,7 @@ export default class LoanForm extends Component {
                             InputProps={{
                                 // startAdornment: <InputAdornment>(In Lakh)</InputAdornment>,
                             }}
-                            helperText={(formSubmitted && !loanAmount)? "Loan Amount is Required!" : null}
+                            helperText={(formSubmitted && !loanAmount)? "Amount is Required!" : null}
 						/>
                     </Grid>
                     <Grid item xs={12}>
