@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  build-and-test:
+  build-test-deploy:
     environment:
       CI: false
     executor:
@@ -13,7 +13,8 @@ jobs:
           steps:
             - run: npm install
             - run: npm run build
+            - run: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --only hosting 
 workflows:
-    build-and-test:
+    build-test-deploy:
       jobs:
-        - build-and-test
+        - build-test-deploy
