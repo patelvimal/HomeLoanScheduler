@@ -39,14 +39,14 @@ export default class App extends Component {
 						</Typography>
 					</Toolbar>
 				</AppBar>
-				<Grid container spacing={0} className="grid-container">
+				{/* <Grid container spacing={0} className="grid-container">
                     <Grid item xs={12} md={4} className="form">
 						<LoanForm onSubmit={this.onFormSubmit} />
 					</Grid>
 					<Grid item xs={12} md={8}>
 						{this.state.showResult ? <LoanReport result={this.state.loanScheduleResult}/> : null}
 					</Grid>
-				</Grid>
+				</Grid> */}
 				</StylesProvider>
 			</React.Fragment >
 		)
