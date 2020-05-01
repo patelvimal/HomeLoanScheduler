@@ -7,10 +7,6 @@ jobs:
       CI: false
     executor:
       name: node/default
-    filters:
-      branches:
-        only:
-          - master
     steps:
       - checkout
       - node/with-cache:
@@ -21,4 +17,11 @@ jobs:
 workflows:
     build-test-deploy:
       jobs:
-        - build-test-deploy
+        - build-test-deploy:
+            requires:
+              - build
+            filters:
+              branches:
+                only: master
+
+            
