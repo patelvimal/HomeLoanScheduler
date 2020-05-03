@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: $roboto-bold;
+  font-family: $roboto-bold !important;
   //font-family: $segoe-ui-light !important;
   //font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   letter-spacing: -0.00833em;
@@ -12,10 +12,6 @@ body {
 }
 
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 // .container {
 //   width: 40%;

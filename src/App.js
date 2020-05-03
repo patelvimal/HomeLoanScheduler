@@ -13,11 +13,23 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
 	root: {
-		background: '#3d4977'
+		background: '#f7f7eb',
+		color:'rgba(0, 0, 0, 0.87)',
+		boxShadow:'0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
 	},
 	headerIcon: {
 		margin: '0 10px'
+	},
+	gridContainer: {
+		marginTop: 25
+	},
+	formContainer: {
+		margin: '0 auto'
+	},
+	formTitle: {
+		margin:'15px 0'
 	}
+
 });
 
 const Header = () => {
@@ -35,7 +47,7 @@ const Header = () => {
 }
 
 const App = () => {
-
+	const classes = useStyles();
 	const onFormSubmit = (loanDetails) => {
 		const { loanAmount, emi, interestRate, prePayment } = loanDetails;
 		var result = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
@@ -50,14 +62,14 @@ const App = () => {
 		<React.Fragment>
 			<StylesProvider injectFirst>
 				<Header/>
-				{/* <Grid container spacing={0} className="grid-container">
-                    <Grid item xs={12} md={4} className="form">
-						<LoanForm onSubmit={this.onFormSubmit} />
+				<Grid container spacing={0} className={classes.gridContainer}>
+                    <Grid item xs={12} md={4} className={classes.formContainer}>
+						<LoanForm onSubmit={onFormSubmit} />
 					</Grid>
-					<Grid item xs={12} md={8}>
+					{/* <Grid item xs={12} md={8}>
 						{this.state.showResult ? <LoanReport result={this.state.loanScheduleResult}/> : null}
-					</Grid>
-				</Grid> */}
+					</Grid> */}
+				</Grid>
 			</StylesProvider>
 		</React.Fragment >
 	)
