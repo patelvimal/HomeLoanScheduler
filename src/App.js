@@ -9,7 +9,7 @@ import { calcHomeLoan } from './shared/calculate-service';
 import Grid from '@material-ui/core/Grid';
 import './assets/App.scss';
 import appIcon from './assets/appIcon.png';
-import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
 	root: {
@@ -24,7 +24,12 @@ const useStyles = makeStyles({
 		marginTop: 25
 	},
 	formContainer: {
-		margin: '0 auto'
+		background: '#f7f7eb',
+		margin: '25px auto',
+		borderRadius:4,
+		border:'solid 1px #e0e0e0',
+		padding: 12,
+		boxShadow:'0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
 	},
 	formTitle: {
 		margin:'15px 0'
@@ -46,6 +51,13 @@ const Header = () => {
 	)
 }
 
+const theme = createMuiTheme({
+	typography: {
+        fontFamily: "Roboto-Regular" 
+    }
+  });
+
+  
 const App = () => {
 	const classes = useStyles();
 	const onFormSubmit = (loanDetails) => {
@@ -61,15 +73,17 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<StylesProvider injectFirst>
-				<Header/>
-				<Grid container spacing={0} className={classes.gridContainer}>
-                    <Grid item xs={12} md={4} className={classes.formContainer}>
-						<LoanForm onSubmit={onFormSubmit} />
-					</Grid>
-					{/* <Grid item xs={12} md={8}>
+				<ThemeProvider theme={theme}>
+					<Header />
+					<Grid container spacing={0} className={classes.gridContainer}>
+						<Grid item xs={12} md={4} className={classes.formContainer}>
+							<LoanForm onSubmit={onFormSubmit} />
+						</Grid>
+						{/* <Grid item xs={12} md={8}>
 						{this.state.showResult ? <LoanReport result={this.state.loanScheduleResult}/> : null}
 					</Grid> */}
-				</Grid>
+					</Grid>
+				</ThemeProvider>
 			</StylesProvider>
 		</React.Fragment >
 	)
