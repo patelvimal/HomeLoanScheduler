@@ -8,7 +8,6 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import './LoanForm.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import Avatar from '@material-ui/core/Avatar';
@@ -28,43 +27,49 @@ const useStyles = makeStyles({
 });
 
 
-const LoanForm = () => {
-    const [loanAmount, setLoanAmount] = useState(null);
-    const [emi, setEmi] = useState(null);
-    const [interestRate, setInterestRate] = useState(null);
+const LoanForm = (props) => {
+    const INITIAL_STATE ={
+        loanAmount:null,
+        emi:null,
+        interestRate:null,
+        prePayment:null
+    };
+    const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
     const [formSubmitted,setFormStatus] = useState(false);
-    //const inputFieldStyle = "Standard";
-    //const inputFieldStyle = "Filled";
-    const inputFieldStyle = "Outlined";
-
     const classes = useStyles();
     
     const onReset = () => {
-
+        setLoanInfo(INITIAL_STATE);
     }
 
-    const onChange = ()=> {
-
+    const onChange = (event)=> {
+        const {name,value} = event.target;
+        setLoanInfo(prevState=>({
+            ...prevState,
+            [name]: value
+        }))
     }
 
     const onSubmit = (event) => {
         setFormStatus(true);
+        if (isFormValid() && typeof props.onSubmit === 'function') {
+            props.onSubmit(loanInfo);
+        }
         event.preventDefault();
         event.stopPropagation();
     }
 
     
     const isFormValid = () => {
+        const { loanAmount,emi,interestRate } = loanInfo;
         return !!(loanAmount && emi && interestRate);
     }
 
     return (
-        
         <Container component="main" maxWidth="xs" className={classes.root}>
             {/* <Avatar className={classes.avatar}>
             <AccountBalanceIcon />   
             </Avatar> */}
-            
             <Typography component="h1" variant="h5" className={classes.heading}>
                 Loan Information
             </Typography>
@@ -72,29 +77,29 @@ const LoanForm = () => {
                 <TextField
                     required
                     fullWidth
-                    error={formSubmitted && !loanAmount}
+                    error={formSubmitted && !loanInfo.loanAmount}
                     id="loanAmount"
                     label="Outstanding Loan Amount"
                     name="loanAmount"
                     onChange={onChange}
                     //variant={inputFieldStyle}
-                    helperText={(formSubmitted && !loanAmount) ? "Amount is Required!" : null}
+                    helperText={(formSubmitted && !loanInfo.loanAmount) ? "Amount is Required!" : null}
                 />
                 <TextField
                     required
                     fullWidth
-                    error={formSubmitted && !emi}
+                    error={formSubmitted && !loanInfo.emi}
                     id="filled-required"
                     label="EMI"
                     name="emi"
                     onChange={onChange}
                     //variant={inputFieldStyle}
-                    helperText={(formSubmitted && !emi) ? "EMI is Required!" : null}
+                    helperText={(formSubmitted && !loanInfo.emi) ? "EMI is Required!" : null}
                 />
                 <TextField
                     required
                     fullWidth
-                    error={formSubmitted && !interestRate}
+                    error={formSubmitted && !loanInfo.interestRate}
                     id="filled-required"
                     label="Interest Rate"
                     name="interestRate"
@@ -103,13 +108,14 @@ const LoanForm = () => {
                     InputProps={{
                         endAdornment: <InputAdornment>%</InputAdornment>,
                     }}
-                    helperText={(formSubmitted && !interestRate) ? "Interest Rate is Required!" : null}
+                    helperText={(formSubmitted && !loanInfo.interestRate) ? "Interest Rate is Required!" : null}
                 />
                 <TextField
                     required
                     id="filled-required"
                     label="PrePayment/Month"
                     name="prePayment"
+                    onChange={onChange}
                    // variant={inputFieldStyle}
                     fullWidth
                 />
@@ -121,8 +127,17 @@ const LoanForm = () => {
                     onClick={onSubmit}
                     className={classes.submit}
                 >
-                   Submit
-          </Button>
+                Submit
+                </Button>
+                {/* <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    //color="primary"
+                    onClick={onReset}
+                >
+                Reset
+                </Button> */}
             </form>
             {/* <Typography variant="h6" color="inherit" noWrap>
                 Loan Information

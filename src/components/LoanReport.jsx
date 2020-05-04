@@ -7,9 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {calcHomeLoan} from '../../shared/calculate-service';
+//import {calcHomeLoan} from '../../shared/calculate-service';
 
-import './LoanReport.scss';
+// import './LoanReport.scss';
 
 export default class LoanResult extends Component {
 

@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import LoanForm from './components/form/LoanForm';
-import LoanReport from './components/report/LoanReport';
+import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { StylesProvider } from '@material-ui/core/styles';
-import { calcHomeLoan } from './shared/calculate-service';
+import { calcHomeLoan } from '../shared/calculate-service';
 import Grid from '@material-ui/core/Grid';
-import './assets/App.scss';
-import appIcon from './assets/appIcon.png';
+import '../assets/App.scss';
+import appIcon from '../assets/appIcon.png';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { BrowserRouter , Route, Redirect } from "react-router-dom";
+import LoanForm from './LoanForm';
+import LoanResult from './LoanReport';
 
 const useStyles = makeStyles({
 	root: {
@@ -60,16 +61,18 @@ const theme = createMuiTheme({
   
 const App = () => {
 	const classes = useStyles();
+	const [showResultView, setResultView] = useState(false);
+	
 	const onFormSubmit = (loanDetails) => {
 		const { loanAmount, emi, interestRate, prePayment } = loanDetails;
 		var result = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
 
-		this.setState({
-			showResult: true,
-			loanScheduleResult: result
-		});
+		setResultView(true);
+		// this.setState({
+		// 	showResult: true,
+		// 	loanScheduleResult: result
+		// });
 	}
-
 	return (
 		<React.Fragment>
 			<StylesProvider injectFirst>
@@ -77,7 +80,13 @@ const App = () => {
 					<Header />
 					<Grid container spacing={0} className={classes.gridContainer}>
 						<Grid item xs={12} md={4} className={classes.formContainer}>
-							<LoanForm onSubmit={onFormSubmit} />
+							<BrowserRouter>
+								<Route path="/" render={()=><LoanForm onSubmit={onFormSubmit} /> } />
+								<Route path="/result" component={LoanResult} />
+								{showResultView ?  <Redirect to='/result' /> : null}
+							</BrowserRouter>
+							
+							{/* <LoanForm onSubmit={onFormSubmit} /> */}
 						</Grid>
 						{/* <Grid item xs={12} md={8}>
 						{this.state.showResult ? <LoanReport result={this.state.loanScheduleResult}/> : null}
