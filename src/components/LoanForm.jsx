@@ -52,8 +52,11 @@ const LoanForm = (props) => {
 
     const onSubmit = (event) => {
         setFormStatus(true);
-        if (isFormValid() && typeof props.onSubmit === 'function') {
-            props.onSubmit(loanInfo);
+        if (isFormValid()){
+            props.history.push({
+                pathname:'./result',
+                search: '?detail=1'
+            });
         }
         event.preventDefault();
         event.stopPropagation();
