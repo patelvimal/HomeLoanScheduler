@@ -20,4 +20,4 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) =
     return result;
 };
 
-//export default calc { calculateHomeLoan:calcHomeLoan};
+export default calcHomeLoan;
