@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,46 +11,64 @@ import Paper from '@material-ui/core/Paper';
 
 // import './LoanReport.scss';
 
-export default class LoanResult extends Component {
 
-    constructor(props){
-        super(props);
-        this.state= {
-            result : null
-        }
-    }
+const LoanResult =(props)=>{
 
-    componentDidMount=()=>{
-        
-    }
-
-    render() {
-        const {result} = this.props;
-        return (
-            <TableContainer component={Paper}>
-                <Table size="small" aria-label="a dense table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Month - Year</TableCell>
-                            <TableCell align="right">principal</TableCell>
-                            <TableCell align="right">interest</TableCell>
-                            <TableCell align="right">balance</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {result && result.map(row => (
-                            <TableRow key={row.monthYear}>
-                                <TableCell component="th" scope="row">
-                                    {row.monthYear}
-                                </TableCell>
-                                <TableCell align="right">{row.principal}</TableCell>
-                                <TableCell align="right">{row.interest}</TableCell>
-                                <TableCell align="right">{row.balance}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        )
-    }
+    useEffect(() => {
+        //setFullName({ name: 'Marco', familyName: 'Shaw' });
+        //props.location
+    }, []);
+    
+    return (
+        <React.Fragment>
+        <h2>REsult</h2>
+        { JSON.stringify(window.location.search)}
+        </React.Fragment>
+    )
 }
+
+export default LoanResult;
+
+// export default class LoanResult extends Component {
+
+//     constructor(props){
+//         super(props);
+//         this.state= {
+//             result : null
+//         }
+//     }
+
+//     componentDidMount=()=>{
+        
+//     }
+
+//     render() {
+//         const {result} = this.props;
+//         return (
+//             <TableContainer component={Paper}>
+//                 <Table size="small" aria-label="a dense table">
+//                     <TableHead>
+//                         <TableRow>
+//                             <TableCell>Month - Year</TableCell>
+//                             <TableCell align="right">principal</TableCell>
+//                             <TableCell align="right">interest</TableCell>
+//                             <TableCell align="right">balance</TableCell>
+//                         </TableRow>
+//                     </TableHead>
+//                     <TableBody>
+//                         {result && result.map(row => (
+//                             <TableRow key={row.monthYear}>
+//                                 <TableCell component="th" scope="row">
+//                                     {row.monthYear}
+//                                 </TableCell>
+//                                 <TableCell align="right">{row.principal}</TableCell>
+//                                 <TableCell align="right">{row.interest}</TableCell>
+//                                 <TableCell align="right">{row.balance}</TableCell>
+//                             </TableRow>
+//                         ))}
+//                     </TableBody>
+//                 </Table>
+//             </TableContainer>
+//         )
+//     }
+// }

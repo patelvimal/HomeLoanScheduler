@@ -20,7 +20,18 @@ const useStyles = makeStyles({
         '& > div' : {
             margin: '5px 0px'
         }
-    }
+    },
+    gridContainer: {
+		marginTop: 25
+	},
+	formContainer: {
+		background: '#f7f7eb',
+		margin: '25px auto',
+		borderRadius: 4,
+		border: 'solid 1px #e0e0e0',
+		padding: 12,
+		boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
+	}
     // heading:{
     //     fontFamily: 'Roboto-Regular'
     // }
@@ -55,7 +66,7 @@ const LoanForm = (props) => {
         if (isFormValid()){
             props.history.push({
                 pathname:'./result',
-                search: '?detail=1'
+                search: `?loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
             });
         }
         event.preventDefault();
@@ -69,70 +80,72 @@ const LoanForm = (props) => {
     }
 
     return (
-        <Container component="main" maxWidth="xs" className={classes.root}>
-            {/* <Avatar className={classes.avatar}>
+        <Grid container spacing={0} className={classes.gridContainer}>
+            <Grid item xs={12} md={4} className={classes.formContainer}>
+                <Container component="main" maxWidth="xs" className={classes.root}>
+                    {/* <Avatar className={classes.avatar}>
             <AccountBalanceIcon />   
             </Avatar> */}
-            <Typography component="h1" variant="h5" className={classes.heading}>
-                Loan Information
-            </Typography>
-            <form className={classes.form} noValidate>
-                <TextField
-                    required
-                    fullWidth
-                    error={formSubmitted && !loanInfo.loanAmount}
-                    id="loanAmount"
-                    label="Outstanding Loan Amount"
-                    name="loanAmount"
-                    onChange={onChange}
-                    //variant={inputFieldStyle}
-                    helperText={(formSubmitted && !loanInfo.loanAmount) ? "Amount is Required!" : null}
-                />
-                <TextField
-                    required
-                    fullWidth
-                    error={formSubmitted && !loanInfo.emi}
-                    id="filled-required"
-                    label="EMI"
-                    name="emi"
-                    onChange={onChange}
-                    //variant={inputFieldStyle}
-                    helperText={(formSubmitted && !loanInfo.emi) ? "EMI is Required!" : null}
-                />
-                <TextField
-                    required
-                    fullWidth
-                    error={formSubmitted && !loanInfo.interestRate}
-                    id="filled-required"
-                    label="Interest Rate"
-                    name="interestRate"
-                    onChange={onChange}
-                    //variant={inputFieldStyle}
-                    InputProps={{
-                        endAdornment: <InputAdornment>%</InputAdornment>,
-                    }}
-                    helperText={(formSubmitted && !loanInfo.interestRate) ? "Interest Rate is Required!" : null}
-                />
-                <TextField
-                    required
-                    id="filled-required"
-                    label="PrePayment/Month"
-                    name="prePayment"
-                    onChange={onChange}
-                   // variant={inputFieldStyle}
-                    fullWidth
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    onClick={onSubmit}
-                    className={classes.submit}
-                >
-                Submit
+                    <Typography component="h1" variant="h5" className={classes.heading}>
+                        Loan Information
+                    </Typography>
+                    <form className={classes.form} noValidate>
+                        <TextField
+                            required
+                            fullWidth
+                            error={formSubmitted && !loanInfo.loanAmount}
+                            id="loanAmount"
+                            label="Outstanding Loan Amount"
+                            name="loanAmount"
+                            onChange={onChange}
+                            //variant={inputFieldStyle}
+                            helperText={(formSubmitted && !loanInfo.loanAmount) ? "Amount is Required!" : null}
+                        />
+                        <TextField
+                            required
+                            fullWidth
+                            error={formSubmitted && !loanInfo.emi}
+                            id="filled-required"
+                            label="EMI"
+                            name="emi"
+                            onChange={onChange}
+                            //variant={inputFieldStyle}
+                            helperText={(formSubmitted && !loanInfo.emi) ? "EMI is Required!" : null}
+                        />
+                        <TextField
+                            required
+                            fullWidth
+                            error={formSubmitted && !loanInfo.interestRate}
+                            id="filled-required"
+                            label="Interest Rate"
+                            name="interestRate"
+                            onChange={onChange}
+                            //variant={inputFieldStyle}
+                            InputProps={{
+                                endAdornment: <InputAdornment>%</InputAdornment>,
+                            }}
+                            helperText={(formSubmitted && !loanInfo.interestRate) ? "Interest Rate is Required!" : null}
+                        />
+                        <TextField
+                            required
+                            id="filled-required"
+                            label="PrePayment/Month"
+                            name="prePayment"
+                            onChange={onChange}
+                            // variant={inputFieldStyle}
+                            fullWidth
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            onClick={onSubmit}
+                            className={classes.submit}
+                        >
+                            Submit
                 </Button>
-                {/* <Button
+                        {/* <Button
                     type="button"
                     fullWidth
                     variant="contained"
@@ -141,49 +154,10 @@ const LoanForm = (props) => {
                 >
                 Reset
                 </Button> */}
-            </form>
-            {/* <Typography variant="h6" color="inherit" noWrap>
-                Loan Information
-                </Typography>
-            <Grid container spacing={2}>
-                <Grid item xs={12} >
-                   
-                </Grid>
-                <Grid item xs={12}>
-                    
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        error={formSubmitted && !interestRate}
-                        id="filled-required"
-                        label="Interest Rate"
-                        variant="outlined"
-                        name="interestRate"
-                        onChange={this.onChange}
-                        fullWidth
-                        InputProps={{
-                            endAdornment: <InputAdornment>%</InputAdornment>,
-                        }}
-                        helperText={(formSubmitted && !interestRate) ? "Interest Rate is Required!" : null}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        id="filled-required"
-                        label="PrePayment/Month"
-                        variant="outlined"
-                        name="prePayment"
-                        fullWidth
-                    />
-                </Grid> 
-                <Grid item xs={12} className="action-buttons">
-                    <Button onClick={onReset}>Reset</Button>
-                    <Button variant="contained" color="primary" onClick={onSubmit}>Calculate</Button>
-                </Grid>
-            </Grid>*/}
-        </Container>
+                    </form>
+                </Container>
+            </Grid>
+        </Grid>
     )
 }
 
