@@ -62,9 +62,9 @@ const LoanResult =(props)=>{
                     <Table stickyHeader  aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell>Month - Year</StyledTableCell>
-                                <StyledTableCell align="right">principal</StyledTableCell>
-                                <StyledTableCell align="right">interest</StyledTableCell>
+                                <StyledTableCell>Year</StyledTableCell>
+                                <StyledTableCell align="right">Principal</StyledTableCell>
+                                <StyledTableCell align="right">Interest</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
