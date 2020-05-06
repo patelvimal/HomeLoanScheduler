@@ -10,7 +10,7 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) =
     while( 0 < loanBalance) {
         var perdayInterestAmount= ((loanBalance * (interestRate/100))/365);
         var monthlyInterest = (perdayInterestAmount *30);
-        loanBalance = (loanBalance-(emi-monthlyInterest));
+        loanBalance = (loanBalance-(emi-monthlyInterest) - prepayment);
         var month = monthNames[today.getMonth()];
         result.push({
             month: month , 
