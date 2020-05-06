@@ -6,7 +6,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {calcHomeLoan} from '../shared/calculate-service';
+import {calcHomeLoan,generateSummary,groupBy} from '../shared/calculate-service';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 
@@ -22,8 +22,12 @@ const useStyles = makeStyles({
 		padding: 12,
 		boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
     },
-    container: {
+    detail: {
         maxHeight: '80vh',
+    },
+    summery: {
+        maxHeight: '40vh',
+        marginBottom:25
     },
 });
 
@@ -48,30 +52,53 @@ const StyledTableRow = withStyles((theme) => ({
 const LoanResult =(props)=>{
     const classes = useStyles();
     const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(window.location.search)
-    const result = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
+    const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
+    const loanSummary = generateSummary(loanDetail,"year");
 
     return (
         <Grid container spacing={0} className={classes.gridContainer}>
             <Grid item xs={12} md={6} className={classes.formContainer}>
-                <TableContainer className={classes.container}>
+                <TableContainer className={classes.summery}>
                     <Table stickyHeader  aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>Month - Year</StyledTableCell>
                                 <StyledTableCell align="right">principal</StyledTableCell>
                                 <StyledTableCell align="right">interest</StyledTableCell>
-                                <StyledTableCell align="right">balance</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {result && result.map(row => (
+                            {loanSummary && loanSummary.map(row => (
                                 <StyledTableRow  key={row.monthYear}>
                                     <StyledTableCell  component="th" scope="row">
-                                        {row.monthYear}
+                                    {row.year}
                                     </StyledTableCell >
-                                    <StyledTableCell  align="right">{row.principal}</StyledTableCell >
-                                    <StyledTableCell  align="right">{row.interest}</StyledTableCell >
-                                    <StyledTableCell  align="right">{row.balance}</StyledTableCell >
+                                    <StyledTableCell  align="right">{row.principal.toFixed(2)}</StyledTableCell >
+                                    <StyledTableCell  align="right">{row.interest.toFixed(2)}</StyledTableCell >
+                                </StyledTableRow >
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TableContainer className={classes.detail}>
+                    <Table stickyHeader  aria-label="a dense table">
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell>Month - Year</StyledTableCell>
+                                <StyledTableCell align="right">Principal</StyledTableCell>
+                                <StyledTableCell align="right">Interest</StyledTableCell>
+                                <StyledTableCell align="right">Balance</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {loanDetail && loanDetail.map(row => (
+                                <StyledTableRow  key={row.monthYear}>
+                                    <StyledTableCell  component="th" scope="row">
+                                        {row.month} - {row.year}
+                                    </StyledTableCell >
+                                    <StyledTableCell  align="right">{row.principal.toFixed(2)}</StyledTableCell >
+                                    <StyledTableCell  align="right">{row.interest.toFixed(2)}</StyledTableCell >
+                                    <StyledTableCell  align="right">{row.balance.toFixed(2)}</StyledTableCell >
                                 </StyledTableRow >
                             ))}
                         </TableBody>
