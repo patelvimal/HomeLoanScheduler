@@ -9,7 +9,11 @@ import Paper from '@material-ui/core/Paper';
 import {calcHomeLoan,generateSummary,groupBy} from '../shared/calculate-service';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
-
+import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
+    Line, LineChart, Legend, ResponsiveContainer, PieChart, Pie, Bar,
+    BarChart, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ComposedChart,
+    RadialBarChart, RadialBar, Treemap } from 'recharts';
+  
 const useStyles = makeStyles({
     gridContainer: {
 		marginTop: 25
@@ -29,6 +33,9 @@ const useStyles = makeStyles({
         maxHeight: '40vh',
         marginBottom:25
     },
+    chart: {
+        height:'50vh'
+    }
 });
 
 const StyledTableCell = withStyles((theme) => ({
@@ -54,6 +61,12 @@ const LoanResult =(props)=>{
     const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(window.location.search)
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = generateSummary(loanDetail,"year");
+
+    const renderColorfulLegendText = (value, entry) => {
+        const { color } = entry.payload;
+      
+      return <span style={{ color }}>{value}</span>;
+    }
 
     return (
         <Grid container spacing={0} className={classes.gridContainer}>
@@ -105,6 +118,40 @@ const LoanResult =(props)=>{
                     </Table>
                 </TableContainer>
             </Grid>
+            <Grid xs={12} md={6}>
+                <div className={classes.chart}>
+                    <ResponsiveContainer>
+                    <BarChart width={730} height={250} data={loanSummary}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" />
+                            {/* <YAxis yAxisId="a" /> */}
+                            {/* <YAxis yAxisId="b" orientation="right" /> */}
+                            <Tooltip />
+                            <Legend />
+                            <Bar yAxisId="a" dataKey="principal" fill="#8884d8" />
+                            <Bar yAxisId="b" dataKey="interest" fill="#82ca9d" />
+                        </BarChart>
+                    </ResponsiveContainer>
+                    <ResponsiveContainer>
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={loanSummary}
+                            margin={{
+                                top: 5, right: 30, left: 20, bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" dataKey="principal" stroke="#8884d8" strokeWidth={2} activeDot={{ r: 8 }} />
+                            <Line type="monotone" dataKey="interest" stroke="#82ca9d" strokeWidth={2}/>
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
+            </Grid>
         </Grid>
     )
 }
@@ -127,47 +174,3 @@ const parseQueryStringToObject = (queryString)=>{
     }
     return obj;
 }
-
-// export default class LoanResult extends Component {
-
-//     constructor(props){
-//         super(props);
-//         this.state= {
-//             result : null
-//         }
-//     }
-
-//     componentDidMount=()=>{
-        
-//     }
-
-//     render() {
-//         const {result} = this.props;
-//         return (
-//             <TableContainer component={Paper}>
-//                 <Table size="small" aria-label="a dense table">
-//                     <TableHead>
-//                         <TableRow>
-//                             <TableCell>Month - Year</TableCell>
-//                             <TableCell align="right">principal</TableCell>
-//                             <TableCell align="right">interest</TableCell>
-//                             <TableCell align="right">balance</TableCell>
-//                         </TableRow>
-//                     </TableHead>
-//                     <TableBody>
-//                         {result && result.map(row => (
-//                             <TableRow key={row.monthYear}>
-//                                 <TableCell component="th" scope="row">
-//                                     {row.monthYear}
-//                                 </TableCell>
-//                                 <TableCell align="right">{row.principal}</TableCell>
-//                                 <TableCell align="right">{row.interest}</TableCell>
-//                                 <TableCell align="right">{row.balance}</TableCell>
-//                             </TableRow>
-//                         ))}
-//                     </TableBody>
-//                 </Table>
-//             </TableContainer>
-//         )
-//     }
-// }
