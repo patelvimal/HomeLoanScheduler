@@ -82,7 +82,7 @@ const LoanResult =(props)=>{
                         </TableHead>
                         <TableBody>
                             {loanSummary && loanSummary.map(row => (
-                                <StyledTableRow  key={row.monthYear}>
+                                <StyledTableRow  key={row.year}>
                                     <StyledTableCell  component="th" scope="row">
                                     {row.year}
                                     </StyledTableCell >
@@ -134,36 +134,36 @@ const LoanResult =(props)=>{
                             height={300}
                             data={loanSummary}
                             margin={{
+                                top: 15, right: 0, left: 20, bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="2 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="principal" fill="#82ca9d" name="Principal" legendType="square"/>
+                            <Bar dataKey="interest" fill="#8884d8" name="Interest" legendType="circle"/>
+                        </BarChart>
+                    </ResponsiveContainer>
+                    <ResponsiveContainer>
+                        <LineChart
+                            width={500}
+                            height={1000}
+                            data={loanSummary}
+                            margin={{
                                 top: 5, right: 30, left: 20, bottom: 5,
                             }}
                         >
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="year" />
-                            <YAxis />
+                            <YAxis dataKey="principal"/>
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="interest" fill="#8884d8" />
-                            <Bar dataKey="principal" fill="#82ca9d" />
-                        </BarChart>
-                    </ResponsiveContainer>
-                    {/* <ResponsiveContainer>
-                        <LineChart
-                            width={500}
-                            height={1000}
-                            data={loanSummary}
-                            // margin={{
-                            //     top: 5, right: 30, left: 20, bottom: 5,
-                            // }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="year" />
-                            <YAxis dataKey="interest"/>
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" dataKey="principal" stroke="#8884d8" strokeWidth={2} activeDot={{ r: 8 }} />
-                            <Line type="monotone" dataKey="interest" stroke="#82ca9d" strokeWidth={2}/>
+                            <Line type="monotone" legendType="square" dataKey="principal" stroke="#8884d8" name="Principal" strokeWidth={2} activeDot={{ r: 8 }} />
+                            <Line type="monotone" legendType="circle" dataKey="interest" stroke="#82ca9d" name="Interest" strokeWidth={2}/>
                         </LineChart>
-                    </ResponsiveContainer> */}
+                    </ResponsiveContainer>
                 </div>
             </Grid>
         </Grid>

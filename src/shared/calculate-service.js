@@ -38,6 +38,7 @@ export const generateSummary = (jsonData) =>{
             result.push(sumTotal);
         })
     }
+    console.log(JSON.stringify(result));
     return result;
 }
 
