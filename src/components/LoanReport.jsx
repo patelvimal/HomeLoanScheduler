@@ -30,7 +30,7 @@ const useStyles = makeStyles({
         maxHeight: '80vh',
     },
     summery: {
-        maxHeight: '40vh',
+        maxHeight: '75vh',
         marginBottom:25
     },
     chart: {
@@ -86,14 +86,14 @@ const LoanResult =(props)=>{
                                     <StyledTableCell  component="th" scope="row">
                                     {row.year}
                                     </StyledTableCell >
-                                    <StyledTableCell  align="right">{row.principal.toFixed(2)}</StyledTableCell >
-                                    <StyledTableCell  align="right">{row.interest.toFixed(2)}</StyledTableCell >
+                                    <StyledTableCell  align="right">{row.principal}</StyledTableCell >
+                                    <StyledTableCell  align="right">{row.interest}</StyledTableCell >
                                 </StyledTableRow >
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TableContainer className={classes.detail}>
+                {/* <TableContainer className={classes.detail}>
                     <Table stickyHeader  aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -116,24 +116,20 @@ const LoanResult =(props)=>{
                             ))}
                         </TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer> */}
             </Grid>
             <Grid xs={12} md={6}>
                 <div className={classes.chart}>
                     <ResponsiveContainer>
-                    <BarChart width={730} height={250} data={loanSummary}>
+                        {/* <BarChart width={730} height={250} data={loanSummary}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="year" />
-                            {/* <YAxis yAxisId="a" /> */}
-                            {/* <YAxis yAxisId="b" orientation="right" /> */}
                             <Tooltip />
                             <Legend />
-                            <Bar yAxisId="a" dataKey="principal" fill="#8884d8" />
-                            <Bar yAxisId="b" dataKey="interest" fill="#82ca9d" />
-                        </BarChart>
-                    </ResponsiveContainer>
-                    <ResponsiveContainer>
-                        <LineChart
+                            <Bar dataKey="principal" fill="#8884d8" />
+                            <Bar dataKey="interest" fill="#82ca9d" />
+                        </BarChart> */}
+                        <BarChart
                             width={500}
                             height={300}
                             data={loanSummary}
@@ -146,10 +142,28 @@ const LoanResult =(props)=>{
                             <YAxis />
                             <Tooltip />
                             <Legend />
+                            <Bar dataKey="interest" fill="#8884d8" />
+                            <Bar dataKey="principal" fill="#82ca9d" />
+                        </BarChart>
+                    </ResponsiveContainer>
+                    {/* <ResponsiveContainer>
+                        <LineChart
+                            width={500}
+                            height={1000}
+                            data={loanSummary}
+                            // margin={{
+                            //     top: 5, right: 30, left: 20, bottom: 5,
+                            // }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis dataKey="interest"/>
+                            <Tooltip />
+                            <Legend />
                             <Line type="monotone" dataKey="principal" stroke="#8884d8" strokeWidth={2} activeDot={{ r: 8 }} />
                             <Line type="monotone" dataKey="interest" stroke="#82ca9d" strokeWidth={2}/>
                         </LineChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer> */}
                 </div>
             </Grid>
         </Grid>
@@ -166,7 +180,7 @@ const parseQueryStringToObject = (queryString)=>{
         if (keys && keys.length > 0) {
             keys.map(a => {
                 var keyVal = a.split('=');
-                if (keyVal && keyVal.length > 0) {
+                if (keyVal && keyVal.length > 0 && !isNaN(keyVal[1])) {
                     obj[keyVal[0]] = keyVal[1];
                 }
             })

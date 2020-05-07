@@ -10,7 +10,7 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) =
     while( 0 < loanBalance) {
         var perdayInterestAmount= ((loanBalance * (interestRate/100))/365);
         var monthlyInterest = (perdayInterestAmount *30);
-        loanBalance = (loanBalance-(emi-monthlyInterest) - prepayment);
+        loanBalance = (loanBalance-(emi-monthlyInterest) - (prepayment|| 0));
         var month = monthNames[today.getMonth()];
         result.push({
             month: month , 
@@ -30,9 +30,12 @@ export const generateSummary = (jsonData) =>{
         const groupByYear = groupBy(jsonData,"year");
         result = [];
         Object.keys(groupByYear).map(key=>{
-            result.push(groupByYear[key].reduce((a,b)=>{
-                return {year: key, principal: a.principal + b.principal, interest : a.interest + b.interest }
-            }))
+            var sumTotal = groupByYear[key].reduce((a, b) => {
+                return { year: key, principal: a.principal + b.principal, interest: a.interest + b.interest }
+            })
+            sumTotal.principal = sumTotal.principal.roundOf(2);
+            sumTotal.interest = sumTotal.interest.roundOf(2);
+            result.push(sumTotal);
         })
     }
     return result;
@@ -43,8 +46,8 @@ const groupBy = (xs, key) => {
         (totalValue[currentValue[key]] = totalValue[currentValue[key]] || []).push(currentValue);
         return totalValue;
     }, {});
-    // return xs.reduce(function (totalValue, currentValue) {
-    //     (totalValue[currentValue[key]] = totalValue[currentValue[key]] || []).push(currentValue);
-    //     return totalValue;
-    // }, {});
 };
+
+Number.prototype.roundOf = function (decimals) {
+    return Number(Math.round(this + 'e' + decimals) + 'e-' + decimals);
+}
