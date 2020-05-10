@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Link from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import Link from 'next/link';
 
 const useStyles = makeStyles({
 	root: {
@@ -15,7 +15,8 @@ const useStyles = makeStyles({
 		margin: '0 10px'
 	},
 	link: {
-		color: 'black'
+		color: '#fff',
+		textDecoration: 'initial'
 	}
 });
 
@@ -26,9 +27,9 @@ const Header = () => {
 			<Toolbar>
 					<img src='./appIcon.png' className={classes.headerIcon}></img>
 					<Typography variant="h6" color="inherit" noWrap>
-						<Link href="/" className={classes.link}>
-							Home Loan Calculator
-						</Link>
+						<Link href="/about" className={classes.link}>
+          					<a>	Home Loan Calculator</a>
+        				</Link>
 					</Typography>
 			</Toolbar>
 		</AppBar>
