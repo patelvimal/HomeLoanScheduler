@@ -4,7 +4,6 @@ import Link from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import appIcon from '../assets/appIcon.png';
 
 const useStyles = makeStyles({
 	root: {
@@ -25,7 +24,7 @@ const Header = () => {
 	return (
 		<AppBar position="static" color="primary" elevation={0} className={classes.root}>
 			<Toolbar>
-					<img src={appIcon} className={classes.headerIcon}></img>
+					<img src='./appIcon.png' className={classes.headerIcon}></img>
 					<Typography variant="h6" color="inherit" noWrap>
 						<Link href="/" className={classes.link}>
 							Home Loan Calculator

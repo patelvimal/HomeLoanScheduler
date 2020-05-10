@@ -58,10 +58,10 @@ const StyledTableRow = withStyles((theme) => ({
 
 const LoanResult =(props)=>{
     const classes = useStyles();
-    const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(window.location.search)
-    const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
-    const loanSummary = generateSummary(loanDetail,"year");
-
+    //const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(window.location.search)
+    //const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
+    //const loanSummary = generateSummary(loanDetail,"year");
+    const loanSummary = null;
     const renderColorfulLegendText = (value, entry) => {
         const { color } = entry.payload;
       
@@ -80,7 +80,7 @@ const LoanResult =(props)=>{
                                 <StyledTableCell align="right">Interest</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
+                        {/* <TableBody>
                             {loanSummary && loanSummary.map(row => (
                                 <StyledTableRow  key={row.year}>
                                     <StyledTableCell  component="th" scope="row">
@@ -90,7 +90,7 @@ const LoanResult =(props)=>{
                                     <StyledTableCell  align="right">{row.interest}</StyledTableCell >
                                 </StyledTableRow >
                             ))}
-                        </TableBody>
+                        </TableBody> */}
                     </Table>
                 </TableContainer>
                 {/* <TableContainer className={classes.detail}>
