@@ -68,6 +68,11 @@ export default function InputSlider(props) {
     }
   };
 
+  const valueLabelFormat = (value) => {
+    console.log(value);
+    return `${value}L`;
+  }
+
   return (
     <div className="inputSlider">
       <Typography id="input-slider" gutterBottom>
@@ -83,10 +88,11 @@ export default function InputSlider(props) {
             max={max}
             step={step}
             marks={marks}
+            valueLabelDisplay='auto'
+            // valueLabelFormat={valueLabelFormat}
           />
         </Grid>
         <Grid className="input">
-          {value}
           {/* <TextField
               // disabled
               // required

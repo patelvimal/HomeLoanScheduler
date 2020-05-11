@@ -24,9 +24,9 @@ const LoanForm = (props) => {
     const [formSubmitted,setFormStatus] = useState(false);
     
     
-    const loandAmountMarker = generateLoanAmountMarker();
-
-    console.log(loandAmountMarker);
+    const loanAmountMarker = generateMarker('L');
+    const emiAmountMarker = generateMarker('K');
+    const intRateMarker = generateMarker('%', 20, 2);
 
     const onReset = () => {
         setLoanInfo(INITIAL_STATE);
@@ -60,86 +60,58 @@ const LoanForm = (props) => {
 
     return (
         <Grid container spacing={0} className='loanDetailsForm'>
-            <Grid item xs={12} md={4} className='formContainer'>
+            <Grid item xs={12} md={6} className='formContainer'>
                 <Container component="main">
-                    {/* <Avatar className={classes.avatar}>
-            <AccountBalanceIcon />   
-            </Avatar> */}
-                    <Typography component="h1" variant="h5" className='heading'>
-                        Loan Information
-                    </Typography>
                     <form  noValidate>
-                        <InputSlider label="Loan Amount" 
+                        <InputSlider 
+                            label="Loan Amount" 
                             min={0} 
                             max={100} 
                             step={1}
                             defaultValue={50}
-                            marks={loandAmountMarker} 
+                            marks={loanAmountMarker} 
                         />
-                        <TextField
-                            required
-                            fullWidth
-                            error={formSubmitted && !loanInfo.loanAmount}
-                            id="loanAmount"
-                            label="Outstanding Loan Amount"
-                            name="loanAmount"
-                            onChange={onChange}
-                            //variant={inputFieldStyle}
-                            helperText={(formSubmitted && !loanInfo.loanAmount) ? "Amount is Required!" : null}
+                         <InputSlider 
+                            label="Monthly EMI" 
+                            min={0} 
+                            max={100} 
+                            step={1}
+                            defaultValue={50}
+                            marks={emiAmountMarker} 
                         />
-                        <TextField
-                            required
-                            fullWidth
-                            error={formSubmitted && !loanInfo.emi}
-                            id="filled-required"
-                            label="EMI"
-                            name="emi"
-                            onChange={onChange}
-                            //variant={inputFieldStyle}
-                            helperText={(formSubmitted && !loanInfo.emi) ? "EMI is Required!" : null}
+                        <InputSlider 
+                            label="Interest Rate" 
+                            min={0} 
+                            max={20} 
+                            step={1}
+                            defaultValue={9}
+                            marks={intRateMarker} 
                         />
-                        <TextField
-                            required
-                            fullWidth
-                            error={formSubmitted && !loanInfo.interestRate}
-                            id="filled-required"
-                            label="Interest Rate"
-                            name="interestRate"
-                            onChange={onChange}
-                            //variant={inputFieldStyle}
-                            InputProps={{
-                                endAdornment: <InputAdornment>%</InputAdornment>,
-                            }}
-                            helperText={(formSubmitted && !loanInfo.interestRate) ? "Interest Rate is Required!" : null}
+                        <InputSlider 
+                            label="Monthly Prepayment" 
+                            min={0} 
+                            max={100} 
+                            step={1}
+                            defaultValue={0}
+                            marks={emiAmountMarker} 
                         />
-                        <TextField
-                            required
-                            id="filled-required"
-                            label="PrePayment/Month"
-                            name="prePayment"
-                            onChange={onChange}
-                            // variant={inputFieldStyle}
-                            fullWidth
-                        />
+
                         <Button
                             type="submit"
-                            fullWidth
                             variant="contained"
                             color="primary"
                             onClick={onSubmit}
-                            className='submit'
-                        >
-                            Submit
+                            className='submit'>
+                        Submit
                         </Button>
-                        {/* <Button
-                    type="button"
-                    fullWidth
-                    variant="contained"
-                    //color="primary"
-                    onClick={onReset}
-                >
-                Reset
-                </Button> */}
+                        <Button
+                            type="button"
+                            variant="contained"
+                            //color="primary"
+                            className='submit'
+                            onClick={onReset}>
+                        Reset
+                        </Button>
                     </form>
                 </Container>
             </Grid>
@@ -149,129 +121,14 @@ const LoanForm = (props) => {
 
 export default LoanForm;
 
-// export default class LoanForm extends Component {
-//     constructor() {
-//         super();
-
-//         this.state = {
-//             interestRate: null,
-//             emi: null,
-//             loanAmount: null,
-//             prePayment:null,
-//             formSubmitted:false
-//         };
-//         this.initialState = this.state;
-//     }
-
-//     onChange = (event) => {
-//         const re = /^[0-9\b]+$/;
-//         if (event.target.value === '' || re.test(event.target.value)) {
-//             console.log(re.test(event.target.value));
-//             this.setState({
-//                 [event.target.name]: event.target.value
-//             })
-//         }
-//     }
-//     onSubmit = () => {
-//         this.setState({
-//             formSubmitted: true
-//         });
-//         if (this.isFormValid()) {
-//             this.props.onSubmit(this.state);
-//         }
-//     }
-
-//     isFormValid =()=> {
-//         const { loanAmount,emi,interestRate } = this.state;
-//         return !!(loanAmount && emi && interestRate);
-//     }
-
-//     onReset = () => {
-//         this.setState(this.initialState);
-//     }
-
-//     render() {
-//         const { formSubmitted,loanAmount,emi,interestRate,prePayment } = this.state;
-
-//         return (
-//             <React.Fragment>
-//                 <Typography variant="h6"  color="inherit" noWrap>
-//                     Loan Information
-//                 </Typography>
-//                 <Grid container spacing={2}>
-//                     <Grid item xs={12} >
-//                         <TextField
-//                             required
-//                             error={formSubmitted && !loanAmount}
-// 							id="filled-required"
-// 							label="Outstanding Loan Amount"
-//                             name="loanAmount"
-//                             onChange={this.onChange}
-//                             fullWidth
-//                             variant="outlined"
-//                             InputProps={{
-//                                 // startAdornment: <InputAdornment>(In Lakh)</InputAdornment>,
-//                             }}
-//                             helperText={(formSubmitted && !loanAmount)? "Amount is Required!" : null}
-// 						/>
-//                     </Grid>
-//                     <Grid item xs={12}>
-//                         <TextField
-//                             required
-//                             error={formSubmitted && !emi}
-// 							id="filled-required"
-// 							label="EMI"
-//                             variant="outlined"
-//                             name="emi"
-//                             onChange={this.onChange}
-//                             fullWidth
-//                             helperText={(formSubmitted && !emi)? "EMI is Required!" : null}
-// 						/>
-//                     </Grid>
-//                     <Grid item xs={12}>
-//                         <TextField
-//                             required
-//                             error={formSubmitted && !interestRate}
-// 							id="filled-required"
-// 							label="Interest Rate"
-//                             variant="outlined"
-//                             name="interestRate"
-//                             onChange={this.onChange}
-//                             fullWidth
-//                             InputProps={{
-//                                 endAdornment: <InputAdornment>%</InputAdornment>,
-//                             }}
-//                             helperText={(formSubmitted && !interestRate)? "Interest Rate is Required!" : null}
-// 						/>
-//                     </Grid>
-//                     <Grid item xs={12}>
-//                         <TextField
-// 							required
-// 							id="filled-required"
-// 							label="PrePayment/Month"
-//                             variant="outlined"
-//                             name="prePayment"
-//                             fullWidth
-// 						/>
-//                     </Grid>
-//                     <Grid item xs={12} className="action-buttons">
-//                         <Button  onClick={this.onReset}>Reset</Button>
-//                         <Button variant="contained" color="primary" onClick={this.onSubmit}>Calculate</Button>
-//                     </Grid>
-//                 </Grid>
-//             </React.Fragment>
-//         )
-//     }
-// }
-
-
-
-const generateLoanAmountMarker = ()=>{
+const generateMarker = (suffix, maxValue,stepSize)=>{
     var list = [];
-    for (var i = 0; i <= 100; i+=10) {
+    maxValue = maxValue || 100;
+    stepSize = stepSize || 10;
+    for (var i = 0; i <= maxValue; i += stepSize) {
         list.push({
                 value: i,
-                label: `${i}L`
+                label: i !== 0 ? `${i}${suffix}` : 0
             })
     }
     return list;
