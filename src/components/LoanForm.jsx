@@ -83,7 +83,7 @@ const LoanForm = (props) => {
                             label="Interest Rate" 
                             min={0} 
                             max={20} 
-                            step={1}
+                            step={.1}
                             defaultValue={9}
                             marks={intRateMarker} 
                         />
