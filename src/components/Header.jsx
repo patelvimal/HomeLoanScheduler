@@ -21,14 +21,13 @@ const useStyles = makeStyles({
 });
 
 const Header = () => {
-	const classes = useStyles();
 	return (
-		<AppBar position="static" color="primary" elevation={0} className={classes.root}>
+		<AppBar position="static" color="primary" elevation={0} className='header'>
 			<Toolbar>
-					<img src='./appIcon.png' className={classes.headerIcon}></img>
+					<img src='./appIcon.png' className='headerIcon'></img>
 					<Typography variant="h6" color="inherit" noWrap>
-						<Link href="/about" className={classes.link}>
-          					<a>	Home Loan Calculator</a>
+						<Link href="/about" >
+          					<a className='link'>	Home Loan Calculator</a>
         				</Link>
 					</Typography>
 			</Toolbar>
