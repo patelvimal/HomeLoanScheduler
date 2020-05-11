@@ -11,32 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import Avatar from '@material-ui/core/Avatar';
-
-const useStyles = makeStyles({
-    submit: {
-        margin:'25px 0'
-    },
-    form :{
-        '& > div' : {
-            margin: '5px 0px'
-        }
-    },
-    gridContainer: {
-		marginTop: 25
-	},
-	formContainer: {
-		background: '#f7f7eb',
-		margin: '25px auto',
-		borderRadius: 4,
-		border: 'solid 1px #e0e0e0',
-		padding: 12,
-		boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
-	}
-    // heading:{
-    //     fontFamily: 'Roboto-Regular'
-    // }
-});
-
+import InputSlider from './InputSlider';
 
 const LoanForm = (props) => {
     const INITIAL_STATE ={
@@ -47,8 +22,12 @@ const LoanForm = (props) => {
     };
     const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
     const [formSubmitted,setFormStatus] = useState(false);
-    const classes = useStyles();
     
+    
+    const loandAmountMarker = generateLoanAmountMarker();
+
+    console.log(loandAmountMarker);
+
     const onReset = () => {
         setLoanInfo(INITIAL_STATE);
     }
@@ -80,16 +59,23 @@ const LoanForm = (props) => {
     }
 
     return (
-        <Grid container spacing={0} className={classes.gridContainer}>
-            <Grid item xs={12} md={4} className={classes.formContainer}>
-                <Container component="main" maxWidth="xs" className={classes.root}>
+        <Grid container spacing={0} className='loanDetailsForm'>
+            <Grid item xs={12} md={4} className='formContainer'>
+                <Container component="main">
                     {/* <Avatar className={classes.avatar}>
             <AccountBalanceIcon />   
             </Avatar> */}
-                    <Typography component="h1" variant="h5" className={classes.heading}>
+                    <Typography component="h1" variant="h5" className='heading'>
                         Loan Information
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form  noValidate>
+                        <InputSlider label="Loan Amount" 
+                            min={0} 
+                            max={100} 
+                            step={1}
+                            defaultValue={50}
+                            marks={loandAmountMarker} 
+                        />
                         <TextField
                             required
                             fullWidth
@@ -141,10 +127,10 @@ const LoanForm = (props) => {
                             variant="contained"
                             color="primary"
                             onClick={onSubmit}
-                            className={classes.submit}
+                            className='submit'
                         >
                             Submit
-                </Button>
+                        </Button>
                         {/* <Button
                     type="button"
                     fullWidth
@@ -277,3 +263,16 @@ export default LoanForm;
 //         )
 //     }
 // }
+
+
+
+const generateLoanAmountMarker = ()=>{
+    var list = [];
+    for (var i = 0; i <= 100; i+=10) {
+        list.push({
+                value: i,
+                label: `${i}L`
+            })
+    }
+    return list;
+}

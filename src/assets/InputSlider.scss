@@ -1,0 +1,60 @@
+.inputSlider{
+    
+    > p {
+        margin-bottom: 0px;
+        margin-left: 0px;
+    }
+
+    .slider {
+        width: inherit;
+        
+        >span {
+            margin-bottom: 0px;;
+        }
+        .MuiSlider-root {
+            color: #209ddb;
+            height: 8px
+        }
+
+        .MuiSlider-thumb {
+            height: 24px;
+            width: 24px;
+            background-color: #fff;
+            border: 2px solid currentColor;
+            margin-top: -8px;
+            margin-left: -12px;
+        
+            &:focus, &:hover, &:active {
+                box-shadow: 'inherit'
+            }
+        }
+    
+        .valueLabel {
+            left: calc(-50% + 4px);
+        }
+    
+        .MuiSlider-track {
+            height: 8px;
+            // border-radius: 4px;
+        }
+        
+        .MuiSlider-rail {
+            height: 8px;
+            // border-radius: 4px;
+        }
+    }
+
+    .input {
+        // width: 150px;
+
+        // .MuiOutlinedInput-notchedOutline {
+        //     // border-color: #209ddb;
+        // }
+        input {
+            // height: 0px;
+            padding: 0px;
+        }
+    }
+    
+
+}

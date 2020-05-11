@@ -2,6 +2,7 @@ import App from 'next/app'
 import Head from 'next/head'
 import React from 'react'
 import '../assets/App.scss';
+import '../assets/InputSlider.scss';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { StylesProvider } from '@material-ui/core/styles';
 import Header from '../components/Header';

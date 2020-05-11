@@ -8,12 +8,14 @@ const Header = () => {
 	return (
 		<AppBar position="static" color="primary" elevation={0} className='header'>
 			<Toolbar>
+				<div className="logo">
 					<img src='./appIcon.png' className='headerIcon'></img>
 					<Typography variant="h6" color="inherit" noWrap>
 						<Link href="/" >
-          					<a className='link'>Home Loan Calculator</a>
-        				</Link>
+							<a className='link'>Home Loan Calculator</a>
+						</Link>
 					</Typography>
+				</div>
 			</Toolbar>
 		</AppBar>
 	)

@@ -1,4 +1,4 @@
-
+import TextField from '@material-ui/core/TextField';
 // import React from 'react';
 // import { withStyles, makeStyles } from '@material-ui/core/styles';
 // import Slider from '@material-ui/core/Slider';
@@ -43,25 +43,14 @@
 // export default SliderInput;
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import Input from '@material-ui/core/Input';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 
-const useStyles = makeStyles({
-  root: {
-    width: 250,
-  },
-  input: {
-    width: 42,
-  },
-});
 
-export default function InputSlider() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(30);
+export default function InputSlider(props) {
+  const {min,max,step,defaultValue,marks} = props;
+  const [value, setValue] = React.useState(defaultValue || 0);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
@@ -74,39 +63,48 @@ export default function InputSlider() {
   const handleBlur = () => {
     if (value < 0) {
       setValue(0);
-    } else if (value > 100) {
-      setValue(100);
+    } else if (value > max) {
+      setValue(max);
     }
   };
 
   return (
-    <div className={classes.root}>
+    <div className="inputSlider">
       <Typography id="input-slider" gutterBottom>
-        Volume
+        {props.label}
       </Typography>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs>
+      <Grid container alignItems="center">
+        <Grid className="slider">
           <Slider
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
+            min={min}
+            max={max}
+            step={step}
+            marks={marks}
           />
         </Grid>
-        <Grid item>
-          <Input
-            className={classes.input}
-            value={value}
-            margin="dense"
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
-              type: 'number',
-              'aria-labelledby': 'input-slider',
-            }}
-          />
+        <Grid className="input">
+          {value}
+          {/* <TextField
+              // disabled
+              // required
+              size="small"
+              fullWidth
+              value={value}
+              id="loanAmount"
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              name="loanAmount"
+               variant='filled'
+              // inputProps={{
+              //   step: 10,y
+              //   min: 0,
+              //   max: 100,
+              //   'aria-labelledby': 'input-slider',
+              // }}
+          />  */}
         </Grid>
       </Grid>
     </div>
