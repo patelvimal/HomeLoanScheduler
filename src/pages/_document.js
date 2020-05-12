@@ -8,7 +8,7 @@ export default class SiteDocument extends Document {
       <html lang="en">
         <Head>
           <meta charset="utf-8" />
-          <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+          <link rel="icon" href="/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="description" content="Home Loan Calculator" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37554448-3"></script>

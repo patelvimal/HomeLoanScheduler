@@ -1,8 +1,8 @@
 import React from 'react'
-import LoanResult from '../components/LoanReport';
+import LoanReport from '../components/LoanReport';
 
 const Result = (props)=> {
-    return <LoanResult/>
+    return <LoanReport/>
 }
 
 export default Result;

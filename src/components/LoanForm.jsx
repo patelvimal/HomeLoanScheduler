@@ -12,13 +12,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import Avatar from '@material-ui/core/Avatar';
 import InputSlider from './InputSlider';
+import { Router ,useRouter } from 'next/router';
 
 const LoanForm = (props) => {
+    const LOAN_AMOUNT_DEFAULT_VALUE = 50;
+    const MONTHLY_EMI_DEFAULT_VALUE = 50;
+    const INTEREST_RATE_DEFAULT_VALUE = 9;
+    const MONTHLY_PREPAYMENT_DEFAULT_VALUE = 0;
+
+    const router = useRouter();
+
     const INITIAL_STATE ={
-        loanAmount:null,
-        emi:null,
-        interestRate:null,
-        prePayment:null
+        loanAmount: LOAN_AMOUNT_DEFAULT_VALUE,
+        emi: MONTHLY_EMI_DEFAULT_VALUE,
+        interestRate: INTEREST_RATE_DEFAULT_VALUE,
+        prePayment:MONTHLY_PREPAYMENT_DEFAULT_VALUE
     };
     const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
     const [formSubmitted,setFormStatus] = useState(false);
@@ -32,22 +40,31 @@ const LoanForm = (props) => {
         setLoanInfo(INITIAL_STATE);
     }
 
-    const onChange = (event)=> {
-        const {name,value} = event.target;
+    const onChange = (name,newValue)=> {
+        //const {name} = event.target;
         setLoanInfo(prevState=>({
             ...prevState,
-            [name]: value
+            [name]: newValue
         }))
     }
 
     const onSubmit = (event) => {
-        setFormStatus(true);
-        if (isFormValid()){
-            props.history.push({
-                pathname:'./result',
-                search: `?loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
-            });
-        }
+        //console.log(loanInfo);
+        // setFormStatus(true);
+        // if (isFormValid()){
+        //     props.history.push({
+        //         pathname:'./result',
+        //         search: `?loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
+        //     });
+        // }
+        setLoanInfo(null);
+        router.push({
+            pathname:'/result',
+            query: `loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
+        });
+        // Router.push({
+        //     pathname: '/search'
+        // })
         event.preventDefault();
         event.stopPropagation();
     }
@@ -61,6 +78,7 @@ const LoanForm = (props) => {
     return (
         <Grid container spacing={0} className='loanDetailsForm'>
             <Grid item xs={12} md={6} className='formContainer'>
+                {JSON.stringify(loanInfo)}
                 <Container component="main">
                     <form  noValidate>
                         <InputSlider 
@@ -68,8 +86,10 @@ const LoanForm = (props) => {
                             min={0} 
                             max={100} 
                             step={1}
-                            defaultValue={50}
+                            defaultValue={LOAN_AMOUNT_DEFAULT_VALUE}
+                            onChange={onChange}
                             suffix="L"
+                            name="loanAmount"
                             marks={loanAmountMarker} 
                         />
                          <InputSlider 
@@ -77,8 +97,9 @@ const LoanForm = (props) => {
                             min={0} 
                             max={100} 
                             step={1}
-                            defaultValue={50}
+                            defaultValue={MONTHLY_EMI_DEFAULT_VALUE}
                             suffix="K"
+                            name="emi"
                             marks={emiAmountMarker} 
                         />
                         <InputSlider 
@@ -86,7 +107,8 @@ const LoanForm = (props) => {
                             min={0} 
                             max={20} 
                             step={.1}
-                            defaultValue={9}
+                            defaultValue={INTEREST_RATE_DEFAULT_VALUE}
+                            name="interestRate"
                             suffix="%"
                             marks={intRateMarker} 
                         />
@@ -95,8 +117,9 @@ const LoanForm = (props) => {
                             min={0} 
                             max={100} 
                             step={1}
-                            defaultValue={0}
+                            defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
                             suffix="K"
+                            name="prePayment"
                             marks={emiAmountMarker} 
                         />
 
@@ -107,14 +130,6 @@ const LoanForm = (props) => {
                             onClick={onSubmit}
                             className='submit'>
                         Submit
-                        </Button>
-                        <Button
-                            type="button"
-                            variant="contained"
-                            //color="primary"
-                            className='submit'
-                            onClick={onReset}>
-                        Reset
                         </Button>
                     </form>
                 </Container>

@@ -13,61 +13,15 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
     Line, LineChart, Legend, ResponsiveContainer, PieChart, Pie, Bar,
     BarChart, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ComposedChart,
     RadialBarChart, RadialBar, Treemap } from 'recharts';
-  
-const useStyles = makeStyles({
-    gridContainer: {
-		marginTop: 25
-	},
-	formContainer: {
-//		background: '#f7f7eb',
-//		margin: '25px auto',
-		borderRadius: 4,
-		border: 'solid 1px #e0e0e0',
-		padding: 12,
-		boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
-    },
-    detail: {
-        maxHeight: '80vh',
-    },
-    summery: {
-        maxHeight: '75vh',
-        marginBottom:25
-    },
-    chart: {
-        height:'50vh'
-    }
-});
+import { useRouter } from 'next/router' ;
 
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: '#2280a0',
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor:  theme.palette.action.hover,
-        },
-    },
-}))(TableRow);
-
-const LoanResult =(props)=>{
+const LoanReport =(props)=>{
     const classes = useStyles();
-    //const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(window.location.search)
-    //const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
-    //const loanSummary = generateSummary(loanDetail,"year");
-    const loanSummary = null;
-    const renderColorfulLegendText = (value, entry) => {
-        const { color } = entry.payload;
-      
-      return <span style={{ color }}>{value}</span>;
-    }
-
+    const router = useRouter()
+    const { loanAmount,emi,interestRate,prePayment } = convertToLongNumber(router.query);
+    const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
+    const loanSummary = generateSummary(loanDetail,"year");
+    
     return (
         <Grid container spacing={0} className={classes.gridContainer}>
             <Grid item xs={12} md={6} className={classes.formContainer}>
@@ -170,21 +124,11 @@ const LoanResult =(props)=>{
     )
 }
 
-export default LoanResult;
+export default LoanReport;
 
-
-const parseQueryStringToObject = (queryString)=>{
-    var obj = {};
-    if (queryString) {
-        var keys = queryString.replace('?', '').split('&');
-        if (keys && keys.length > 0) {
-            keys.map(a => {
-                var keyVal = a.split('=');
-                if (keyVal && keyVal.length > 0 && !isNaN(keyVal[1])) {
-                    obj[keyVal[0]] = keyVal[1];
-                }
-            })
-        }
-    }
+const convertToLongNumber = (obj)=> {
+    obj.loanAmount = obj.loanAmount * 100000;
+    obj.emi = obj.emi * 1000;
+    obj.prePayment = obj.prePayment * 1000;
     return obj;
 }

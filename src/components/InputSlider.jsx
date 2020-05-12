@@ -49,11 +49,14 @@ import Slider from '@material-ui/core/Slider';
 
 
 export default function InputSlider(props) {
-	const { min, max, step, defaultValue, marks,suffix } = props;
+	const { min, max, step, defaultValue, marks,suffix,name } = props;
 	const [value, setValue] = React.useState(defaultValue || 0);
 
 	const handleSliderChange = (event, newValue) => {
 		setValue(newValue);
+		if(props.onChange &&  typeof props.onChange === 'function') {
+			props.onChange(name,newValue);
+		}
 	};
 
 	const handleInputChange = (event) => {
@@ -77,6 +80,7 @@ export default function InputSlider(props) {
 		console.log(value);
 		return value;
 	}
+
 	return (
 		<div className="inputSlider">
 			<Grid container justify="space-between">
@@ -93,8 +97,9 @@ export default function InputSlider(props) {
 						max={max}
 						step={step}
 						marks={marks}
-						valueLabelDisplay='auto'
-						getAriaValueText={selecedValueText}
+						name={name}
+						// valueLabelDisplay='auto'
+						// getAriaValueText={selecedValueText}
 					// valueLabelFormat={valueLabelFormat}
 					/>
 				</Grid>
