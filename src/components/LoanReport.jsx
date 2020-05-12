@@ -16,20 +16,16 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
 import { useRouter } from 'next/router' ;
 
 const LoanReport =(props)=>{
-    const router = useRouter()
-    //const { loanAmount,emi,interestRate,prePayment } = convertToLongNumber(router.query);
-    //const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
-    //const loanSummary = generateSummary(loanDetail,"year");
-    
-    React.useEffect(() => {
-        // window is accessible here.
-        console.log(window.location.search);
-      }, []);
+    const router = useRouter();
+    const { loanAmount,emi,interestRate,prePayment } = convertToLongNumber(router.query);
+    const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
+    const loanSummary = generateSummary(loanDetail,"year");
 
-    return (
-        <Grid container spacing={0} className='loanResult'>
-        </Grid>
-    )
+	return (
+      <Grid container spacing={0} className="loanResult">
+		  <h2>{JSON.stringify(loanSummary)}</h2>
+      </Grid>
+    );
 }
 
 export default LoanReport;
@@ -37,6 +33,7 @@ export default LoanReport;
 const convertToLongNumber = (obj)=> {
     obj.loanAmount = obj.loanAmount * 100000;
     obj.emi = obj.emi * 1000;
-    obj.prePayment = obj.prePayment * 1000;
+	obj.prePayment = obj.prePayment * 1000;
+	obj.interestRate = obj.interestRate * 1;
     return obj;
 }
