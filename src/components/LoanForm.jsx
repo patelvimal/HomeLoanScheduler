@@ -49,22 +49,10 @@ const LoanForm = (props) => {
     }
 
     const onSubmit = (event) => {
-        //console.log(loanInfo);
-        // setFormStatus(true);
-        // if (isFormValid()){
-        //     props.history.push({
-        //         pathname:'./result',
-        //         search: `?loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
-        //     });
-        // }
-        setLoanInfo(null);
         router.push({
             pathname:'/result',
             query: `loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
         });
-        // Router.push({
-        //     pathname: '/search'
-        // })
         event.preventDefault();
         event.stopPropagation();
     }
