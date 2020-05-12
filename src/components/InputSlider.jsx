@@ -49,51 +49,58 @@ import Slider from '@material-ui/core/Slider';
 
 
 export default function InputSlider(props) {
-  const {min,max,step,defaultValue,marks} = props;
-  const [value, setValue] = React.useState(defaultValue || 0);
+	const { min, max, step, defaultValue, marks,suffix } = props;
+	const [value, setValue] = React.useState(defaultValue || 0);
 
-  const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-  };
+	const handleSliderChange = (event, newValue) => {
+		setValue(newValue);
+	};
 
-  const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-  };
+	const handleInputChange = (event) => {
+		setValue(event.target.value === '' ? '' : Number(event.target.value));
+	};
 
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > max) {
-      setValue(max);
-    }
-  };
+	const handleBlur = () => {
+		if (value < 0) {
+			setValue(0);
+		} else if (value > max) {
+			setValue(max);
+		}
+	};
 
-  const valueLabelFormat = (value) => {
-    console.log(value);
-    return `${value}L`;
-  }
+	const valueLabelFormat = (value) => {
+		console.log(value);
+		return `${value}L`;
+	}
 
-  return (
-    <div className="inputSlider">
-      <Typography id="input-slider" gutterBottom>
-        {props.label}
-      </Typography>
-      <Grid container alignItems="center">
-        <Grid className="slider">
-          <Slider
-            value={typeof value === 'number' ? value : 0}
-            onChange={handleSliderChange}
-            aria-labelledby="input-slider"
-            min={min}
-            max={max}
-            step={step}
-            marks={marks}
-            valueLabelDisplay='auto'
-            // valueLabelFormat={valueLabelFormat}
-          />
-        </Grid>
-        <Grid className="input">
-          {/* <TextField
+	const selecedValueText = (value) => {
+		console.log(value);
+		return value;
+	}
+	return (
+		<div className="inputSlider">
+			<Grid container justify="space-between">
+				<Typography align="left" className="leftLabel">{props.label}</Typography>
+				<Typography align="right" className="rightLabel">{value}{suffix}</Typography>
+			</Grid>
+			<Grid container alignItems="center">
+				<Grid className="slider">
+					<Slider
+						value={typeof value === 'number' ? value : 0}
+						onChange={handleSliderChange}
+						aria-labelledby="input-slider"
+						min={min}
+						max={max}
+						step={step}
+						marks={marks}
+						valueLabelDisplay='auto'
+						getAriaValueText={selecedValueText}
+					// valueLabelFormat={valueLabelFormat}
+					/>
+				</Grid>
+
+				<Grid className="input">
+					{/* <TextField
               // disabled
               // required
               size="small"
@@ -111,8 +118,8 @@ export default function InputSlider(props) {
               //   'aria-labelledby': 'input-slider',
               // }}
           />  */}
-        </Grid>
-      </Grid>
-    </div>
-  );
+				</Grid>
+			</Grid>
+		</div>
+	);
 }

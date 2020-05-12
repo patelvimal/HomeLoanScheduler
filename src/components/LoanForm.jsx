@@ -69,6 +69,7 @@ const LoanForm = (props) => {
                             max={100} 
                             step={1}
                             defaultValue={50}
+                            suffix="L"
                             marks={loanAmountMarker} 
                         />
                          <InputSlider 
@@ -77,6 +78,7 @@ const LoanForm = (props) => {
                             max={100} 
                             step={1}
                             defaultValue={50}
+                            suffix="K"
                             marks={emiAmountMarker} 
                         />
                         <InputSlider 
@@ -85,6 +87,7 @@ const LoanForm = (props) => {
                             max={20} 
                             step={.1}
                             defaultValue={9}
+                            suffix="%"
                             marks={intRateMarker} 
                         />
                         <InputSlider 
@@ -93,6 +96,7 @@ const LoanForm = (props) => {
                             max={100} 
                             step={1}
                             defaultValue={0}
+                            suffix="K"
                             marks={emiAmountMarker} 
                         />
 
