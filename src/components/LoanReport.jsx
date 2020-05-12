@@ -17,10 +17,9 @@ import { useRouter } from 'next/router' ;
 
 const LoanReport =(props)=>{
     const router = useRouter();
-    const { loanAmount,emi,interestRate,prePayment } = convertToLongNumber(router.query);
+	const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(router.asPath);
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = generateSummary(loanDetail,"year");
-
 	return (
       <Grid container spacing={0} className="loanResult">
 		  <h2>{JSON.stringify(loanSummary)}</h2>
@@ -29,6 +28,23 @@ const LoanReport =(props)=>{
 }
 
 export default LoanReport;
+
+
+const parseQueryStringToObject = (queryString)=>{
+    var obj = {};
+    if (queryString) {
+        var keys = queryString.substring(queryString.indexOf('?') +1,queryString.length).split('&');
+        if (keys && keys.length > 0) {
+            keys.map(a => {
+                var keyVal = a.split('=');
+                if (keyVal && keyVal.length > 0 && !isNaN(keyVal[1])) {
+                    obj[keyVal[0]] = keyVal[1];
+                }
+            })
+        }
+	}
+	return convertToLongNumber(obj);
+}
 
 const convertToLongNumber = (obj)=> {
     obj.loanAmount = obj.loanAmount * 100000;
