@@ -46,8 +46,8 @@ export const getTotal = (jsonData) => {
         return { total: a.principal + a.interest + b.principal + b.interest, principal: a.principal + b.principal, interest: a.interest + b.interest }
     })
     totalAmount.total = totalAmount.total.addThousandSeperator();
-    totalAmount.principal = totalAmount.principal.addThousandSeperator();
-    totalAmount.interest =  totalAmount.interest.addThousandSeperator();
+    totalAmount.principal = totalAmount.principal.roundOf(0).addThousandSeperator();
+    totalAmount.interest =  totalAmount.interest.roundOf(0).addThousandSeperator();
     return totalAmount;
 }
 

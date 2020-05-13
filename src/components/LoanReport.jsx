@@ -25,9 +25,10 @@ const LoanReport =(props)=>{
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail,"year");
     const total = getTotal(loanSummary);
-    console.log(total);
+    const completionDate = getCompletionDate(loanDetail);
+
 	return (
-        <Grid
+        <Grid item
             container
             spacing={4}
             xs={12}
@@ -42,7 +43,7 @@ const LoanReport =(props)=>{
                     </CardHeader>
                     <CardContent>
                         <div>
-                            <Typography variant="h6" color="textPrimary" display="inline">
+                            <Typography variant="h7" color="textPrimary" display="inline">
                                 Total Amount:
                         </Typography>
                             <Typography variant="h6" color="textPrimary" display="inline">
@@ -50,7 +51,7 @@ const LoanReport =(props)=>{
                         </Typography>
                         </div>
                         <div>
-                            <Typography variant="h6" color="textPrimary" display="inline">
+                            <Typography variant="h7" color="textPrimary" display="inline">
                                 Total Principal:
                         </Typography>
                             <Typography variant="h6" color="textPrimary" display="inline">
@@ -58,15 +59,68 @@ const LoanReport =(props)=>{
                         </Typography>
                         </div>
                         <div>
-                            <Typography variant="h6" color="textPrimary" display="inline">
+                            <Typography variant="h7" color="textPrimary" display="inline">
                                 Total Interest:
                         </Typography>
                             <Typography variant="h6" color="textPrimary" display="inline">
                                 {total.interest}
                         </Typography>
                         </div>
+                        <div>
+                            <Typography variant="h7" color="textPrimary" display="inline">
+                                Completion Date:
+                        </Typography>
+                            <Typography variant="h6" color="textPrimary" display="inline">
+                               {completionDate}
+                        </Typography>
+                        </div>
                     </CardContent>
                 </Card>
+            </Grid>
+           
+            <Grid item xs={12} md={6}>
+                <div className='chart'>
+                    <ResponsiveContainer>
+                        <BarChart
+                            width={500}
+                            height={300}
+                            data={loanSummary}
+                            margin={{
+                                top: 15, right: 0, left: 20, bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="2 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="principal" fill="#82ca9d" name="Principal" legendType="square"/>
+                            <Bar dataKey="interest" fill="#8884d8" name="Interest" legendType="circle"/>
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+                <div className='chart'>
+                    <ResponsiveContainer>
+                        <LineChart
+                            width={500}
+                            height={1000}
+                            data={loanSummary}
+                            margin={{
+                                top: 5, right: 30, left: 20, bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis dataKey="principal"/>
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" legendType="square" dataKey="principal" stroke="#8884d8" name="Principal" strokeWidth={2} activeDot={{ r: 8 }} />
+                            <Line type="monotone" legendType="circle" dataKey="interest" stroke="#82ca9d" name="Interest" strokeWidth={2}/>
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
             </Grid>
             <Grid item xs={12} md={6}>
                 <Card>
@@ -125,4 +179,13 @@ const convertToLongNumber = (obj)=> {
 	obj.prePayment = obj.prePayment * 1000;
 	obj.interestRate = obj.interestRate * 1;
     return obj;
+}
+
+const getCompletionDate = (loanDetails) => {
+    var result = null;
+    if (loanDetails && loanDetails.length > 0) {
+        const { month, year } = loanDetails[loanDetails.length - 1];
+        result = `${month}, ${year}`;
+    }
+    return result;
 }

@@ -66,8 +66,6 @@ const LoanForm = (props) => {
     return (
         <Grid container spacing={0} className='loanDetailsForm'>
             <Grid item xs={12} md={6} className='formContainer'>
-                {JSON.stringify(loanInfo)}
-                {console.log(loanInfo)}
                 <Container component="main">
                     <form  noValidate>
                         <InputSlider 
