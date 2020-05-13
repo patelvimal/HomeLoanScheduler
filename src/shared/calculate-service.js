@@ -24,7 +24,7 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) =
     return result;
 };
 
-export const generateSummary = (jsonData) =>{
+export const getSummary = (jsonData) =>{
     var result = null;
     if (jsonData && Array.isArray(jsonData) && jsonData.length > 0) {
         const groupByYear = groupBy(jsonData,"year");
@@ -41,6 +41,16 @@ export const generateSummary = (jsonData) =>{
     return result;
 }
 
+export const getTotal = (jsonData) => {
+    var totalAmount = jsonData.reduce((a,b) => {
+        return { total: a.principal + a.interest + b.principal + b.interest, principal: a.principal + b.principal, interest: a.interest + b.interest }
+    })
+    totalAmount.total = totalAmount.total.addThousandSeperator();
+    totalAmount.principal = totalAmount.principal.addThousandSeperator();
+    totalAmount.interest =  totalAmount.interest.addThousandSeperator();
+    return totalAmount;
+}
+
 const groupBy = (xs, key) => {
     return xs.reduce((totalValue, currentValue) => {
         (totalValue[currentValue[key]] = totalValue[currentValue[key]] || []).push(currentValue);
@@ -50,4 +60,8 @@ const groupBy = (xs, key) => {
 
 Number.prototype.roundOf = function (decimals) {
     return Number(Math.round(this + 'e' + decimals) + 'e-' + decimals);
+}
+
+Number.prototype.addThousandSeperator = function() {
+    return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
