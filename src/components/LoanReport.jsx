@@ -24,8 +24,8 @@ const LoanReport =(props)=>{
 	const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(router.asPath);
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail,"year");
-    const total = getTotal(loanSummary);
-    const completionDate = getCompletionDate(loanDetail);
+    var total = getTotal(loanSummary);
+    total.completionDate = getCompletionDate(loanDetail);
 
 	return (
         <Grid item
@@ -39,41 +39,10 @@ const LoanReport =(props)=>{
         >
             <Grid item xs={12} md={8}>
                 <Card>
-                    <CardHeader subheader="Summary" className="cardHeader">
+                    <CardHeader subheader="Summary" className="card-header">
                     </CardHeader>
-                    <CardContent>
-                        <div>
-                            <Typography variant="h7" color="textPrimary" display="inline">
-                                Total Amount:
-                            </Typography>
-                            <Typography variant="h6" color="textPrimary" display="inline">
-                                {total && total.total}
-                            </Typography>
-                        </div>
-                        <div>
-                            <Typography variant="h7" color="textPrimary" display="inline">
-                                Total Principal:
-                        </Typography>
-                            <Typography variant="h6" color="textPrimary" display="inline">
-                                {total && total.principal}
-                        </Typography>
-                        </div>
-                        <div>
-                            <Typography variant="h7" color="textPrimary" display="inline">
-                                Total Interest:
-                        </Typography>
-                            <Typography variant="h6" color="textPrimary" display="inline">
-                                {total && total.interest}
-                        </Typography>
-                        </div>
-                        <div>
-                            <Typography variant="h7" color="textPrimary" display="inline">
-                                Completion Date:
-                        </Typography>
-                            <Typography variant="h6" color="textPrimary" display="inline">
-                               {completionDate}
-                        </Typography>
-                        </div>
+                    <CardContent class="card-content">
+                        <Summary data={total}></Summary>
                     </CardContent>
                 </Card>
             </Grid>
@@ -188,4 +157,44 @@ const getCompletionDate = (loanDetails) => {
         result = `${month}, ${year}`;
     }
     return result;
+}
+
+const Summary = (props) => {
+    const {total,completionDate,principal,interest} = props.data;
+    return (
+        <React.Fragment>
+            <div class="label-value">
+                <Typography variant="subtitle1"  display="inline">
+                    Total Amount:
+                </Typography>
+                <Typography variant="subtitle1" display="inline" >
+                    { total}
+                </Typography>
+            </div>
+            <div class="label-value completion-date">
+                <Typography variant="subtitle1" display="inline">
+                    Completion Date:
+                        </Typography>
+                <Typography variant="subtitle1" display="inline">
+                    {completionDate}
+                </Typography>
+            </div>
+            <div class="label-value">
+                <Typography variant="subtitle1" display="inline">
+                    Total Principal:
+                </Typography>
+                <Typography variant="subtitle1" display="inline">
+                    {principal}
+                </Typography>
+            </div>
+            <div class="label-value">
+                <Typography variant="subtitle1" display="inline">
+                    Total Interest:
+                </Typography>
+                <Typography variant="subtitle1" display="inline">
+                    {interest}
+                </Typography>
+            </div>
+        </React.Fragment>
+    );
 }
