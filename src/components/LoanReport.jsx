@@ -42,54 +42,24 @@ const LoanReport =(props)=>{
                     <CardHeader subheader="Summary" className="card-header">
                     </CardHeader>
                     <CardContent class="card-content">
-                        <Summary data={total}></Summary>
+                        <Summary data={total}/>
                     </CardContent>
                 </Card>
             </Grid>
-           
             <Grid item xs={12} md={8}>
-                <div className='chart'>
-                    <ResponsiveContainer>
-                        <BarChart
-                            width={500}
-                            height={300}
-                            data={loanSummary}
-                            margin={{
-                                top: 15, right: 0, left: 20, bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="2 3" />
-                            <XAxis dataKey="year" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="principal" fill="#82ca9d" name="Principal" legendType="square"/>
-                            <Bar dataKey="interest" fill="#8884d8" name="Interest" legendType="circle"/>
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
+                <Card>
+                    <CardContent class="card-content">
+                        <BarChartInfo loanInfo={loanSummary}/>
+                    </CardContent>
+                </Card>
+                
             </Grid>
             <Grid item xs={12} md={8}>
-                <div className='chart'>
-                    <ResponsiveContainer>
-                        <LineChart
-                            width={500}
-                            height={1000}
-                            data={loanSummary}
-                            margin={{
-                                top: 5, right: 30, left: 20, bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="year" />
-                            <YAxis dataKey="principal"/>
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" legendType="square" dataKey="principal" stroke="#8884d8" name="Principal" strokeWidth={2} activeDot={{ r: 8 }} />
-                            <Line type="monotone" legendType="circle" dataKey="interest" stroke="#82ca9d" name="Interest" strokeWidth={2}/>
-                        </LineChart>
-                    </ResponsiveContainer>
-                </div>
+                <Card>
+                    <CardContent class="card-content">
+                        <AreaChartInfo loanInfo={loanSummary}/>
+                    </CardContent>
+                </Card>
             </Grid>
             <Grid item xs={12} md={8}>
                 <Card>
@@ -125,39 +95,6 @@ const LoanReport =(props)=>{
 
 export default LoanReport;
 
-
-const parseQueryStringToObject = (queryString)=>{
-    var obj = {};
-    if (queryString) {
-        var keys = queryString.substring(queryString.indexOf('?') +1,queryString.length).split('&');
-        if (keys && keys.length > 0) {
-            keys.map(a => {
-                var keyVal = a.split('=');
-                if (keyVal && keyVal.length > 0 && !isNaN(keyVal[1])) {
-                    obj[keyVal[0]] = keyVal[1];
-                }
-            })
-        }
-	}
-	return convertToLongNumber(obj);
-}
-
-const convertToLongNumber = (obj)=> {
-    obj.loanAmount = obj.loanAmount * 100000;
-    obj.emi = obj.emi * 1000;
-	obj.prePayment = obj.prePayment * 1000;
-	obj.interestRate = obj.interestRate * 1;
-    return obj;
-}
-
-const getCompletionDate = (loanDetails) => {
-    var result = null;
-    if (loanDetails && loanDetails.length > 0) {
-        const { month, year } = loanDetails[loanDetails.length - 1];
-        result = `${month}, ${year}`;
-    }
-    return result;
-}
 
 const Summary = (props) => {
     const {total,completionDate,principal,interest} = props.data;
@@ -197,4 +134,85 @@ const Summary = (props) => {
             </div>
         </React.Fragment>
     );
+}
+
+const BarChartInfo = (props) => {
+    return (
+        <div className = 'chart' >
+            <ResponsiveContainer>
+                <BarChart
+                    width={500}
+                    data={props.loanInfo}
+                    margin={{
+                        top: 15, right: 0, left: 20, bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="2 3" />
+                    <XAxis dataKey="year" />
+                    <YAxis hide={true}/>
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="principal" fill="#82ca9d" name="Principal" legendType="square" />
+                    <Bar dataKey="interest" fill="#8884d8" name="Interest" legendType="circle" />
+                </BarChart>
+            </ResponsiveContainer>
+        </div >
+    )
+}
+
+const AreaChartInfo = (props)=> {
+    return (
+        <div className='chart'>
+            <ResponsiveContainer>
+                <LineChart
+                    width={500}
+                    data={props.loanInfo}
+                    margin={{
+                        top: 5, right: 30, left: 20, bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="year" />
+                    <YAxis dataKey="interest" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" legendType="square" dataKey="principal" stroke="#8884d8" name="Principal" strokeWidth={2} activeDot={{ r: 8 }} />
+                    <Line type="monotone" legendType="circle" dataKey="interest" stroke="#82ca9d" name="Interest" strokeWidth={2} />
+                </LineChart>
+            </ResponsiveContainer>
+        </div>
+    )
+}
+
+const parseQueryStringToObject = (queryString)=>{
+    var obj = {};
+    if (queryString) {
+        var keys = queryString.substring(queryString.indexOf('?') +1,queryString.length).split('&');
+        if (keys && keys.length > 0) {
+            keys.map(a => {
+                var keyVal = a.split('=');
+                if (keyVal && keyVal.length > 0 && !isNaN(keyVal[1])) {
+                    obj[keyVal[0]] = keyVal[1];
+                }
+            })
+        }
+	}
+	return convertToLongNumber(obj);
+}
+
+const convertToLongNumber = (obj)=> {
+    obj.loanAmount = obj.loanAmount * 100000;
+    obj.emi = obj.emi * 1000;
+	obj.prePayment = obj.prePayment * 1000;
+	obj.interestRate = obj.interestRate * 1;
+    return obj;
+}
+
+const getCompletionDate = (loanDetails) => {
+    var result = null;
+    if (loanDetails && loanDetails.length > 0) {
+        const { month, year } = loanDetails[loanDetails.length - 1];
+        result = `${month}, ${year}`;
+    }
+    return result;
 }
