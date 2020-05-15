@@ -37,7 +37,7 @@ const LoanReport =(props)=>{
             alignItems="flex-start"
             className="loanResult"
         >
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={8}>
                 <Card>
                     <CardHeader subheader="Summary" className="cardHeader">
                     </CardHeader>
@@ -45,17 +45,17 @@ const LoanReport =(props)=>{
                         <div>
                             <Typography variant="h7" color="textPrimary" display="inline">
                                 Total Amount:
-                        </Typography>
+                            </Typography>
                             <Typography variant="h6" color="textPrimary" display="inline">
-                            {total.total}
-                        </Typography>
+                                {total && total.total}
+                            </Typography>
                         </div>
                         <div>
                             <Typography variant="h7" color="textPrimary" display="inline">
                                 Total Principal:
                         </Typography>
                             <Typography variant="h6" color="textPrimary" display="inline">
-                                {total.principal}
+                                {total && total.principal}
                         </Typography>
                         </div>
                         <div>
@@ -63,7 +63,7 @@ const LoanReport =(props)=>{
                                 Total Interest:
                         </Typography>
                             <Typography variant="h6" color="textPrimary" display="inline">
-                                {total.interest}
+                                {total && total.interest}
                         </Typography>
                         </div>
                         <div>
@@ -78,7 +78,7 @@ const LoanReport =(props)=>{
                 </Card>
             </Grid>
            
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={8}>
                 <div className='chart'>
                     <ResponsiveContainer>
                         <BarChart
@@ -100,7 +100,7 @@ const LoanReport =(props)=>{
                     </ResponsiveContainer>
                 </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={8}>
                 <div className='chart'>
                     <ResponsiveContainer>
                         <LineChart
@@ -122,7 +122,7 @@ const LoanReport =(props)=>{
                     </ResponsiveContainer>
                 </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={8}>
                 <Card>
                     <TableContainer className=''>
                         <Table stickyHeader aria-label="a dense table">

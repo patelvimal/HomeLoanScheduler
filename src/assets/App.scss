@@ -20,7 +20,13 @@ body {
 }
 
 .header {
-	background: #2b92c8;
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#606c88+0,3f4c6b+100;Grey+3D+%232 */
+	background: #606c88; /* Old browsers */
+	background: -moz-linear-gradient(top,  #606c88 0%, #3f4c6b 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #606c88 0%,#3f4c6b 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #606c88 0%,#3f4c6b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+
 	color: rgba(0, 0, 0, 0.87);
 	box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.2),
 		0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
@@ -67,6 +73,10 @@ body {
 .loanResult {
 	margin: 8px 0px;
 
+	> div {
+		margin: 0 auto;
+	}
+
 	.gridContainer {
 		margin-top: 25px;
 	}
@@ -82,4 +92,21 @@ body {
 	.chart {
 		height: 50vh;
 	}
+}
+
+.cardHeader {
+	background: #cdeb8b; /* Old browsers */
+	background: -moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#cdeb8b',GradientType=0 ); /* IE6-9 */
+	border: solid 1px #b4e645;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.icon {
+	width: 25px;
+	height: 25px;
+	color:blue;
 }

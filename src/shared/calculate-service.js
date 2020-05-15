@@ -7,19 +7,20 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) =
     var result=[];
     var loanBalance=loanAmount;
     var today = new Date();
+    var currentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     while( 0 < loanBalance) {
         var perdayInterestAmount= ((loanBalance * (interestRate/100))/365);
-        var monthlyInterest = (perdayInterestAmount *30);
+        var monthlyInterest = (perdayInterestAmount * currentMonth.getDate());
         loanBalance = (loanBalance-(emi-monthlyInterest) - (prepayment|| 0));
-        var month = monthNames[today.getMonth()];
+        var month = monthNames[currentMonth.getMonth()];
         result.push({
             month: month , 
-            year: today.getFullYear(),
+            year: currentMonth.getFullYear(),
             principal: (emi-monthlyInterest),
             interest:monthlyInterest,
             balance: loanBalance
         });
-        today.setMonth(today.getMonth() + 1);
+        currentMonth.setMonth(currentMonth.getMonth() + 2, 0);
     }
     return result;
 };
@@ -42,13 +43,19 @@ export const getSummary = (jsonData) =>{
 }
 
 export const getTotal = (jsonData) => {
-    var totalAmount = jsonData.reduce((a,b) => {
-        return { total: a.principal + a.interest + b.principal + b.interest, principal: a.principal + b.principal, interest: a.interest + b.interest }
-    })
-    totalAmount.total = totalAmount.total.addThousandSeperator();
-    totalAmount.principal = totalAmount.principal.roundOf(0).addThousandSeperator();
-    totalAmount.interest =  totalAmount.interest.roundOf(0).addThousandSeperator();
-    return totalAmount;
+    if (jsonData && jsonData.length > 0) {
+        var totalAmount = jsonData.reduce((a, b) => {
+            return {
+                total: a.principal + a.interest + b.principal + b.interest,
+                principal: a.principal + b.principal,
+                interest: a.interest + b.interest
+            }
+        })
+        totalAmount.total = totalAmount.total.addThousandSeperator();
+        totalAmount.principal = totalAmount.principal.roundOf(0).addThousandSeperator();
+        totalAmount.interest = totalAmount.interest.roundOf(0).addThousandSeperator();
+        return totalAmount;
+    }
 }
 
 const groupBy = (xs, key) => {

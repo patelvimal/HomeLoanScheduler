@@ -69,7 +69,7 @@ const LoanForm = (props) => {
                 <Container component="main">
                     <form  noValidate>
                         <InputSlider 
-                            label="Loan Amount" 
+                            label="Outstanding Loan Amount" 
                             min={0} 
                             max={100} 
                             step={1}
@@ -85,6 +85,7 @@ const LoanForm = (props) => {
                             max={100} 
                             step={1}
                             defaultValue={MONTHLY_EMI_DEFAULT_VALUE}
+                            onChange={onChange}
                             suffix="K"
                             name="emi"
                             marks={emiAmountMarker} 
@@ -95,6 +96,7 @@ const LoanForm = (props) => {
                             max={20} 
                             step={.1}
                             defaultValue={INTEREST_RATE_DEFAULT_VALUE}
+                            onChange={onChange}
                             name="interestRate"
                             suffix="%"
                             marks={intRateMarker} 
@@ -105,6 +107,7 @@ const LoanForm = (props) => {
                             max={100} 
                             step={1}
                             defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
+                            onChange={onChange}
                             suffix="K"
                             name="prePayment"
                             marks={emiAmountMarker} 
