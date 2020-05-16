@@ -18,6 +18,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
+import { 
+    parseQueryStringToObject,
+    convertToLongNumber,
+    getCompletionDate
+} from '../shared/utilities';
 
 const LoanReport =(props)=>{
     const router = useRouter();
@@ -41,7 +46,7 @@ const LoanReport =(props)=>{
                 <Card>
                     <CardHeader subheader="Summary" className="card-header">
                     </CardHeader>
-                    <CardContent class="card-content">
+                    <CardContent className="card-content">
                         <Summary data={total}/>
                     </CardContent>
                 </Card>
@@ -50,7 +55,7 @@ const LoanReport =(props)=>{
                 <Card>
                     <CardHeader subheader="Principal/Interest Distribution Each Year" className="card-header">
                     </CardHeader>
-                    <CardContent class="card-content">
+                    <CardContent className="card-content">
                         <BarChartInfo loanInfo={loanSummary}/>
                         <AreaChartInfo loanInfo={loanSummary}/>
                     </CardContent>
@@ -59,10 +64,10 @@ const LoanReport =(props)=>{
             </Grid>
             <Grid item xs={12} md={8}>
                 <Card>
-                    <CardContent class="card-content">
+                    <CardContent className="card-content">
                     <TableContainer className='table'>
                         <Table stickyHeader>
-                            <TableHead class="table-header">
+                            <TableHead className="table-header">
                                 <TableRow>
                                     <TableCell>Year</TableCell>
                                     <TableCell>Principal</TableCell>
@@ -70,7 +75,7 @@ const LoanReport =(props)=>{
                                     <TableCell>Total</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody class="table-body">
+                            <TableBody className="table-body">
                                 {loanSummary && loanSummary.map(row => (
                                     <TableRow key={row.year}>
                                         <TableCell>{row.year}</TableCell>
@@ -96,7 +101,7 @@ const Summary = (props) => {
     const {total,completionDate,principal,interest} = props.data;
     return (
         <React.Fragment>
-            <div class="label-value">
+            <div className="label-value">
                 <Typography variant="subtitle1"  display="inline">
                     Total Amount:
                 </Typography>
@@ -104,7 +109,7 @@ const Summary = (props) => {
                     { total}
                 </Typography>
             </div>
-            <div class="label-value completion-date">
+            <div className="label-value completion-date">
                 <Typography variant="subtitle1" display="inline">
                     Completion Date:
                         </Typography>
@@ -112,7 +117,7 @@ const Summary = (props) => {
                     {completionDate}
                 </Typography>
             </div>
-            <div class="label-value">
+            <div className="label-value">
                 <Typography variant="subtitle1" display="inline">
                     Total Principal:
                 </Typography>
@@ -120,7 +125,7 @@ const Summary = (props) => {
                     {principal}
                 </Typography>
             </div>
-            <div class="label-value">
+            <div className="label-value">
                 <Typography variant="subtitle1" display="inline">
                     Total Interest:
                 </Typography>
@@ -178,37 +183,4 @@ const AreaChartInfo = (props)=> {
             </ResponsiveContainer>
         </div>
     )
-}
-
-const parseQueryStringToObject = (queryString)=>{
-    var obj = {};
-    if (queryString) {
-        var keys = queryString.substring(queryString.indexOf('?') +1,queryString.length).split('&');
-        if (keys && keys.length > 0) {
-            keys.map(a => {
-                var keyVal = a.split('=');
-                if (keyVal && keyVal.length > 0 && !isNaN(keyVal[1])) {
-                    obj[keyVal[0]] = keyVal[1];
-                }
-            })
-        }
-	}
-	return convertToLongNumber(obj);
-}
-
-const convertToLongNumber = (obj)=> {
-    obj.loanAmount = obj.loanAmount * 100000;
-    obj.emi = obj.emi * 1000;
-	obj.prePayment = obj.prePayment * 1000;
-	obj.interestRate = obj.interestRate * 1;
-    return obj;
-}
-
-const getCompletionDate = (loanDetails) => {
-    var result = null;
-    if (loanDetails && loanDetails.length > 0) {
-        const { month, year } = loanDetails[loanDetails.length - 1];
-        result = `${month}, ${year}`;
-    }
-    return result;
 }
