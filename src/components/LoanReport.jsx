@@ -48,8 +48,11 @@ const LoanReport =(props)=>{
             </Grid>
             <Grid item xs={12} md={8}>
                 <Card>
+                    <CardHeader subheader="Principal/Interest Distribution Each Year" className="card-header">
+                    </CardHeader>
                     <CardContent class="card-content">
                         <BarChartInfo loanInfo={loanSummary}/>
+                        <AreaChartInfo loanInfo={loanSummary}/>
                     </CardContent>
                 </Card>
                 
@@ -57,39 +60,32 @@ const LoanReport =(props)=>{
             <Grid item xs={12} md={8}>
                 <Card>
                     <CardContent class="card-content">
-                        <AreaChartInfo loanInfo={loanSummary}/>
-                    </CardContent>
-                </Card>
-            </Grid>
-            <Grid item xs={12} md={8}>
-                <Card>
-                    <TableContainer className=''>
-                        <Table stickyHeader aria-label="a dense table">
-                            <TableHead>
+                    <TableContainer className='table'>
+                        <Table stickyHeader>
+                            <TableHead class="table-header">
                                 <TableRow>
                                     <TableCell>Year</TableCell>
                                     <TableCell>Principal</TableCell>
                                     <TableCell>Interest</TableCell>
+                                    <TableCell>Total</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
+                            <TableBody class="table-body">
                                 {loanSummary && loanSummary.map(row => (
                                     <TableRow key={row.year}>
                                         <TableCell>{row.year}</TableCell>
-                                        <TableCell>{row.principal}</TableCell>
-                                        <TableCell>{row.interest}</TableCell>
+                                        <TableCell>{row.principal.addThousandSeperator()}</TableCell>
+                                        <TableCell>{row.interest.addThousandSeperator()}</TableCell>
+                                        <TableCell>{row.totalAmount.addThousandSeperator()}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    </CardContent>
                 </Card>
             </Grid>
         </Grid>
-
-    //   <Grid container spacing={0} className="loanResult">
-	// 	  <h2>{JSON.stringify(loanSummary)}</h2>
-    //   </Grid>
     );
 }
 

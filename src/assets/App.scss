@@ -91,17 +91,22 @@ body {
 
 	.chart {
 		height: 50vh;
+		margin-bottom: 25px;
 	}
 }
 
-.card-header {
+.header-bg {
 	background: #cdeb8b; /* Old browsers */
 	background: -moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#cdeb8b',GradientType=0 ); /* IE6-9 */
 	border: solid 1px #b4e645;
-    padding: 8px 16px;
+}
+
+.card-header {
+	@extend .header-bg;
+	padding: 8px 16px;
 	text-align: center;
 	
 	span {
@@ -141,14 +146,44 @@ body {
 			h6:last-child {
 				background-color: #aee6f2;
 				/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a1dbff+0,cbebff+53,f0f9ff+100 */
-background: #a1dbff; /* Old browsers */
-background: -moz-linear-gradient(left,  #a1dbff 0%, #cbebff 53%, #f0f9ff 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left,  #a1dbff 0%,#cbebff 53%,#f0f9ff 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right,  #a1dbff 0%,#cbebff 53%,#f0f9ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1dbff', endColorstr='#f0f9ff',GradientType=1 ); /* IE6-9 */
+				background: #a1dbff;
+				/* Old browsers */
+				background: -moz-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%);
+				/* FF3.6-15 */
+				background: -webkit-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%);
+				/* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(to right, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%);
+				/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a1dbff', endColorstr='#f0f9ff', GradientType=1);
+				/* IE6-9 */
 
 				border-radius: 4px;
 			}
 		}
+	}
+}
+
+
+.table-header {
+	 th {
+		@extend .header-bg;
+		color: rgba(0, 0, 0, 0.74);
+		font-weight: bold;
+	 }
+
+	 th {
+		padding: 10px 30px;
+	 }
+}
+
+.table-body {
+	td {
+		padding: 10px 30px;
+	}
+
+	tr {
+		&:nth-of-type(odd) {
+			background: #f7fbf3;
+		}	
 	}
 }

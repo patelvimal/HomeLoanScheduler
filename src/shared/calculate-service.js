@@ -36,6 +36,7 @@ export const getSummary = (jsonData) =>{
             })
             sumTotal.principal = sumTotal.principal.roundOf(2);
             sumTotal.interest = sumTotal.interest.roundOf(2);
+            sumTotal.totalAmount = (sumTotal.principal + sumTotal.interest).roundOf(2);
             result.push(sumTotal);
         })
     }
