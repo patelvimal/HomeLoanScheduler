@@ -3,9 +3,34 @@
 const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
 
 
-export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) => {
+export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
     var result=[];
     var loanBalance=loanAmount;
+    var today = new Date();
+    var currentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    while( 0 < loanBalance) {
+        var perdayInterestAmount= ((loanBalance * (interestRate/100))/365);
+        var monthlyInterest = (perdayInterestAmount * currentMonth.getDate());
+        loanBalance = (loanBalance-(emi-monthlyInterest) - (prepayment|| 0));
+        var month = monthNames[currentMonth.getMonth()];
+        result.push({
+            month: month , 
+            year: currentMonth.getFullYear(),
+            principal: (emi-monthlyInterest),
+            interest:monthlyInterest,
+            balance: loanBalance,
+            prepayment:prepayment
+        });
+        currentMonth.setMonth(currentMonth.getMonth() + 2, 0);
+    }
+    console.log(calculateEMI(4270000,9.55,240).toFixed(0));
+    return result;
+};
+
+
+export const calcHomeLoanwithPrepayment = (loanAmount,emi,interestRate,prepayment) => {
+    var result=[];
+    var loanBalance = loanAmount;
     var today = new Date();
     var currentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     while( 0 < loanBalance) {
@@ -25,6 +50,7 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment,startDate) =
     return result;
 };
 
+
 export const getSummary = (jsonData) =>{
     var result = null;
     if (jsonData && Array.isArray(jsonData) && jsonData.length > 0) {
@@ -32,11 +58,16 @@ export const getSummary = (jsonData) =>{
         result = [];
         Object.keys(groupByYear).map(key=>{
             var sumTotal = groupByYear[key].reduce((a, b) => {
-                return { year: key, principal: a.principal + b.principal, interest: a.interest + b.interest }
+                return { year: key, 
+                    principal: a.principal + b.principal, 
+                    interest: a.interest + b.interest,
+                    prepayment : a.prepayment + b.prepayment,
+                }
             })
             sumTotal.principal = sumTotal.principal.roundOf(2);
             sumTotal.interest = sumTotal.interest.roundOf(2);
-            sumTotal.totalAmount = (sumTotal.principal + sumTotal.interest).roundOf(2);
+            sumTotal.prepayment = sumTotal.prepayment.roundOf(2);
+            sumTotal.totalAmount = (sumTotal.principal + sumTotal.interest + sumTotal.prepayment).roundOf(2);
             result.push(sumTotal);
         })
     }
@@ -66,6 +97,15 @@ const groupBy = (xs, key) => {
     }, {});
 };
 
+
+export const calculateEMI = (loanAmount,interestRate,numberOfMonths)=> {
+    const monthlyInterestRatio = (interestRate / 100) / 12;
+    const top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
+    const bottom = top - 1;
+    const sp = top / bottom;
+    const emi = ((loanAmount * monthlyInterestRatio) * sp);
+    return emi;
+}
 Number.prototype.roundOf = function (decimals) {
     return Number(Math.round(this + 'e' + decimals) + 'e-' + decimals);
 }

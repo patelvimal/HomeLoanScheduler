@@ -72,6 +72,7 @@ const LoanReport =(props)=>{
                                     <TableCell>Year</TableCell>
                                     <TableCell>Principal</TableCell>
                                     <TableCell>Interest</TableCell>
+                                    <TableCell>Pre-Payment</TableCell>
                                     <TableCell>Total</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -81,6 +82,7 @@ const LoanReport =(props)=>{
                                         <TableCell>{row.year}</TableCell>
                                         <TableCell>{row.principal.addThousandSeperator()}</TableCell>
                                         <TableCell>{row.interest.addThousandSeperator()}</TableCell>
+                                        <TableCell>{row.prepayment.addThousandSeperator()}</TableCell>
                                         <TableCell>{row.totalAmount.addThousandSeperator()}</TableCell>
                                     </TableRow>
                                 ))}
