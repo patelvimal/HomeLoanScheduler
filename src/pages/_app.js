@@ -9,11 +9,11 @@ import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/sty
 import { StylesProvider } from '@material-ui/core/styles';
 import Header from '../components/Header';
 
-// const theme = createMuiTheme({
-// 	typography: {
-//     // fontFamily: "Roboto-Regular"
-// 	}
-// });
+const theme = createMuiTheme({
+	typography: {
+    // fontFamily: "Roboto-Regular"
+	}
+});
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
