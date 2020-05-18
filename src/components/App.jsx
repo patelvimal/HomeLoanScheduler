@@ -6,7 +6,6 @@ import LoanResult from './LoanReport';
 import Header from './Header';
 import InputSlider from './InputSlider';
 
-
 const App = () => {
 	//return <MyForm/>
 	return (

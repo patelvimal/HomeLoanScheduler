@@ -13,6 +13,54 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import Avatar from '@material-ui/core/Avatar';
 import InputSlider from './InputSlider';
 import { Router ,useRouter } from 'next/router';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+
+const useStyles = makeStyles({
+    submit: {
+        margin:'25px 0'
+    },
+    form :{
+        '& > div' : {
+            margin: '5px 0px'
+        }
+    },
+    gridContainer: {
+		marginTop: 25
+	},
+	formContainer: {
+		margin: '10px auto'
+    },
+
+    
+});
+
+
+
+const useCardStyles = makeStyles({
+    header: {
+        padding: '8px 16px',
+        textAlign:'center',
+        background: '#cdeb8b',
+	    background: '-moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%)',
+	    background: '-webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%)',
+	    background: 'linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%)',
+	    filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr="#cdeb8b", endColorstr="#cdeb8b",GradientType=0 )',
+	    border: 'solid 1px #b4e645'
+    },
+    subHeader: {
+        fontWeight:'Bold'
+    },
+    content: {
+        margin: '10px 0px'
+    }
+});
 
 const LoanForm = (props) => {
     const LOAN_AMOUNT_DEFAULT_VALUE = 50;
@@ -62,35 +110,50 @@ const LoanForm = (props) => {
         const { loanAmount,emi,interestRate } = loanInfo;
         return !!(loanAmount && emi && interestRate);
     }
-
+   
+    const cardClasses = useCardStyles();
+    const formClasses = useStyles();
     return (
         <Grid container spacing={0} className='loanDetailsForm'>
-            <Grid item xs={12} md={6} className='formContainer'>
+            <Grid item xs={12} md={4} className={formClasses.formContainer}>
+                <Card>
+                    <CardHeader subheader="Loan Details" classes={{
+                        root:cardClasses.header,
+                        subheader:cardClasses.subHeader
+                    }}>
+                    </CardHeader>
+                    <CardContent className={cardClasses.content}>
+                        <form  noValidate>
+                            <InputSlider 
+                                label="Outstanding Loan Amount" 
+                                min={0} 
+                                max={100} 
+                                step={1}
+                                defaultValue={LOAN_AMOUNT_DEFAULT_VALUE}
+                                onChange={onChange}
+                                suffix="L"
+                                name="loanAmount"
+                                marks={loanAmountMarker} 
+                            />
+                            <InputSlider 
+                                label="Monthly EMI" 
+                                min={0} 
+                                max={100} 
+                                step={1}
+                                defaultValue={MONTHLY_EMI_DEFAULT_VALUE}
+                                onChange={onChange}
+                                suffix="K"
+                                name="emi"
+                                marks={emiAmountMarker} 
+                            />
+                        </form>
+                    </CardContent>
+                </Card>
                 <Container component="main">
                     <form  noValidate>
-                        <InputSlider 
-                            label="Outstanding Loan Amount" 
-                            min={0} 
-                            max={100} 
-                            step={1}
-                            defaultValue={LOAN_AMOUNT_DEFAULT_VALUE}
-                            onChange={onChange}
-                            suffix="L"
-                            name="loanAmount"
-                            marks={loanAmountMarker} 
-                        />
-                         <InputSlider 
-                            label="Monthly EMI" 
-                            min={0} 
-                            max={100} 
-                            step={1}
-                            defaultValue={MONTHLY_EMI_DEFAULT_VALUE}
-                            onChange={onChange}
-                            suffix="K"
-                            name="emi"
-                            marks={emiAmountMarker} 
-                        />
-                        <InputSlider 
+                        
+                
+                        {/*<InputSlider 
                             label="Interest Rate" 
                             min={0} 
                             max={20} 
@@ -120,7 +183,7 @@ const LoanForm = (props) => {
                             onClick={onSubmit}
                             className='submit'>
                         Submit
-                        </Button>
+                        </Button> */}
                     </form>
                 </Container>
             </Grid>
