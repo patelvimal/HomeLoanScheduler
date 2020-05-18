@@ -81,7 +81,7 @@ const LoanForm = (props) => {
         prePayment:MONTHLY_PREPAYMENT_DEFAULT_VALUE
     };
     const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
-    const [formSubmitted,setFormStatus] = useState(false);
+    const [showResult,setResultFormStatus] = useState(false);
     
     
     const loanAmountMarker = generateMarker('L');
@@ -101,10 +101,11 @@ const LoanForm = (props) => {
     }
 
     const onSubmit = (event) => {
-        router.push({
-            pathname:'/result',
-            query: `loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
-        });
+        // router.push({
+        //     pathname:'/result',
+        //     query: `loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
+        // });
+        setResultFormStatus(true);
         event.preventDefault();
         event.stopPropagation();
     }
@@ -118,7 +119,7 @@ const LoanForm = (props) => {
     const cardClasses = useCardStyles();
     const formClasses = useStyles();
     return (
-        <Grid container spacing={0} className='loanDetailsForm'>
+        <Grid container spacing={2} xs={12} className='loanDetailsForm'>
             <Grid item xs={12} md={4} className={formClasses.formContainer}>
                 <Card>
                     <CardHeader subheader="Loan Details" classes={{
@@ -185,6 +186,12 @@ const LoanForm = (props) => {
                     </CardContent>
                 </Card>
             </Grid>
+            {
+                showResult ?
+                <Grid item xs={12} md={8} className={formClasses.formContainer}>
+                    <h1>Result Form</h1>
+                </Grid> : null
+            }
         </Grid>
     )
 }
