@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Link from 'next/link';
+
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({

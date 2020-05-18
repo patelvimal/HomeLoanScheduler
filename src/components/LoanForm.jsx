@@ -21,6 +21,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import LoanResult from './LoanReport';
 
 const useStyles = makeStyles({
     submit: {
@@ -101,10 +102,10 @@ const LoanForm = (props) => {
     }
 
     const onSubmit = (event) => {
-        // router.push({
-        //     pathname:'/result',
-        //     query: `loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
-        // });
+        router.push({
+            pathname:'/',
+            query: `loanAmount=${loanInfo.loanAmount}&emi=${loanInfo.emi}&interestRate=${loanInfo.interestRate}&prePayment=${loanInfo.prePayment}`
+        });
         setResultFormStatus(true);
         event.preventDefault();
         event.stopPropagation();
@@ -119,7 +120,7 @@ const LoanForm = (props) => {
     const cardClasses = useCardStyles();
     const formClasses = useStyles();
     return (
-        <Grid container spacing={2} xs={12} className='loanDetailsForm'>
+        <Grid container spacing={4} xs={12} className='loanDetailsForm'>
             <Grid item xs={12} md={4} className={formClasses.formContainer}>
                 <Card>
                     <CardHeader subheader="Loan Details" classes={{
@@ -180,7 +181,7 @@ const LoanForm = (props) => {
                                 color="primary"
                                 onClick={onSubmit}
                                 className={formClasses.submitButton}>
-                            Submit
+                            Calculate
                             </Button>
                         </form>
                     </CardContent>
@@ -189,7 +190,7 @@ const LoanForm = (props) => {
             {
                 showResult ?
                 <Grid item xs={12} md={8} className={formClasses.formContainer}>
-                    <h1>Result Form</h1>
+                    <LoanResult/>
                 </Grid> : null
             }
         </Grid>

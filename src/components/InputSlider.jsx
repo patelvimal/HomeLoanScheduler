@@ -23,7 +23,8 @@ const useStyles = makeStyles({
 	},
 	sliderRoot: {
 		color: '#209ddb',
-		height: '8px'
+		height: '8px',
+		padding: '10px 0'
 	},
 
 	thumb: {
@@ -47,7 +48,8 @@ const useStyles = makeStyles({
 	  borderRadius: 4,
 	},
 	label: {
-		padding: '14px 0',
+		padding: '9px 0',
+		marginTop:4
 	},
 	inputContainer:{
 		// width:200,
@@ -65,7 +67,7 @@ const useStyles = makeStyles({
 		borderRadius: 4,
 		fontSize: '18px',
 		border: 'solid 1px rgb(223, 224, 228)',
-		width: 180,
+		width: 100,
 		background: '#a6daf23d'
 	}
 });
