@@ -1,109 +1,152 @@
-import React, { useEffect } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import {calcHomeLoan,getSummary,getTotal} from '../shared/calculate-service';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles,withStyles } from '@material-ui/core/styles';
-import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
-    Line, LineChart, Legend, ResponsiveContainer, PieChart, Pie, Bar,
-    BarChart, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ComposedChart,
-    RadialBarChart, RadialBar, Treemap } from 'recharts';
-import { useRouter } from 'next/router' ;
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import Grid from '@material-ui/core/Grid';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import React from 'react';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import { 
-    parseQueryStringToObject,
-    convertToLongNumber,
-    getCompletionDate
-} from '../shared/utilities';
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { calcHomeLoan, getSummary, getTotal } from '../shared/calculate-service';
+import { getCompletionDate,convertToLongNumber } from '../shared/utilities';
+
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+
+
+const useCardStyles = makeStyles({
+    header: {
+        padding: '8px 16px',
+        textAlign: 'center',
+        background: '#cdeb8b',
+        background: '-moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%)',
+        background: '-webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%)',
+        background: 'linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%)',
+        filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr="#cdeb8b", endColorstr="#cdeb8b",GradientType=0 )',
+        border: 'solid 1px #b4e645'
+    },
+    subHeader: {
+        fontWeight: 'Bold'
+    },
+    content: {
+        margin: '10px 0px'
+    }
+});
+
 
 const LoanReport =(props)=>{
-    const router = useRouter();
-	const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(router.asPath);
+	const { loanAmount,emi,interestRate,prePayment } = convertToLongNumber(props.loanInfo);
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail,"year");
     var total = getTotal(loanSummary);
     total.completionDate = getCompletionDate(loanDetail);
 
+    const cardClasses = useCardStyles();
 	return (
-        <Grid item
-            container
-            spacing={4}
-            xs={12}
-            direction="row"
-            justify="flex-start"
-            alignItems="flex-start"
-            className="loanResult"
-        >
-            <Grid item xs={12} md={8}>
+        <>
                 <Card>
-                    <CardHeader subheader="Summary" className="card-header">
-                    </CardHeader>
-                    <CardContent className="card-content">
+                    <CardHeader subheader="Summary" classes={{
+                        root: cardClasses.header,
+                        subheader: cardClasses.subHeader
+                    }}>
+                </CardHeader>
+                    <CardContent className={cardClasses.content}>
                         <Summary data={total}/>
                     </CardContent>
                 </Card>
-            </Grid>
-            <Grid item xs={12} md={8}>
-                <Card>
-                    <CardHeader subheader="Principal/Interest Distribution Each Year" className="card-header">
-                    </CardHeader>
-                    <CardContent className="card-content">
-                        <BarChartInfo loanInfo={loanSummary}/>
-                        <AreaChartInfo loanInfo={loanSummary}/>
-                    </CardContent>
-                </Card>
+        </>
+            // <Grid item xs={12} md={8}>
+            //     <Card>
+            //         <CardHeader subheader="Principal/Interest Distribution Each Year" classes={{
+            //             root: cardClasses.header,
+            //             subheader: cardClasses.subHeader
+            //         }}>
+            //         </CardHeader>
+            //         <CardContent className={cardClasses.content}>
+            //             <BarChartInfo loanInfo={loanSummary}/>
+            //             <AreaChartInfo loanInfo={loanSummary}/>
+            //         </CardContent>
+            //     </Card>
                 
-            </Grid>
-            <Grid item xs={12} md={8}>
-                <Card>
-                    <CardContent className="card-content">
-                    <TableContainer className='table'>
-                        <Table stickyHeader>
-                            <TableHead className="table-header">
-                                <TableRow>
-                                    <TableCell>Year</TableCell>
-                                    <TableCell>Principal</TableCell>
-                                    <TableCell>Interest</TableCell>
-                                    <TableCell>Pre-Payment</TableCell>
-                                    <TableCell>Total</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody className="table-body">
-                                {loanSummary && loanSummary.map(row => (
-                                    <TableRow key={row.year}>
-                                        <TableCell>{row.year}</TableCell>
-                                        <TableCell>{row.principal.addThousandSeperator()}</TableCell>
-                                        <TableCell>{row.interest.addThousandSeperator()}</TableCell>
-                                        <TableCell>{row.prepayment.addThousandSeperator()}</TableCell>
-                                        <TableCell>{row.totalAmount.addThousandSeperator()}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    </CardContent>
-                </Card>
-            </Grid>
-        </Grid>
+            // </Grid>
+            // <Grid item xs={12} md={8}>
+            //     <Card>
+            //         <CardContent className={cardClasses.content}>
+            //             <TableContainer className='table'>
+            //                 <Table stickyHeader>
+            //                     <TableHead className="table-header">
+            //                         <TableRow>
+            //                             <TableCell>Year</TableCell>
+            //                             <TableCell>Principal</TableCell>
+            //                             <TableCell>Interest</TableCell>
+            //                             <TableCell>Pre-Payment</TableCell>
+            //                             <TableCell>Total</TableCell>
+            //                         </TableRow>
+            //                     </TableHead>
+            //                     <TableBody className="table-body">
+            //                         {loanSummary && loanSummary.map(row => (
+            //                             <TableRow key={row.year}>
+            //                                 <TableCell>{row.year}</TableCell>
+            //                                 <TableCell>{row.principal.addThousandSeperator()}</TableCell>
+            //                                 <TableCell>{row.interest.addThousandSeperator()}</TableCell>
+            //                                 <TableCell>{row.prepayment.addThousandSeperator()}</TableCell>
+            //                                 <TableCell>{row.totalAmount.addThousandSeperator()}</TableCell>
+            //                             </TableRow>
+            //                         ))}
+            //                     </TableBody>
+            //                 </Table>
+            //             </TableContainer>
+            //         </CardContent>
+            //     </Card>
     );
 }
 
 export default LoanReport;
 
 
+const useSummaryStyles = makeStyles({
+    labelValue:{
+        '> h6': {
+			width: 125,
+			display: 'inline-block',
+			padding: '4px 10px',
+			margin: '2px 0px',
+			fontWeight: 'bold',
+
+			'&:first-child' : {
+				paddingLeft: 50,
+				color:'#727272',
+				textAlign: 'right'
+			},
+			'&:last-child' : {
+				fontWeight: 'bold'
+			}
+		},
+
+		'&.completion-date': {
+			'h6:last-child' : {
+				backgroundColor: '#aee6f2',
+				background: '#a1dbff',
+				background: '-moz-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+				background: '-webkit-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+				background: 'linear-gradient(to right, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+				filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#a1dbff", endColorstr="#f0f9ff", GradientType=1)',
+				borderRadius: 4
+			}
+		}
+    },
+
+});
+
 const Summary = (props) => {
-    const {total,completionDate,principal,interest} = props.data;
+    const { total, completionDate, principal, interest } = props.data;
+    const classes = useSummaryStyles();
     return (
         <React.Fragment>
-            <div className="label-value">
+            <div className={classes.labelValue}>
                 <Typography variant="subtitle1"  display="inline">
                     Total Amount:
                 </Typography>
@@ -111,7 +154,7 @@ const Summary = (props) => {
                     { total}
                 </Typography>
             </div>
-            <div className="label-value completion-date">
+            <div className={classes.labelValue}>
                 <Typography variant="subtitle1" display="inline">
                     Completion Date:
                         </Typography>
@@ -119,7 +162,7 @@ const Summary = (props) => {
                     {completionDate}
                 </Typography>
             </div>
-            <div className="label-value">
+            <div className={classes.labelValue}>
                 <Typography variant="subtitle1" display="inline">
                     Total Principal:
                 </Typography>
@@ -127,7 +170,7 @@ const Summary = (props) => {
                     {principal}
                 </Typography>
             </div>
-            <div className="label-value">
+            <div className={classes.labelValue}>
                 <Typography variant="subtitle1" display="inline">
                     Total Interest:
                 </Typography>
