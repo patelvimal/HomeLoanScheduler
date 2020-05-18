@@ -25,7 +25,7 @@ const App = () => {
             </Grid>
             {
                 loanInfo ?
-                    <Grid item xs={12} md={8}>
+                    <Grid item xs={12} md={8} className={formClasses.formContainer}>
                         <LoanResult loanInfo={loanInfo} />
                     </Grid> : null
             }

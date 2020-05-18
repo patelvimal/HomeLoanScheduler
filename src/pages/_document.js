@@ -15,8 +15,8 @@ class MyDocument extends Document {
             return { ...initialProps,
                 styles: (
                     <>
+                        {/* {sheet.getStyleElement()} */}
                         {initialProps.styles}
-                        {sheet.getStyleElement()}
                     </>
                 )
             }
