@@ -113,12 +113,11 @@ export default function InputSlider(props) {
 		
 		<div className={classes.root}>
 			<Grid container justify="space-between">
-				
 				<Typography align="left" className={classes.label}>{props.label}</Typography>
 				<div className={classes.inputContainer}>
 					{/* <img src="/rupee.svg" alt="rupee" className={classes.rupeeIcon}></img> */}
 					<RupeeIcon className={classes.rupeeIcon}></RupeeIcon>
-					<input type="text" className={classes.input}></input>
+					<input type="text" className={classes.input} value={value} onChange={handleInputChange}></input>
 					{/* <TextField
                             required
                             //={formSubmitted && !loanInfo.loanAmount}

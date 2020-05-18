@@ -37,7 +37,11 @@ const useStyles = makeStyles({
 	formContainer: {
 		margin: '10px auto'
     },
-
+    submitButton : {
+        float: 'right',
+        padding: '6px 50px',
+        margin: '15px 0',
+    }
     
 });
 
@@ -146,46 +150,40 @@ const LoanForm = (props) => {
                                 name="emi"
                                 marks={emiAmountMarker} 
                             />
+                            <InputSlider 
+                                label="Interest Rate" 
+                                min={0} 
+                                max={20} 
+                                step={.1}
+                                defaultValue={INTEREST_RATE_DEFAULT_VALUE}
+                                onChange={onChange}
+                                name="interestRate"
+                                suffix="%"
+                                marks={intRateMarker} 
+                            />
+                            <InputSlider 
+                                label="Monthly Prepayment" 
+                                min={0} 
+                                max={100} 
+                                step={1}
+                                defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
+                                onChange={onChange}
+                                suffix="K"
+                                name="prePayment"
+                                marks={emiAmountMarker} 
+                            />
+
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                onClick={onSubmit}
+                                className={formClasses.submitButton}>
+                            Submit
+                            </Button>
                         </form>
                     </CardContent>
                 </Card>
-                <Container component="main">
-                    <form  noValidate>
-                        
-                
-                        {/*<InputSlider 
-                            label="Interest Rate" 
-                            min={0} 
-                            max={20} 
-                            step={.1}
-                            defaultValue={INTEREST_RATE_DEFAULT_VALUE}
-                            onChange={onChange}
-                            name="interestRate"
-                            suffix="%"
-                            marks={intRateMarker} 
-                        />
-                        <InputSlider 
-                            label="Monthly Prepayment" 
-                            min={0} 
-                            max={100} 
-                            step={1}
-                            defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
-                            onChange={onChange}
-                            suffix="K"
-                            name="prePayment"
-                            marks={emiAmountMarker} 
-                        />
-
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            onClick={onSubmit}
-                            className='submit'>
-                        Submit
-                        </Button> */}
-                    </form>
-                </Container>
             </Grid>
         </Grid>
     )
