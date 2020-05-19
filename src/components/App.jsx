@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Link from '@material-ui/core/Link';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { StylesProvider } from '@material-ui/core/styles';
-import { calcHomeLoan } from '../shared/calculate-service';
 import Grid from '@material-ui/core/Grid';
-import '../assets/App.scss';
-import appIcon from '../assets/appIcon.png';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { BrowserRouter, Route, Redirect, Switch, useHistory } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import LoanForm from './LoanForm';
 import LoanResult from './LoanReport';
-import Header from './Header';
 
-const theme = createMuiTheme({
-	typography: {
-		fontFamily: "Roboto-Regular"
-	}
-});
+const useStyles = makeStyles((theme) =>({
+    root : {
+        [theme.breakpoints.down('sm')]: {
+            margin: 0,
+            '& > .MuiGrid-item': {
+                padding: 0,
+            },
+        },
+    },
+    formContainer: {
+        margin: '10px auto'
+    }
+}));
 
 const App = () => {
-	return (
-		<React.Fragment>
-			<StylesProvider injectFirst>
-				<ThemeProvider theme={theme}>
-					<Header />
-					<BrowserRouter>
-						<Switch>
-							<Route path="/result" render={() => { return <LoanResult /> }} />
-							<Route path="/" component={LoanForm} />
-						</Switch>
-					</BrowserRouter>
-				</ThemeProvider>
-			</StylesProvider>
-		</React.Fragment >
-	)
+    const [loanInfo, setLoanInfo] = useState(null);
+    const formClasses = useStyles();
+
+    const onFormSubmit = (loanDetails) => {
+        setLoanInfo(loanDetails);
+        window.scrollTo(0,1500);
+    }
+
+    return (
+        <Grid container spacing={4} item xs={12} className={formClasses.root}>
+            <Grid item xs={12} md={4} className={formClasses.formContainer}>
+                <LoanForm onFormSubmit={onFormSubmit} />
+            </Grid>
+            {
+                loanInfo ?
+                    <Grid item xs={12} md={8} className={formClasses.formContainer}>
+                        <LoanResult loanInfo={loanInfo} />
+                    </Grid> : null
+            }
+        </Grid>
+    )
 }
 
 export default App;

@@ -1,33 +1,193 @@
-@import 'variables';
+@import "variables";
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: $roboto-bold !important;
-  //font-family: $segoe-ui-light !important;
-  //font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  letter-spacing: -0.00833em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	padding: 0;
+	font-family: $roboto-regular !important;
+	//font-family: $segoe-ui-light !important;
+	//font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+	letter-spacing: -0.00833em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: #f5f5f5;
+}
+
+.submit {
+	float: right;
+	padding: 6px 50px;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+
+.header {
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#606c88+0,3f4c6b+100;Grey+3D+%232 */
+	background: #606c88; /* Old browsers */
+	background: -moz-linear-gradient(top,  #606c88 0%, #3f4c6b 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #606c88 0%,#3f4c6b 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #606c88 0%,#3f4c6b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+
+	color: rgba(0, 0, 0, 0.87);
+	box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.2),
+		0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+	height: 80px;
+
+	.logo {
+		margin: 10px auto 0px auto;
+		text-align: center;
+	}
+
+	.headerIcon {
+		margin: 0 10px;
+		float: left;
+	}
+
+	.link {
+		margin-left: 5px;
+		text-decoration: initial;
+		color: #fff;
+	}
+}
+
+.loanDetailsForm {
+	margin: 0 auto;
+
+	&>div {
+		margin: "5px 0px";
+	}
+
+	.gridContainer {
+		margin-top: 25px;
+	}
+
+	.formContainer {
+		margin: 25px auto;
+		border-radius: 4px;
+		border: solid 1px #e0e0e0;
+		padding: 24px 2px;
+		box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+			0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+	}
+}
+
+.loanResult {
+	margin: 8px 0px;
+
+	> div {
+		margin: 0 auto;
+	}
+
+	.gridContainer {
+		margin-top: 25px;
+	}
+
+	.detail {
+		max-height: 80vh;
+	}
+	.summary {
+		max-height: 75vh;
+		margin-bottom: 25px;
+	}
+
+	.chart {
+		height: 50vh;
+		margin-bottom: 25px;
+
+		text {
+			font-size: 14px;
+		}
+	}
+}
+
+.header-bg {
+	background: #cdeb8b; /* Old browsers */
+	background: -moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#cdeb8b',GradientType=0 ); /* IE6-9 */
+	border: solid 1px #b4e645;
+}
+
+.card-header {
+	@extend .header-bg;
+	padding: 8px 16px;
+	text-align: center;
+	
+	span {
+		font-weight: bold;	
+
+	}
+}
+
+.icon {
+	width: 25px;
+	height: 25px;
+	color:blue;
+}
+
+.card-content {
+	margin: 10px 0px;
+	.label-value {
+		> h6 {
+			width: 125px;
+			display: inline-block;
+			padding: 4px 10px ;
+			margin: 2px 0px;
+			font-weight: bold;
+
+			&:first-child {
+				padding-left: 50px;
+				color:#727272;
+				text-align: right;
+			}
+
+			&:last-child {
+				font-weight: bold;
+			}
+		}
+
+		&.completion-date {
+			h6:last-child {
+				background-color: #aee6f2;
+				/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a1dbff+0,cbebff+53,f0f9ff+100 */
+				background: #a1dbff;
+				/* Old browsers */
+				background: -moz-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%);
+				/* FF3.6-15 */
+				background: -webkit-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%);
+				/* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(to right, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%);
+				/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a1dbff', endColorstr='#f0f9ff', GradientType=1);
+				/* IE6-9 */
+
+				border-radius: 4px;
+			}
+		}
+	}
 }
 
 
+.table-header {
+	 th {
+		@extend .header-bg;
+		color: rgba(0, 0, 0, 0.74);
+		font-weight: bold;
+	 }
 
-// .container {
-//   width: 40%;
-//   margin: 50px auto;
-// }
+	 th {
+		padding: 10px 30px;
+	 }
+}
 
-// .grid-container {
-//   margin: 15px auto !important;
+.table-body {
+	td {
+		padding: 10px 30px;
+	}
 
-//   > div {
-//     padding: 25px !important;
-    
-//     &:first-child {
-//       BORDER-RIGHT: SOLID 1PX rgba(0, 0, 0, 0.26) !important;  
-//     }
-//   }
-  
-
-// }
+	tr {
+		&:nth-of-type(odd) {
+			background: #f7fbf3;
+		}	
+	}
+}
