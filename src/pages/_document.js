@@ -1,32 +1,44 @@
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import {ServerStyleSheets} from "@material-ui/styles";
 
+class MyDocument extends Document {
+    static async getInitialProps(ctx) {
+        const sheet = new ServerStyleSheets();
+        const originalRenderPage = ctx.renderPage;
 
-export default class SiteDocument extends Document {
-  render() {
+        try{
+            ctx.renderPage = () => originalRenderPage({
+                enhanceApp: App => props => sheet.collect(<App {...props}/>)
+            });
 
-    return (
-      <html lang="en">
-        <Head>
-          <meta charset="utf-8" />
-          <link rel="icon" href="/favicon.ico" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="description" content="Home Loan Calculator" />
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37554448-3"></script>
-          {/* <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {dataLayer.push(arguments); }
-            gtag('js', new Date());
+            const initialProps = await Document.getInitialProps(ctx);
+            return { ...initialProps,
+                styles: (
+                    <>
+                        {/* {sheet.getStyleElement()} */}
+                        {initialProps.styles}
+                    </>
+                )
+            }
+        } finally {
+            ctx.renderPage(sheet)
+        }
 
-            gtag('config', 'UA-37554448-3');
-          </script> */}
-        </Head>
-        <body>
-          <div className="root">
-            <Main />
-          </div>
-          <NextScript />
-        </body>
-      </html>
-    )
-  }
+    }
+    render() {
+        return (
+            <Html>
+                <Head>
+                    <link rel="shortcut icon" type="image/png" href="./appIcon.png"/>
+                    <style>{`body { margin: 0 } /* custom! */`}</style>
+                    <meta name="viewport"content="width=device-width, initial-scale=1.0" />
+                </Head>
+                <body className="custom_class">
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+    )}
 }
+
+export default MyDocument;

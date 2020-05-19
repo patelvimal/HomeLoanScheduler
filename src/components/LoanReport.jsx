@@ -1,73 +1,112 @@
-import React, { useEffect } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import {calcHomeLoan,getSummary,getTotal} from '../shared/calculate-service';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles,withStyles } from '@material-ui/core/styles';
-import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
-    Line, LineChart, Legend, ResponsiveContainer, PieChart, Pie, Bar,
-    BarChart, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ComposedChart,
-    RadialBarChart, RadialBar, Treemap } from 'recharts';
-import { useRouter } from 'next/router' ;
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import Grid from '@material-ui/core/Grid';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import React from 'react';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import { 
-    parseQueryStringToObject,
-    convertToLongNumber,
-    getCompletionDate
-} from '../shared/utilities';
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { calcHomeLoan, getSummary, getTotal } from '../shared/calculate-service';
+import { getCompletionDate, convertToLongNumber } from '../shared/utilities';
 
-const LoanReport =(props)=>{
-    const router = useRouter();
-	const { loanAmount,emi,interestRate,prePayment } = parseQueryStringToObject(router.asPath);
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+
+
+const useCardStyles = makeStyles({
+    header: {
+        padding: '8px 16px',
+        textAlign: 'center',
+        background: '#cdeb8b',
+        background: '-moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%)',
+        background: '-webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%)',
+        background: 'linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%)',
+        filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr="#cdeb8b", endColorstr="#cdeb8b",GradientType=0 )',
+        border: 'solid 1px #b4e645'
+    },
+    subHeader: {
+        fontWeight: 'Bold'
+    },
+    content: {
+        margin: '10px 0px'
+    }
+});
+
+const useTableStyles = makeStyles({
+
+    tableHeader: {
+        border:'solid 2px black',
+        '& th' : {
+            padding: '8px 16px',
+            textAlign: 'center',
+            background: '#cdeb8b',
+            background: '-moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%)',
+            background: '-webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%)',
+            background: 'linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%)',
+            filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr="#cdeb8b", endColorstr="#cdeb8b",GradientType=0 )',
+                border: 'solid 1px #b4e645',
+           color: 'rgba(0, 0, 0, 0.74)',
+           fontWeight: 'bold'
+        },
+   
+        '& > th' : {
+           padding: '10px 30px'
+        }
+   },
+   
+   tableBody: {
+       '& td': {
+           padding: '10px 30px'
+       },
+       '& tr' : {
+           '&:nth-of-type(odd)': {
+               background: '#f7fbf3'
+           }	
+       }
+   }
+});
+
+const LoanReport = (props) => {
+    const { loanAmount, emi, interestRate, prePayment } = convertToLongNumber(props.loanInfo);
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
-    const loanSummary = getSummary(loanDetail,"year");
+    const loanSummary = getSummary(loanDetail, "year");
     var total = getTotal(loanSummary);
     total.completionDate = getCompletionDate(loanDetail);
 
-	return (
-        <Grid item
-            container
-            spacing={4}
-            xs={12}
-            direction="row"
-            justify="flex-start"
-            alignItems="flex-start"
-            className="loanResult"
-        >
-            <Grid item xs={12} md={8}>
-                <Card>
-                    <CardHeader subheader="Summary" className="card-header">
-                    </CardHeader>
-                    <CardContent className="card-content">
-                        <Summary data={total}/>
-                    </CardContent>
-                </Card>
-            </Grid>
-            <Grid item xs={12} md={8}>
-                <Card>
-                    <CardHeader subheader="Principal/Interest Distribution Each Year" className="card-header">
-                    </CardHeader>
-                    <CardContent className="card-content">
-                        <BarChartInfo loanInfo={loanSummary}/>
-                        <AreaChartInfo loanInfo={loanSummary}/>
-                    </CardContent>
-                </Card>
-                
-            </Grid>
-            <Grid item xs={12} md={8}>
-                <Card>
-                    <CardContent className="card-content">
+    const cardClasses = useCardStyles();
+    const tableClasses = useTableStyles();
+    return (
+        <>
+            <Card>
+                <CardHeader subheader="Summary" classes={{
+                    root: cardClasses.header,
+                    subheader: cardClasses.subHeader
+                }}>
+                </CardHeader>
+                <CardContent className={cardClasses.content}>
+                    <Summary data={total} />
+                </CardContent>
+            </Card>
+            <Card>
+                <CardHeader subheader="Principal/Interest Distribution Each Year" classes={{
+                    root: cardClasses.header,
+                    subheader: cardClasses.subHeader
+                }}>
+                </CardHeader>
+                <CardContent className={cardClasses.content}>
+                    <BarChartInfo loanInfo={loanSummary} />
+                    <AreaChartInfo loanInfo={loanSummary} />
+                </CardContent>
+            </Card>
+            <Card>
+                <CardContent className={cardClasses.content}>
                     <TableContainer className='table'>
                         <Table stickyHeader>
-                            <TableHead className="table-header">
+                            <TableHead className={tableClasses.tableHeader}>
                                 <TableRow>
                                     <TableCell>Year</TableCell>
                                     <TableCell>Principal</TableCell>
@@ -76,7 +115,7 @@ const LoanReport =(props)=>{
                                     <TableCell>Total</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody className="table-body">
+                            <TableBody  className={tableClasses.tableBody}>
                                 {loanSummary && loanSummary.map(row => (
                                     <TableRow key={row.year}>
                                         <TableCell>{row.year}</TableCell>
@@ -89,29 +128,67 @@ const LoanReport =(props)=>{
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    </CardContent>
-                </Card>
-            </Grid>
-        </Grid>
+                </CardContent>
+            </Card>
+        </>
     );
 }
 
 export default LoanReport;
 
 
+const useSummaryStyles = makeStyles({
+    labelValue: {
+        '& > h6': {
+            
+            display: 'inline-block',
+            padding: '4px 10px',
+            margin: '2px 0px',
+            fontWeight: 'bold',
+
+            '&:first-child': {
+                paddingLeft: 50,
+                color: '#727272',
+                textAlign: 'right',
+                width: 135,
+            },
+            '&:last-child': {
+                fontWeight: 'bold',
+                width: 115,
+            }
+        },
+
+
+    },
+
+    completionDate: {
+        ' & h6:last-child': {
+            backgroundColor: '#aee6f2',
+            background: '#a1dbff',
+            background: '-moz-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+            background: '-webkit-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+            background: 'linear-gradient(to right, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+            filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#a1dbff", endColorstr="#f0f9ff", GradientType=1)',
+            borderRadius: 4
+        }
+    }
+
+});
+
 const Summary = (props) => {
-    const {total,completionDate,principal,interest} = props.data;
+    const { total, completionDate, principal, interest } = props.data;
+    const classes = useSummaryStyles();
     return (
         <React.Fragment>
-            <div className="label-value">
-                <Typography variant="subtitle1"  display="inline">
+            <div className={classes.labelValue}>
+                <Typography variant="subtitle1" display="inline">
                     Total Amount:
                 </Typography>
                 <Typography variant="subtitle1" display="inline" >
-                    { total}
+                    {total}
                 </Typography>
             </div>
-            <div className="label-value completion-date">
+            <div className={`${classes.labelValue} ${classes.completionDate}`}>
                 <Typography variant="subtitle1" display="inline">
                     Completion Date:
                         </Typography>
@@ -119,7 +196,7 @@ const Summary = (props) => {
                     {completionDate}
                 </Typography>
             </div>
-            <div className="label-value">
+            <div className={classes.labelValue}>
                 <Typography variant="subtitle1" display="inline">
                     Total Principal:
                 </Typography>
@@ -127,7 +204,7 @@ const Summary = (props) => {
                     {principal}
                 </Typography>
             </div>
-            <div className="label-value">
+            <div className={classes.labelValue}>
                 <Typography variant="subtitle1" display="inline">
                     Total Interest:
                 </Typography>
@@ -139,9 +216,23 @@ const Summary = (props) => {
     );
 }
 
+
+
+const useChartStyles = makeStyles({
+    chart: {
+        height: 300,
+        marginBottom: 25,
+
+        '& > text' :{
+			fontSize: 14
+        }
+    },
+});
+
 const BarChartInfo = (props) => {
+    const classes = useChartStyles();
     return (
-        <div className = 'chart' >
+        <div className={classes.chart}>
             <ResponsiveContainer>
                 <BarChart
                     width={500}
@@ -152,7 +243,7 @@ const BarChartInfo = (props) => {
                 >
                     <CartesianGrid strokeDasharray="2 3" />
                     <XAxis dataKey="year" />
-                    <YAxis hide={true}/>
+                    <YAxis hide={true} />
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="principal" fill="#82ca9d" name="Principal" legendType="square" />
@@ -163,9 +254,10 @@ const BarChartInfo = (props) => {
     )
 }
 
-const AreaChartInfo = (props)=> {
+const AreaChartInfo = (props) => {
+    const classes = useChartStyles();
     return (
-        <div className='chart'>
+        <div className={classes.chart}>
             <ResponsiveContainer>
                 <LineChart
                     width={500}
