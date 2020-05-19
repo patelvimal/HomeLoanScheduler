@@ -167,6 +167,7 @@ const LoanForm = (props) => {
                         defaultValue={INTEREST_RATE_DEFAULT_VALUE}
                         onChange={onChange}
                         name="interestRate"
+                        type="Decimal"
                         suffix="%"
                         marks={intRateMarker}
                     />

@@ -84,6 +84,10 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 export default function InputSlider(props) {
 	const { min, max, step, defaultValue, marks,suffix,name } = props;
 	const [value, setValue] = React.useState(defaultValue || 0);
+	//const integerRegex = `^((?:|${min}|[1-9]\d?|${max})?)$`;
+	const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
+	const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
+	const regex = props.type == "Decimal" ? decimalRegex: new RegExp(integerRegex);
 
 	const handleSliderChange = (event, newValue) => {
 		setValue(newValue);
@@ -93,7 +97,10 @@ export default function InputSlider(props) {
 	};
 
 	const handleInputChange = (event) => {
-		setValue(event.target.value === '' ? '' : Number(event.target.value));
+		const {value} = event.target;
+		if (value === '' || regex.test(value) && (value >= min && value <= max)) {
+			setValue(value === '' ? '' : value.indexOf('.') == (value.length -1) ? value :Number(value));	
+		 }
 	};
 
 	const handleBlur = () => {
