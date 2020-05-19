@@ -140,7 +140,7 @@ export default LoanReport;
 const useSummaryStyles = makeStyles({
     labelValue: {
         '& > h6': {
-            width: 125,
+            
             display: 'inline-block',
             padding: '4px 10px',
             margin: '2px 0px',
@@ -149,10 +149,12 @@ const useSummaryStyles = makeStyles({
             '&:first-child': {
                 paddingLeft: 50,
                 color: '#727272',
-                textAlign: 'right'
+                textAlign: 'right',
+                width: 135,
             },
             '&:last-child': {
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                width: 115,
             }
         },
 
