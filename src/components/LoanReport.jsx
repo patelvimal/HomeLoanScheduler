@@ -1,20 +1,19 @@
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import React from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { calcHomeLoan, getSummary, getTotal } from '../shared/calculate-service';
-import { getCompletionDate, convertToLongNumber } from '../shared/utilities';
+import { calcHomeLoan, calculateEMI, getSummary, getTotal } from '../shared/calculate-service';
+import { convertToLongNumber, getCompletionDate } from '../shared/utilities';
 
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 
 const useCardStyles = makeStyles({
@@ -71,7 +70,11 @@ const useTableStyles = makeStyles({
 });
 
 const LoanReport = (props) => {
-    const { loanAmount, emi, interestRate, prePayment } = convertToLongNumber(props.loanInfo);
+    var loanInfo = convertToLongNumber(props.loanInfo);
+    if (props.loanInfo.calculateEMI) {
+        loanInfo.emi = calculateEMI(loanInfo.loanAmount, loanInfo.interestRate, loanInfo.loanTenure * 12);
+    }
+    const { loanAmount, emi, interestRate, prePayment } = loanInfo;
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail, "year");
     var total = getTotal(loanSummary);

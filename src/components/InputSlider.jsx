@@ -21,6 +21,9 @@ const useStyles = makeStyles({
 	root:{
 		marginBottom: 5
 	},
+	hide:{
+		display: 'none'
+	},
 	sliderRoot: {
 		color: '#209ddb',
 		height: '8px',
@@ -113,13 +116,18 @@ export default function InputSlider(props) {
 	const classes = useStyles();
 	return (
 		
-		<div className={classes.root}>
+		<div className={`${classes.root} ${props.hide ? classes.hide : ""}`}>
 			<Grid container justify="space-between">
 				<Typography align="left" className={classes.label}>{props.label}</Typography>
 				<div className={classes.inputContainer}>
 					{/* <img src="/rupee.svg" alt="rupee" className={classes.rupeeIcon}></img> */}
 					<RupeeIcon className={classes.rupeeIcon}></RupeeIcon>
-					<input type="text" className={classes.input} value={value} onChange={handleInputChange}></input>
+					<input 
+						type="text" 
+						className={classes.input} 
+						value={value} onChange={handleInputChange}
+						disabled = {props.disabled}
+					></input>
 					{/* <TextField
                             required
                             //={formSubmitted && !loanInfo.loanAmount}
@@ -139,6 +147,7 @@ export default function InputSlider(props) {
 			<Grid container alignItems="center">
 			<Slider
 						value={typeof value === 'number' ? value : 0}
+						disabled = {props.disabled}
 						onChange={handleSliderChange}
 						aria-labelledby="input-slider"
 						classes={{

@@ -20,7 +20,8 @@ export const convertToLongNumber = (obj)=> {
         loanAmount: obj.loanAmount * 100000,
         emi: obj.emi * 1000,
         prePayment: obj.prePayment * 1000,
-        interestRate: obj.interestRate * 1
+        interestRate: obj.interestRate * 1,
+        loanTenure: obj.loanTenure
     };
     return loanInfo;
 }

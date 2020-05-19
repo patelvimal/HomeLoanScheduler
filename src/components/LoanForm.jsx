@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import InputSlider from './InputSlider';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles({
     submit: {
@@ -47,6 +49,7 @@ const LoanForm = (props) => {
     const LOAN_AMOUNT_DEFAULT_VALUE = 50;
     const MONTHLY_EMI_DEFAULT_VALUE = 50;
     const INTEREST_RATE_DEFAULT_VALUE = 9;
+    const LOAN_TENURE_DEFAULT_VALUE = 10;
     const MONTHLY_PREPAYMENT_DEFAULT_VALUE = 0;
 
     const router = useRouter();
@@ -55,15 +58,19 @@ const LoanForm = (props) => {
         loanAmount: LOAN_AMOUNT_DEFAULT_VALUE,
         emi: MONTHLY_EMI_DEFAULT_VALUE,
         interestRate: INTEREST_RATE_DEFAULT_VALUE,
-        prePayment: MONTHLY_PREPAYMENT_DEFAULT_VALUE
+        prePayment: MONTHLY_PREPAYMENT_DEFAULT_VALUE,
+        loanTenure: LOAN_TENURE_DEFAULT_VALUE,
+        calculateEMI:false
     };
     const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
     const [showResult, setResultFormStatus] = useState(false);
+    const [emiUnknown, setLoanTermFieldStatus] = useState(false);
 
 
     const loanAmountMarker = generateMarker('L');
     const emiAmountMarker = generateMarker('K');
     const intRateMarker = generateMarker('%', 20, 2);
+    const loanTenureMarker = generateMarker('', 30, 2);
 
     const onReset = () => {
         setLoanInfo(INITIAL_STATE);
@@ -91,6 +98,9 @@ const LoanForm = (props) => {
         return !!(loanAmount && emi && interestRate);
     }
 
+    const handleEmiUnknownChange = (event,newValue)=>{
+        onChange(event.target.name,newValue);
+    }
     const cardClasses = useCardStyles();
     const formClasses = useStyles();
     return (
@@ -113,6 +123,17 @@ const LoanForm = (props) => {
                         name="loanAmount"
                         marks={loanAmountMarker}
                     />
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            checked={loanInfo.calculateEMI}
+                            onChange={handleEmiUnknownChange}
+                            name="calculateEMI"
+                            color="primary"
+                        />
+                        }
+                        label="Don't know EMI"
+                    />
                     <InputSlider
                         label="Monthly EMI"
                         min={0}
@@ -122,7 +143,21 @@ const LoanForm = (props) => {
                         onChange={onChange}
                         suffix="K"
                         name="emi"
+                        hide = {loanInfo.calculateEMI}
                         marks={emiAmountMarker}
+                    />
+                    
+                    <InputSlider
+                        hide = {!loanInfo.calculateEMI}
+                        label="Loan Tenure"
+                        min={0}
+                        max={30}
+                        step={1}
+                        defaultValue={LOAN_TENURE_DEFAULT_VALUE}
+                        onChange={onChange}
+                        name="loanTenure"
+                        suffix=""
+                        marks={loanTenureMarker}
                     />
                     <InputSlider
                         label="Interest Rate"

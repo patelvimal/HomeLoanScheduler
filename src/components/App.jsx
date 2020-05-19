@@ -24,7 +24,6 @@ const App = () => {
 
     const onFormSubmit = (loanDetails) => {
         setLoanInfo(loanDetails);
-        window.scrollTo(0,1500);
     }
 
     return (
