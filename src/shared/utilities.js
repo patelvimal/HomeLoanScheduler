@@ -16,11 +16,13 @@ export const parseQueryStringToObject = (queryString)=>{
 }
 
 export const convertToLongNumber = (obj)=> {
-    obj.loanAmount = obj.loanAmount * 100000;
-    obj.emi = obj.emi * 1000;
-	obj.prePayment = obj.prePayment * 1000;
-	obj.interestRate = obj.interestRate * 1;
-    return obj;
+    const loanInfo = {
+        loanAmount: obj.loanAmount * 100000,
+        emi: obj.emi * 1000,
+        prePayment: obj.prePayment * 1000,
+        interestRate: obj.interestRate * 1
+    };
+    return loanInfo;
 }
 
 export const getCompletionDate = (loanDetails) => {
