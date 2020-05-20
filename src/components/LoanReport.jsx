@@ -16,7 +16,15 @@ import { convertToLongNumber, getCompletionDate } from '../shared/utilities';
 import Grid from '@material-ui/core/Grid';
 
 
-const useCardStyles = makeStyles({
+const useCardStyles = makeStyles((theme) =>({
+    root : {
+        [theme.breakpoints.down('sm')]: {
+            margin: '0 auto',
+            '& > .MuiGrid-item': {
+                padding: 0,
+            },
+        },
+    },
     header: {
         padding: '8px 16px',
         textAlign: 'center',
@@ -40,7 +48,7 @@ const useCardStyles = makeStyles({
         fontWeight: 'bold',
         color:'#777474'
     }
-});
+}));
 
 const useTableStyles = makeStyles({
 
@@ -107,7 +115,7 @@ const LoanReport = (props) => {
                 }}>
                 </CardHeader>
                 <CardContent className={cardClasses.content}>
-                    <Grid container spacing={4} item xs={12}>
+                    <Grid container spacing={4} item xs={12} className={cardClasses.root}>
                         <Grid item xs={12} md={6} >
                             {totalWithoutPrepayment?<Typography className={cardClasses.label} >With Prepayment</Typography>: null }
                             <Summary data={total} />
@@ -169,7 +177,7 @@ const LoanReport = (props) => {
 export default LoanReport;
 
 
-const useSummaryStyles = makeStyles({
+const useSummaryStyles = makeStyles((theme) => ({
     labelValue: {
         '& > h6': {
             
@@ -186,8 +194,14 @@ const useSummaryStyles = makeStyles({
                 fontWeight: 'bold',
             }
         },
-
-
+        [theme.breakpoints.down('sm')]: {
+            '& > h6': {
+                width: 'unset',
+            },
+            '&:last-child': {
+                marginBottom:10
+            }
+        }
     },
 
     completionDate: {
@@ -202,7 +216,7 @@ const useSummaryStyles = makeStyles({
         }
     }
 
-});
+}));
 
 const Summary = (props) => {
     const { total, completionDate, principal, interest } = props.data;
