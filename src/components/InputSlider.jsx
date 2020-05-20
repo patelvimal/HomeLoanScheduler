@@ -1,20 +1,8 @@
-// import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
-// import React from 'react';
-// import { withStyles, makeStyles } from '@material-ui/core/styles';
-// import Slider from '@material-ui/core/Slider';
-
-
-// const InputSlider = ()=> {
-
-//     return(
-//         <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} />
-//     )
-// }
-
-// export default InputSlider;
-
-import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Slider from '@material-ui/core/Slider';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import RupeeIcon from '../components/RupeeIcon';
 
 const useStyles = makeStyles({
@@ -75,16 +63,10 @@ const useStyles = makeStyles({
 	}
 });
 
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 export default function InputSlider(props) {
 	const { min, max, step, defaultValue, marks,suffix,name } = props;
 	const [value, setValue] = React.useState(defaultValue || 0);
-	//const integerRegex = `^((?:|${min}|[1-9]\d?|${max})?)$`;
 	const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
 	const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
 	const regex = props.type == "Decimal" ? decimalRegex: new RegExp(integerRegex);
@@ -103,23 +85,6 @@ export default function InputSlider(props) {
 		 }
 	};
 
-	const handleBlur = () => {
-		if (value < 0) {
-			setValue(0);
-		} else if (value > max) {
-			setValue(max);
-		}
-	};
-
-	const valueLabelFormat = (value) => {
-		console.log(value);
-		return `${value}L`;
-	}
-
-	const selecedValueText = (value) => {
-		console.log(value);
-		return value;
-	}
 	const classes = useStyles();
 	return (
 		
@@ -127,7 +92,6 @@ export default function InputSlider(props) {
 			<Grid container justify="space-between">
 				<Typography align="left" className={classes.label}>{props.label}</Typography>
 				<div className={classes.inputContainer}>
-					{/* <img src="/rupee.svg" alt="rupee" className={classes.rupeeIcon}></img> */}
 					<RupeeIcon className={classes.rupeeIcon}></RupeeIcon>
 					<input 
 						type="text" 
@@ -135,48 +99,29 @@ export default function InputSlider(props) {
 						value={value} onChange={handleInputChange}
 						disabled = {props.disabled}
 					></input>
-					{/* <TextField
-                            required
-                            //={formSubmitted && !loanInfo.loanAmount}
-							id="loanAmount"
-							size="small"
-                            // label="Outstanding Loan Amount"
-							name="loanAmount"
-							variant="filled"
-                           // onChange={onChange}
-                            //variant={inputFieldStyle}
-							//helperText={(formSubmitted && !loanInfo.loanAmount) ? "Amount is Required!" : null}
-				/> */}
 				</div>
-				
-				{/* <Typography align="right" className="rightLabel">{value}{suffix}</Typography> */}
 			</Grid>
 			<Grid container alignItems="center">
-			<Slider
-						value={typeof value === 'number' ? value : 0}
-						disabled = {props.disabled}
-						onChange={handleSliderChange}
-						aria-labelledby="input-slider"
-						classes={{
-							root: classes.sliderRoot,
-							rail: classes.rail,
-							track: classes.track,
-							thumb: classes.thumb,
-							active: classes.active,
-							valueLabel: classes.valueLabel
-						}}
-						min={min}
-						max={max}
-						step={step}
-						marks={marks}
-						name={name}
-						valueLabelDisplay='auto'
-						// getAriaValueText={selecedValueText}
-					// valueLabelFormat={valueLabelFormat}
-					/>
-				<Grid className="input">
-				{/* <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} /> */}
-				</Grid>
+				<Slider
+					value={typeof value === 'number' ? value : 0}
+					disabled = {props.disabled}
+					onChange={handleSliderChange}
+					aria-labelledby="input-slider"
+					classes={{
+						root: classes.sliderRoot,
+						rail: classes.rail,
+						track: classes.track,
+						thumb: classes.thumb,
+						active: classes.active,
+						valueLabel: classes.valueLabel
+					}}
+					min={min}
+					max={max}
+					step={step}
+					marks={marks}
+					name={name}
+					valueLabelDisplay='auto'
+				/>
 			</Grid>
 		</div>
 	);

@@ -63,21 +63,12 @@ const LoanForm = (props) => {
         calculateEMI:false
     };
     const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
-    const [showResult, setResultFormStatus] = useState(false);
-    const [emiUnknown, setLoanTermFieldStatus] = useState(false);
-
-
     const loanAmountMarker = generateMarker('L');
     const emiAmountMarker = generateMarker('K');
     const intRateMarker = generateMarker('%', 20, 2);
     const loanTenureMarker = generateMarker('', 30, 2);
 
-    const onReset = () => {
-        setLoanInfo(INITIAL_STATE);
-    }
-
     const onChange = (name, newValue) => {
-        //const {name} = event.target;
         setLoanInfo(prevState => ({
             ...prevState,
             [name]: newValue
@@ -92,17 +83,12 @@ const LoanForm = (props) => {
         event.stopPropagation();
     }
 
-
-    const isFormValid = () => {
-        const { loanAmount, emi, interestRate } = loanInfo;
-        return !!(loanAmount && emi && interestRate);
-    }
-
     const handleEmiUnknownChange = (event,newValue)=>{
         onChange(event.target.name,newValue);
     }
     const cardClasses = useCardStyles();
     const formClasses = useStyles();
+    
     return (
         <Card>
             <CardHeader subheader="Loan Details" classes={{
@@ -146,7 +132,6 @@ const LoanForm = (props) => {
                         hide = {loanInfo.calculateEMI}
                         marks={emiAmountMarker}
                     />
-                    
                     <InputSlider
                         hide = {!loanInfo.calculateEMI}
                         label="Loan Tenure"

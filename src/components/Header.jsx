@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from 'next/link';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import React from 'react';
 
 const useStyles = makeStyles({
 	root: {
@@ -33,6 +33,7 @@ const useStyles = makeStyles({
 		color: '#fff'
 	}
 });
+
 const Header = () => {
 	const classes = useStyles();
 	return (

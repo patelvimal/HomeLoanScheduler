@@ -36,7 +36,11 @@ class MyDocument extends Document {
                     <meta name="viewport"content="width=device-width, initial-scale=1.0" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <meta name="description" content="Home Loan Calculator"/>
-                    <style>{`body { margin: 0 ; padding: 0} `}</style>
+                    <style>{`
+                   
+                    body { margin: 0; padding: 0;} 
+                    
+                    `}</style>
                 </Head>
                 <body className="custom_class">
                     <Main />
