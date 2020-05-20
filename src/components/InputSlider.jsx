@@ -69,7 +69,7 @@ export default function InputSlider(props) {
 	const [value, setValue] = React.useState(defaultValue || 0);
 	const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
 	const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
-	const regex = props.type == "Decimal" ? decimalRegex: new RegExp(integerRegex);
+	const regex = props.type == "Decimal" ? decimalRegex: integerRegex;
 
 	const handleSliderChange = (event, newValue) => {
 		setValue(newValue);
