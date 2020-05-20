@@ -39,7 +39,7 @@ const Header = () => {
 		<AppBar position="static" color="primary" elevation={0} className={classes.root}>
 			<Toolbar>
 				<div className={classes.logo}>
-					<img src='./appIcon.png' className={classes.headerIcon}></img>
+					<img src='./appIcon.png' className={classes.headerIcon} alt="Home Loan Calculator"></img>
 					<Typography variant="h6" color="inherit" noWrap>
 						<Link href="/" >
 							<a className={classes.link}>Home Loan Calculator</a>
