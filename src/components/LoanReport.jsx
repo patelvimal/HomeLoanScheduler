@@ -13,7 +13,7 @@ import React from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { calcHomeLoan, calculateEMI, getSummary, getTotal } from '../shared/calculate-service';
 import { convertToLongNumber, getCompletionDate } from '../shared/utilities';
-
+import Grid from '@material-ui/core/Grid';
 
 
 const useCardStyles = makeStyles({
@@ -32,6 +32,13 @@ const useCardStyles = makeStyles({
     },
     content: {
         margin: '10px 0px'
+    },
+    label: {
+        textAlign:'center',
+        padding:'4px 0',
+        background: '#e6e6e6',
+        fontWeight: 'bold',
+        color:'#777474'
     }
 });
 
@@ -77,6 +84,15 @@ const LoanReport = (props) => {
     const { loanAmount, emi, interestRate, prePayment } = loanInfo;
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail, "year");
+    var loanSummaryWithoutPrepayment = null;
+    var totalWithoutPrepayment = null;
+    if(prePayment > 0) {
+        const loanDetailWithoutPrepayment = calcHomeLoan(loanAmount, emi, interestRate, 0);
+        loanSummaryWithoutPrepayment = getSummary(loanDetailWithoutPrepayment, "year");
+        totalWithoutPrepayment = getTotal(loanSummaryWithoutPrepayment);
+        totalWithoutPrepayment.completionDate = getCompletionDate(loanDetailWithoutPrepayment);
+    }
+    
     var total = getTotal(loanSummary);
     total.completionDate = getCompletionDate(loanDetail);
 
@@ -91,7 +107,20 @@ const LoanReport = (props) => {
                 }}>
                 </CardHeader>
                 <CardContent className={cardClasses.content}>
-                    <Summary data={total} />
+                    <Grid container spacing={4} item xs={12}>
+                        <Grid item xs={12} md={6} >
+                            {totalWithoutPrepayment?<Typography className={cardClasses.label} >With Prepayment</Typography>: null }
+                            <Summary data={total} />
+                        </Grid>
+                        {
+                            totalWithoutPrepayment?
+                                <Grid item xs={12} md={6} >
+                                    <Typography className={cardClasses.label} >Without Prepayment</Typography>
+                                    <Summary data={totalWithoutPrepayment} />
+                                </Grid>
+                            : null
+                        }
+                    </Grid>
                 </CardContent>
             </Card>
             <Card>
@@ -147,17 +176,14 @@ const useSummaryStyles = makeStyles({
             display: 'inline-block',
             padding: '4px 10px',
             margin: '2px 0px',
-            fontWeight: 'bold',
-
+            color: '#545454',
+            width: '40%',
             '&:first-child': {
                 paddingLeft: 50,
-                color: '#727272',
                 textAlign: 'right',
-                width: 135,
             },
             '&:last-child': {
                 fontWeight: 'bold',
-                width: 115,
             }
         },
 
@@ -166,13 +192,13 @@ const useSummaryStyles = makeStyles({
 
     completionDate: {
         ' & h6:last-child': {
-            backgroundColor: '#aee6f2',
-            background: '#a1dbff',
-            background: '-moz-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
-            background: '-webkit-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
-            background: 'linear-gradient(to right, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
-            filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#a1dbff", endColorstr="#f0f9ff", GradientType=1)',
-            borderRadius: 4
+            // backgroundColor: '#aee6f2',
+            // background: '#a1dbff',
+            // background: '-moz-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+            // background: '-webkit-linear-gradient(left, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+            // background: 'linear-gradient(to right, #a1dbff 0%, #cbebff 53%, #f0f9ff 100%)',
+            // filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#a1dbff", endColorstr="#f0f9ff", GradientType=1)',
+            // borderRadius: 4
         }
     }
 
