@@ -87,5 +87,5 @@ Number.prototype.roundOf = function (decimals) {
 }
 
 Number.prototype.addThousandSeperator = function() {
-    return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    return this.toLocaleString('en-IN') ;
 }
