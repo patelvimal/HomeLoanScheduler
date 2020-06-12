@@ -31,6 +31,7 @@ jobs:
     - name: Netlify Deploy
       uses: jsmrcaga/action-netlify-deploy@v1.1.0
       env:
+          CI: false
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       with:
