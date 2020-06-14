@@ -12,6 +12,9 @@ const useStyles = makeStyles({
 	hide:{
 		display: 'none'
 	},
+	visibility: {
+		visibility:'hidden'
+	},
 	sliderRoot: {
 		color: '#209ddb',
 		height: '8px',
@@ -92,7 +95,7 @@ export default function InputSlider(props) {
 			<Grid container justify="space-between">
 				<Typography align="left" className={classes.label}>{props.label}</Typography>
 				<div className={classes.inputContainer}>
-					<RupeeIcon className={classes.rupeeIcon}></RupeeIcon>
+				<RupeeIcon className={`${classes.rupeeIcon} ${props.hideIcon ? classes.visibility : ""}`}></RupeeIcon>
 					<input 
 						type="text" 
 						className={classes.input} 

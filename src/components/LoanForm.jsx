@@ -139,6 +139,7 @@ const LoanForm = (props) => {
                         defaultValue={LOAN_TENURE_DEFAULT_VALUE}
                         onChange={onChange}
                         name="loanTenure"
+                        hideIcon={true}
                         suffix=""
                         marks={loanTenureMarker}
                     />
