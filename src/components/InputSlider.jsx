@@ -68,7 +68,7 @@ const useStyles = makeStyles({
 
 
 export default function InputSlider(props) {
-	const { min, max, step, defaultValue, marks,suffix,name } = props;
+	const { min, max, step, defaultValue, marks, suffix, name } = props;
 	const [value, setValue] = React.useState(defaultValue || 0);
 	const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
 	const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
@@ -76,17 +76,23 @@ export default function InputSlider(props) {
 
 	const handleSliderChange = (event, newValue) => {
 		setValue(newValue);
-		if(props.onChange &&  typeof props.onChange === 'function') {
-			props.onChange(name,newValue);
-		}
+		invokeCallback(newValue);
 	};
 
 	const handleInputChange = (event) => {
 		const {value} = event.target;
 		if (value === '' || regex.test(value) && (value >= min && value <= max)) {
-			setValue(value === '' ? '' : value.indexOf('.') == (value.length -1) ? value :Number(value));	
+			const newValue = value === '' ? '' : value.indexOf('.') == (value.length -1) ? value :Number(value);
+			setValue(newValue);
+			invokeCallback(newValue);
 		 }
 	};
+
+	const invokeCallback = (newValue) => {
+		if(props.onChange &&  typeof props.onChange === 'function') {
+			props.onChange(name,newValue);
+		}
+	}
 
 	const classes = useStyles();
 	return (

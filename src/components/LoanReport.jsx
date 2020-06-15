@@ -50,6 +50,8 @@ const LoanReport = (props) => {
     if (props.loanInfo.calculateEMI) {
         loanInfo.emi = calculateEMI(loanInfo.loanAmount, loanInfo.interestRate, loanInfo.loanTenure * 12);
     }
+
+   
     const { loanAmount, emi, interestRate, prePayment } = loanInfo;
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail, "year");
@@ -63,7 +65,10 @@ const LoanReport = (props) => {
     }
     
     var total = getTotal(loanSummary);
-    total.completionDate = getCompletionDate(loanDetail);
+    if (total) {
+        total.completionDate = getCompletionDate(loanDetail);
+    }
+    
 
     const cardClasses = useCardStyles();
     
@@ -79,7 +84,7 @@ const LoanReport = (props) => {
                     <Grid container spacing={4} item xs={12} className={cardClasses.root}>
                         <Grid item xs={12} md={6} >
                             {totalWithoutPrepayment?<Typography className={cardClasses.label} >With Prepayment</Typography>: null }
-                            <SummaryReport data={total} />
+                            {total && <SummaryReport data={total} /> }
                         </Grid>
                         {
                             totalWithoutPrepayment?

@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) =>({
 	root: {
 		//background: '#f7f7eb',
 		background: '#606c88', /* Old browsers */
@@ -14,11 +14,17 @@ const useStyles = makeStyles({
 		filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=#606c88, endColorstr=#3f4c6b,GradientType=0 )',
 		color: 'rgba(0, 0, 0, 0.87)',
 		boxShadow: '0px 1px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-		height: 80
+		height: 80,
+		[theme.breakpoints.down('sm')]: {
+            height: 55,
+        },
 	},
 	logo: {
 		margin: '10px auto 0px auto',
-		textAlign: 'center'
+		textAlign: 'center',
+		[theme.breakpoints.down('sm')]: {
+            margin: '0px auto 0px auto',
+        },
 	},
 
 	headerIcon: {
@@ -31,7 +37,7 @@ const useStyles = makeStyles({
 		textDecoration:'initial',
 		color: '#fff'
 	}
-});
+}));
 
 const Header = () => {
 	const classes = useStyles();
