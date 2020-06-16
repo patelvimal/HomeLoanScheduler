@@ -10,8 +10,8 @@ import SummaryReport from './SummaryReport';
 import { BarChartInfo, AreaChartInfo } from './ChartReport';
 import DetailReport from './DetailReport';
 
-const useCardStyles = makeStyles((theme) =>({
-    root : {
+const useCardStyles = makeStyles((theme) => ({
+    root: {
         [theme.breakpoints.down('sm')]: {
             margin: '0 auto',
             '& > .MuiGrid-item': {
@@ -36,17 +36,17 @@ const useCardStyles = makeStyles((theme) =>({
         margin: '10px 0px'
     },
     label: {
-        textAlign:'center',
-        padding:'4px 0',
+        textAlign: 'center',
+        padding: '4px 0',
         background: '#e6e6e6',
         fontWeight: 'bold',
-        color:'#777474'
+        color: '#777474'
     }
 }));
 
 const LoanReport = (props) => {
     const cardClasses = useCardStyles();
-    const {total,loanSummary,totalWithoutPrepayment} = props.loanInfo;
+    const { total, loanSummary, totalWithoutPrepayment } = props.loanInfo;
     return (
         <>
             <Card>
@@ -58,16 +58,16 @@ const LoanReport = (props) => {
                 <CardContent className={cardClasses.content}>
                     <Grid container spacing={4} item xs={12} className={cardClasses.root}>
                         <Grid item xs={12} md={6} >
-                            {totalWithoutPrepayment?<Typography className={cardClasses.label} >With Prepayment</Typography>: null }
-                            {total && <SummaryReport data={total} /> }
+                            {totalWithoutPrepayment ? <Typography className={cardClasses.label} >With Prepayment</Typography> : null}
+                            {total && <SummaryReport data={total} />}
                         </Grid>
                         {
-                            props.totalWithoutPrepayment?
+                            props.totalWithoutPrepayment ?
                                 <Grid item xs={12} md={6} >
                                     <Typography className={cardClasses.label} >Without Prepayment</Typography>
                                     <SummaryReport data={totalWithoutPrepayment} />
                                 </Grid>
-                            : null
+                                : null
                         }
                     </Grid>
                 </CardContent>
@@ -85,7 +85,7 @@ const LoanReport = (props) => {
             </Card>
             <Card>
                 <CardContent className={cardClasses.content}>
-                    <DetailReport loanInfo={loanSummary}/>
+                    <DetailReport loanInfo={loanSummary} />
                 </CardContent>
             </Card>
         </>

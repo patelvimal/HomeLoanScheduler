@@ -6,6 +6,12 @@ import LoanResult from './LoanReport';
 import { isMobileOnly } from 'react-device-detect';
 import { calcHomeLoan, calculateEMI, getSummary, getTotal } from '../shared/calculate-service';
 import { convertToLongNumber, getCompletionDate } from '../shared/utilities';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Zoom from '@material-ui/core/Zoom';
 
 const useStyles = makeStyles((theme) =>({
     root : {
@@ -21,6 +27,45 @@ const useStyles = makeStyles((theme) =>({
     }
 }));
 
+const useScrollStyles = makeStyles((theme) => ({
+    root: {
+      position: 'fixed',
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+      'z-index':999
+    },
+  }));
+
+const ScrollTop = (props) => {
+    const { children, window } = props;
+    const classes = useScrollStyles();
+    // Note that you normally won't need to set the window ref as useScrollTrigger
+    // will default to window.
+    // This is only being set here because the demo is in an iframe.
+    const trigger = useScrollTrigger({
+      target: window ? window() : undefined,
+      disableHysteresis: true,
+      threshold: 100,
+    });
+  
+    const handleClick = (event) => {
+      const anchor = (event.target.ownerDocument || document).querySelector('#appHeader');
+  
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+  
+    return (
+      <Zoom in={trigger}>
+        <div onClick={handleClick} role="presentation" className={classes.root}>
+          {children}
+        </div>
+      </Zoom>
+    );
+  }
+
+  
 const App = () => {
     const [loanInfo, setLoanInfo] = useState(null);
     const formClasses = useStyles();
@@ -87,7 +132,15 @@ const App = () => {
                         <div ref={resultView}>
                             <LoanResult loanInfo ={loanInfo}/>
                         </div>
-                    </Grid> : null
+                        <ScrollTop >
+                            <Fab color="secondary" size="small" aria-label="scroll back to top">
+                                <KeyboardArrowUpIcon />
+                            </Fab>
+                        </ScrollTop>
+                        
+                    </Grid>
+                    
+                    : null
             }
             
         </Grid>

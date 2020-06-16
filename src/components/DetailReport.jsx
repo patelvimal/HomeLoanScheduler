@@ -6,11 +6,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
+import { isMobileOnly } from 'react-device-detect';
 
 
-const useTableStyles = makeStyles({
+const useTableStyles = makeStyles((theme)=>({
     root: {
-        width:'100%'
+        width:'100%',
+        display:'block'
     },
 
     tableHeader: {
@@ -37,6 +39,9 @@ const useTableStyles = makeStyles({
         '& td': {
             padding: '10px 30px',
             textAlign: 'center',
+            [theme.breakpoints.down('sm')]: {
+                padding: 10
+            },
         },
         '& tr': {
             '&:nth-of-type(odd)': {
@@ -44,11 +49,12 @@ const useTableStyles = makeStyles({
             }
         }
     }
-});
+}));
 
 
 const DetailReport = (props) => {
     const tableClasses = useTableStyles();
+    
     return (
         <TableContainer className={tableClasses.root}>
             <Table stickyHeader>
@@ -57,7 +63,7 @@ const DetailReport = (props) => {
                         <TableCell width="5%">Year</TableCell>
                         <TableCell width="5%">Principal</TableCell>
                         <TableCell width="5%">Interest</TableCell>
-                        <TableCell width="5%">Pre-Payment</TableCell>
+                        {isMobileOnly ? null:<TableCell width="5%">Pre-Payment</TableCell> }
                         <TableCell width="5%">Total</TableCell>
                     </TableRow>
                 </TableHead>
@@ -67,7 +73,7 @@ const DetailReport = (props) => {
                             <TableCell width="5%">{row.year}</TableCell>
                             <TableCell width="5%">{row.principal.addThousandSeperator()}</TableCell>
                             <TableCell width="5%">{row.interest.addThousandSeperator()}</TableCell>
-                            <TableCell width="5%">{row.prepayment.addThousandSeperator()}</TableCell>
+                            {isMobileOnly ? null : <TableCell width="5%">{row.prepayment.addThousandSeperator()}</TableCell>}
                             <TableCell width="2%">{row.totalAmount.addThousandSeperator()}</TableCell>
                         </TableRow>
                     ))}
