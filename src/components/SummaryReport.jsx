@@ -38,22 +38,6 @@ const SummaryReport = (props) => {
         <React.Fragment>
             <div className={classes.labelValue}>
                 <Typography variant="subtitle1" display="inline">
-                    Total Amount:
-                </Typography>
-                <Typography variant="subtitle1" display="inline" >
-                    {total}
-                </Typography>
-            </div>
-            <div className={`${classes.labelValue} ${classes.completionDate}`}>
-                <Typography variant="subtitle1" display="inline">
-                    Completion Date:
-                        </Typography>
-                <Typography variant="subtitle1" display="inline">
-                    {completionDate}
-                </Typography>
-            </div>
-            <div className={classes.labelValue}>
-                <Typography variant="subtitle1" display="inline">
                     Total Principal:
                 </Typography>
                 <Typography variant="subtitle1" display="inline">
@@ -68,6 +52,23 @@ const SummaryReport = (props) => {
                     {interest}
                 </Typography>
             </div>
+            <div className={classes.labelValue}>
+                <Typography variant="subtitle1" display="inline">
+                    Total Amount:
+                </Typography>
+                <Typography variant="subtitle1" display="inline" >
+                    {total}
+                </Typography>
+            </div>
+            <div className={`${classes.labelValue} ${classes.completionDate}`}>
+                <Typography variant="subtitle1" display="inline">
+                    Completion Date:
+                        </Typography>
+                <Typography variant="subtitle1" display="inline">
+                    {completionDate}
+                </Typography>
+            </div>
+            
         </React.Fragment>
     );
 }

@@ -5,8 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { calcHomeLoan, calculateEMI, getSummary, getTotal } from '../shared/calculate-service';
-import { convertToLongNumber, getCompletionDate } from '../shared/utilities';
+
 import SummaryReport from './SummaryReport';
 import { BarChartInfo, AreaChartInfo } from './ChartReport';
 import DetailReport from './DetailReport';
@@ -46,32 +45,8 @@ const useCardStyles = makeStyles((theme) =>({
 }));
 
 const LoanReport = (props) => {
-    var loanInfo = convertToLongNumber(props.loanInfo);
-    if (props.loanInfo.calculateEMI) {
-        loanInfo.emi = calculateEMI(loanInfo.loanAmount, loanInfo.interestRate, loanInfo.loanTenure * 12);
-    }
-
-   
-    const { loanAmount, emi, interestRate, prePayment } = loanInfo;
-    const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
-    const loanSummary = getSummary(loanDetail, "year");
-    var loanSummaryWithoutPrepayment = null;
-    var totalWithoutPrepayment = null;
-    if(prePayment > 0) {
-        const loanDetailWithoutPrepayment = calcHomeLoan(loanAmount, emi, interestRate, 0);
-        loanSummaryWithoutPrepayment = getSummary(loanDetailWithoutPrepayment, "year");
-        totalWithoutPrepayment = getTotal(loanSummaryWithoutPrepayment);
-        totalWithoutPrepayment.completionDate = getCompletionDate(loanDetailWithoutPrepayment);
-    }
-    
-    var total = getTotal(loanSummary);
-    if (total) {
-        total.completionDate = getCompletionDate(loanDetail);
-    }
-    
-
     const cardClasses = useCardStyles();
-    
+    const {total,loanSummary,totalWithoutPrepayment} = props.loanInfo;
     return (
         <>
             <Card>
@@ -87,7 +62,7 @@ const LoanReport = (props) => {
                             {total && <SummaryReport data={total} /> }
                         </Grid>
                         {
-                            totalWithoutPrepayment?
+                            props.totalWithoutPrepayment?
                                 <Grid item xs={12} md={6} >
                                     <Typography className={cardClasses.label} >Without Prepayment</Typography>
                                     <SummaryReport data={totalWithoutPrepayment} />

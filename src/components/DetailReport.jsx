@@ -9,6 +9,9 @@ import React from 'react';
 
 
 const useTableStyles = makeStyles({
+    root: {
+        width:'100%'
+    },
 
     tableHeader: {
         border: 'solid 2px black',
@@ -47,25 +50,25 @@ const useTableStyles = makeStyles({
 const DetailReport = (props) => {
     const tableClasses = useTableStyles();
     return (
-        <TableContainer className='table'>
+        <TableContainer className={tableClasses.root}>
             <Table stickyHeader>
                 <TableHead className={tableClasses.tableHeader}>
                     <TableRow>
-                        <TableCell>Year</TableCell>
-                        <TableCell>Principal</TableCell>
-                        <TableCell>Interest</TableCell>
-                        <TableCell>Pre-Payment</TableCell>
-                        <TableCell>Total</TableCell>
+                        <TableCell width="5%">Year</TableCell>
+                        <TableCell width="5%">Principal</TableCell>
+                        <TableCell width="5%">Interest</TableCell>
+                        <TableCell width="5%">Pre-Payment</TableCell>
+                        <TableCell width="5%">Total</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody className={tableClasses.tableBody}>
                     {props.loanInfo && props.loanInfo.map(row => (
                         <TableRow key={row.year}>
-                            <TableCell>{row.year}</TableCell>
-                            <TableCell>{row.principal.addThousandSeperator()}</TableCell>
-                            <TableCell>{row.interest.addThousandSeperator()}</TableCell>
-                            <TableCell>{row.prepayment.addThousandSeperator()}</TableCell>
-                            <TableCell>{row.totalAmount.addThousandSeperator()}</TableCell>
+                            <TableCell width="5%">{row.year}</TableCell>
+                            <TableCell width="5%">{row.principal.addThousandSeperator()}</TableCell>
+                            <TableCell width="5%">{row.interest.addThousandSeperator()}</TableCell>
+                            <TableCell width="5%">{row.prepayment.addThousandSeperator()}</TableCell>
+                            <TableCell width="2%">{row.totalAmount.addThousandSeperator()}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
