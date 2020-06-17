@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'capitalize'
     },
     listRoot: {
-        padding: 0
+        padding: '5px 0'
     },
     appTitle: {
         background: '#406a8e',
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     appVersion: {
         // background:'#406a8e9e',
         '& > div': {
-            margin: '2px 10px'
+            margin: '2px 0px'
         }
     }
 }));
@@ -69,30 +69,30 @@ const Sidebar = (props) => {
                 </List>
                 <Divider />
                 <List>
-                    <ListItem button>
+                    {/* <ListItem button>
                         <ListItemIcon>
                             <FeedbackIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Feedback"/>
-                    </ListItem>
-                    <ListItem button>
+                        <ListItemText primary="Feedback/Suggestions"/>
+                    </ListItem> */}
+                    {/* <ListItem button>
                         <ListItemIcon>
                             <BugReportIcon/>
                         </ListItemIcon>
                         <ListItemText primary="Report A Bug"/>
-                    </ListItem>
-                    <ListItem button>
+                    </ListItem> */}
+                    <ListItem button component="a" href="https://api.whatsapp.com/send?text=https://home-loan-calculator.netlify.app/">>
                         <ListItemIcon>
                             <ShareIcon/>
                         </ListItemIcon>
                         <ListItemText primary="Share"/>
                     </ListItem>
-                    <ListItem button>
+                    {/* <ListItem button>
                         <ListItemIcon>
                             <StarBorderIcon/>
                         </ListItemIcon>
                         <ListItemText primary="Rate The App"/>
-                    </ListItem>
+                    </ListItem> */}
                 </List>
                 <Divider />
                 {/* <List>
