@@ -173,7 +173,7 @@ const LoanForm = (props) => {
                         onClick={onSubmit}
                         className={formClasses.submitButton}>
                         Calculate
-                            </Button>
+                    </Button>
                 </form>
             </CardContent>
         </Card>

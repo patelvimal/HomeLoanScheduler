@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
 	const classes = useStyles();
-	const [showSidebar, setToggleSidebar] = useState(false)
+	const [showSidebar, setToggleSidebar] = useState(true)
 
 	const hamburgerClick = () => {
 		setToggleSidebar(true);
