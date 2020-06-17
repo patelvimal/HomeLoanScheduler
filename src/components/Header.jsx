@@ -39,12 +39,16 @@ const useStyles = makeStyles((theme) => ({
 		textDeclaration: 'initial',
 		textDecoration: 'initial',
 		color: '#fff'
+	},
+	menuButton :{
+		color:'#fff'
 	}
+
 }));
 
 const Header = () => {
 	const classes = useStyles();
-	const [showSidebar, setToggleSidebar] = useState(true)
+	const [showSidebar, setToggleSidebar] = useState(false);
 
 	const hamburgerClick = () => {
 		setToggleSidebar(true);
@@ -57,7 +61,7 @@ const Header = () => {
 	return (
 		<AppBar position="static" color="primary" elevation={0} className={classes.root}>
 			<Toolbar>
-				<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={hamburgerClick}>
+				<IconButton edge="start" className={classes.menuButton} onClick={hamburgerClick}>
 					<MenuIcon />
 				</IconButton>
 				<Sidebar open={showSidebar} toggleDrawer={toggleSidebar}></Sidebar>
