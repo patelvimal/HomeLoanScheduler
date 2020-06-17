@@ -5,7 +5,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June","July
 
 export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
     var result=[];
-    var loanBalance=loanAmount;
+    var loanBalance = loanAmount;
     var today = new Date();
     var currentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     while( 0 < loanBalance) {
