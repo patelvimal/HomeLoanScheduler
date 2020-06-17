@@ -6,11 +6,11 @@ import App from './components/App';
 import Header from './components/Header';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { StylesProvider } from '@material-ui/core/styles';
-
+import './assets/App.scss';
 
 const theme = createMuiTheme({
 	typography: {
-    // fontFamily: "Roboto-Regular"
+     fontFamily: "Roboto-Regular"
 	}
 });
 

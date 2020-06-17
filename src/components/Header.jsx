@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
+import AppTitle from './AppTitle';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		//background: '#f7f7eb',
 		background: '#606c88', /* Old browsers */
 		background: '-moz-linear-gradient(top,  #606c88 0%, #3f4c6b 100%)',
 		background: '-webkit-linear-gradient(top,  #606c88 0%,#3f4c6b 100%)',
@@ -22,33 +22,15 @@ const useStyles = makeStyles((theme) => ({
 			height: 55,
 		},
 	},
-	logo: {
-		margin: '10px auto 0px auto',
-		textAlign: 'center',
-		[theme.breakpoints.down('sm')]: {
-			margin: '0px auto 0px auto',
-		},
-	},
-
-	headerIcon: {
-		margin: '0 10px',
-		float: 'left'
-	},
-	link: {
-		marginLeft: '5px',
-		textDeclaration: 'initial',
-		textDecoration: 'initial',
-		color: '#fff'
-	},
 	menuButton :{
-		color:'#fff'
+		color:'#fff',
+		position:'absolute'
 	}
-
 }));
 
 const Header = () => {
 	const classes = useStyles();
-	const [showSidebar, setToggleSidebar] = useState(false);
+	const [showSidebar, setToggleSidebar] = useState(true);
 
 	const hamburgerClick = () => {
 		setToggleSidebar(true);
@@ -65,12 +47,7 @@ const Header = () => {
 					<MenuIcon />
 				</IconButton>
 				<Sidebar open={showSidebar} toggleDrawer={toggleSidebar}></Sidebar>
-				<div className={classes.logo} id="appHeader">
-					<img src='./appIcon.png' className={classes.headerIcon} alt="Home Loan Calculator"></img>
-					<Typography variant="h6" color="inherit" noWrap>
-						<a className={classes.link} href="/">Home Loan Calculator</a>
-					</Typography>
-				</div>
+				<AppTitle/>
 			</Toolbar>
 		</AppBar>
 	)

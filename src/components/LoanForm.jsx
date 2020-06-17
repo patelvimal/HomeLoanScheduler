@@ -26,15 +26,18 @@ const useStyles = makeStyles({
 });
 
 const useCardStyles = makeStyles({
+    root: {
+        boxShadow:'none'
+    },
     header: {
         padding: '8px 16px',
         textAlign: 'center',
-        background: '#cdeb8b',
-        background: '-moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%)',
-        background: '-webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%)',
-        background: 'linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%)',
-        filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr="#cdeb8b", endColorstr="#cdeb8b",GradientType=0 )',
-        border: 'solid 1px #b4e645'
+        borderBottom: 'solid 1px rgb(185, 184, 184)',
+        background: 'rgb(255,255,255)',
+        background: '-moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%)',
+        background: '-webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%)',
+        background: 'linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%)',
+        filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=#ffffff, endColorstr=#e5e5e5,GradientType=0 )'
     },
     subHeader: {
         fontWeight: 'Bold'
@@ -88,7 +91,7 @@ const LoanForm = (props) => {
     const formClasses = useStyles();
     
     return (
-        <Card>
+        <Card className={cardClasses.root}>
             <CardHeader subheader="Loan Details" classes={{
                 root: cardClasses.header,
                 subheader: cardClasses.subHeader
