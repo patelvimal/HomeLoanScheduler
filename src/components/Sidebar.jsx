@@ -42,6 +42,16 @@ const useStyles = makeStyles((theme) => ({
         '& > div': {
             margin: '2px 0px'
         }
+    },
+    itemIcon: {
+        minWidth:40
+    },
+    itemText:{
+        color:'#525151',
+        '& > span': {
+            fontWeight:'bold !important'
+        }
+        
     }
 }));
 
@@ -81,11 +91,11 @@ const Sidebar = (props) => {
                         </ListItemIcon>
                         <ListItemText primary="Report A Bug"/>
                     </ListItem> */}
-                    <ListItem button component="a" href="https://api.whatsapp.com/send?text=https://home-loan-calculator.netlify.app/">>
-                        <ListItemIcon>
+                    <ListItem button component="a" href="https://api.whatsapp.com/send?text=https://home-loan-calculator.netlify.app/">
+                        <ListItemIcon className={classes.itemIcon}>
                             <ShareIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Share"/>
+                        <ListItemText primary="Share" className={classes.itemText}/>
                     </ListItem>
                     {/* <ListItem button>
                         <ListItemIcon>

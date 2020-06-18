@@ -17,10 +17,13 @@ const useStyles = makeStyles((theme) => ({
 		filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=#606c88, endColorstr=#3f4c6b,GradientType=0 )',
 		color: 'rgba(0, 0, 0, 0.87)',
 		boxShadow: '0px 1px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-		height: 80,
+		height: 65,
 		[theme.breakpoints.down('sm')]: {
 			height: 55,
 		},
+		'& > div': {
+            minHeight: 55
+        }
 	},
 	menuButton :{
 		color:'#fff',
