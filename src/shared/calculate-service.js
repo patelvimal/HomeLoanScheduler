@@ -4,11 +4,11 @@ const monthNames = ["January", "February", "March", "April", "May", "June","July
 
 
 export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
-    var result=[];
+    var result = [];
     var loanBalance = loanAmount;
     var today = new Date();
     var currentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    while( 0 < loanBalance) {
+    while( 0 < loanBalance ) {
         var perdayInterestAmount= ((loanBalance * (interestRate/100))/365);
         var monthlyInterest = (perdayInterestAmount * currentMonth.getDate());
         loanBalance = (loanBalance-(emi-monthlyInterest) - (prepayment|| 0));
@@ -16,13 +16,14 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
         result.push({
             month: month , 
             year: currentMonth.getFullYear(),
-            principal: (emi-monthlyInterest),
+            principal: (emi-monthlyInterest) ,
             interest:monthlyInterest,
             balance: loanBalance,
             prepayment:prepayment
         });
         currentMonth.setMonth(currentMonth.getMonth() + 2, 0);
     }
+    console.table(result);
     return result;
 };
 

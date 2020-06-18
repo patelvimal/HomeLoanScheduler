@@ -88,10 +88,11 @@ const App = () => {
         
       }, [loanInfo]);
     
-    const calculateHomeLoan = (loanInfo)=> {
-        var loanInfo = convertToLongNumber(loanInfo);
-        if (loanInfo.calculateEMI) {
+    const calculateHomeLoan = (loanDetails)=> {
+        var loanInfo = convertToLongNumber(loanDetails);
+        if (loanDetails.calculateEMI) {
             loanInfo.emi = calculateEMI(loanInfo.loanAmount, loanInfo.interestRate, loanInfo.loanTenure * 12);
+            console.log(loanInfo.emi);
         }
     
         const { loanAmount, emi, interestRate, prePayment } = loanInfo;
