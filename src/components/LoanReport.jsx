@@ -10,6 +10,7 @@ import SummaryReport from './SummaryReport';
 import { BarChartInfo, AreaChartInfo } from './ChartReport';
 import DetailReport from './DetailReport';
 import { Button } from '@material-ui/core';
+import ComparisonTable from './Comparison';
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
@@ -80,6 +81,20 @@ const LoanReport = (props) => {
                     </Grid>
                 </CardContent>
             </Card>
+            {
+                props.comparison ? 
+                    <Card>
+                        <CardHeader subheader="Loan Comparison For Extra PrePayment on Each Month" classes={{
+                            root: cardClasses.header,
+                            subheader: cardClasses.subHeader
+                        }}>
+                        </CardHeader>
+                        <CardContent className={cardClasses.content}>
+                            <ComparisonTable loanInfo={props.comparison} />
+                        </CardContent>
+                    </Card> : null
+            }
+            
             <Card>
                 <CardHeader subheader="Principal/Interest Distribution Each Year" classes={{
                     root: cardClasses.header,

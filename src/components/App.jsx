@@ -135,7 +135,7 @@ const App = () => {
                 prePayment : prePayment.roundOf(0),
             });
         })
-        console.log(loanComparison);
+        setLoanComparison(loanComparison);
     }
 
     return (
@@ -149,7 +149,10 @@ const App = () => {
                         {/* we cannot attached ref to functional component for that we need to forwardRefs
                         thats why added below div to attch ref*/}
                         <div ref={resultView}>
-                            <LoanResult loanInfo ={calculatedLoanInfo} onCompareClick={loanComparison}/>
+                            <LoanResult loanInfo ={calculatedLoanInfo} 
+                                comparison={loanComparisonInfo} 
+                                onCompareClick={loanComparison}
+                            />
                         </div>
                         <ScrollTop >
                             <Fab color="secondary" size="small" aria-label="scroll back to top">
