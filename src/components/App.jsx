@@ -108,9 +108,10 @@ const App = () => {
             totalWithoutPrepayment.completionDate = getCompletionDate(loanDetailWithoutPrepayment);
         }
     
-        var total = getTotal([...loanSummary]);
+        var total = getTotal([...loanSummary],loanInfo.loanAmount);
         if (total) {
             total.completionDate = getCompletionDate(loanDetail);
+            total.emi = loanInfo.emi.roundOf(0).addThousandSeperator();
         }
 
         setLoanInfo({

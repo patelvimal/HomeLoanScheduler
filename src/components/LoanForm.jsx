@@ -51,7 +51,7 @@ const LoanForm = (props) => {
     const LOAN_AMOUNT_DEFAULT_VALUE = 50;
     const MONTHLY_EMI_DEFAULT_VALUE = 50;
     const INTEREST_RATE_DEFAULT_VALUE = 9;
-    const LOAN_TENURE_DEFAULT_VALUE = 10;
+    const LOAN_TENURE_DEFAULT_VALUE = 20;
     const MONTHLY_PREPAYMENT_DEFAULT_VALUE = 0;
 
 
@@ -61,7 +61,7 @@ const LoanForm = (props) => {
         interestRate: INTEREST_RATE_DEFAULT_VALUE,
         prePayment: MONTHLY_PREPAYMENT_DEFAULT_VALUE,
         loanTenure: LOAN_TENURE_DEFAULT_VALUE,
-        calculateEMI:false
+        calculateEMI:true
     };
     const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
     const loanAmountMarker = generateMarker('L');
@@ -110,7 +110,7 @@ const LoanForm = (props) => {
                         name="loanAmount"
                         marks={loanAmountMarker}
                     />
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control={
                         <Checkbox
                             checked={loanInfo.calculateEMI}
@@ -120,7 +120,7 @@ const LoanForm = (props) => {
                         />
                         }
                         label="Don't know EMI"
-                    />
+                    /> */}
                     <InputSlider
                         label="Monthly EMI"
                         min={0}

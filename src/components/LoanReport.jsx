@@ -58,17 +58,8 @@ const LoanReport = (props) => {
                 <CardContent className={cardClasses.content}>
                     <Grid container spacing={4} item xs={12} className={cardClasses.root}>
                         <Grid item xs={12} md={6} >
-                            {totalWithoutPrepayment ? <Typography className={cardClasses.label} >With Prepayment</Typography> : null}
                             {total && <SummaryReport data={total} />}
                         </Grid>
-                        {
-                            props.totalWithoutPrepayment ?
-                                <Grid item xs={12} md={6} >
-                                    <Typography className={cardClasses.label} >Without Prepayment</Typography>
-                                    <SummaryReport data={totalWithoutPrepayment} />
-                                </Grid>
-                                : null
-                        }
                     </Grid>
                 </CardContent>
             </Card>

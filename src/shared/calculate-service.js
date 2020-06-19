@@ -9,8 +9,7 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
     var today = new Date();
     var currentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     while( 0 < loanBalance ) {
-        var perdayInterestAmount= ((loanBalance * (interestRate/100))/365);
-        var monthlyInterest = (perdayInterestAmount * currentMonth.getDate());
+        var monthlyInterest =  loanBalance * ((interestRate / 100) / 12);
         loanBalance = (loanBalance-(emi-monthlyInterest) - (prepayment|| 0));
         var month = monthNames[currentMonth.getMonth()];
         result.push({
@@ -50,7 +49,7 @@ export const getSummary = (jsonData) =>{
     return result;
 }
 
-export const getTotal = (jsonData) => {
+export const getTotal = (jsonData,loanAmount) => {
     if (jsonData && jsonData.length > 0) {
         var totalAmount = jsonData.reduce((a, b) => {
             return {
@@ -59,10 +58,10 @@ export const getTotal = (jsonData) => {
                 interest: a.interest + b.interest
             }
         })
-        
+        totalAmount.total = (totalAmount.interest + loanAmount).roundOf(0).addThousandSeperator();
         totalAmount.principal = totalAmount.principal.roundOf(0).addThousandSeperator();
         totalAmount.interest = totalAmount.interest.roundOf(0).addThousandSeperator();
-        totalAmount.total = totalAmount.total && totalAmount.total.addThousandSeperator();
+       
         return totalAmount;
     }
 }

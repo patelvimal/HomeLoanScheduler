@@ -32,16 +32,16 @@ const useSummaryStyles = makeStyles((theme) => ({
 }));
 
 const SummaryReport = (props) => {
-    const { total, completionDate, principal, interest } = props.data;
+    const { total, completionDate, principal, interest, emi } = props.data;
     const classes = useSummaryStyles();
     return (
         <React.Fragment>
             <div className={classes.labelValue}>
                 <Typography variant="subtitle1" display="inline">
-                    Total Principal:
+                    Monthly EMI:
                 </Typography>
                 <Typography variant="subtitle1" display="inline">
-                    {principal}
+                    {emi}
                 </Typography>
             </div>
             <div className={classes.labelValue}>
