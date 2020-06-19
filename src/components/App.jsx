@@ -78,7 +78,6 @@ const App = () => {
     }
 
     useEffect(() => {
-        console.log(loanInfo);
         if (loanInfo && isMobileOnly) {
             resultView.current.scrollIntoView({
                 behavior: 'smooth',
@@ -92,7 +91,6 @@ const App = () => {
         var loanInfo = convertToLongNumber(loanDetails);
         if (loanDetails.calculateEMI) {
             loanInfo.emi = calculateEMI(loanInfo.loanAmount, loanInfo.interestRate, loanInfo.loanTenure * 12);
-            console.log(loanInfo.emi);
         }
     
         const { loanAmount, emi, interestRate, prePayment } = loanInfo;

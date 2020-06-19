@@ -9,6 +9,7 @@ import React from 'react';
 import SummaryReport from './SummaryReport';
 import { BarChartInfo, AreaChartInfo } from './ChartReport';
 import DetailReport from './DetailReport';
+import { Button } from '@material-ui/core';
 
 const useCardStyles = makeStyles((theme) => ({
     root: {
@@ -41,12 +42,22 @@ const useCardStyles = makeStyles((theme) => ({
         background: '#e6e6e6',
         fontWeight: 'bold',
         color: '#777474'
+    },
+    submitButton: {
+        float: 'right',
+        padding: '6px 50px',
+        margin: '15px 0',
     }
 }));
 
 const LoanReport = (props) => {
     const cardClasses = useCardStyles();
     const { total, loanSummary, totalWithoutPrepayment } = props.loanInfo;
+
+    const onCompareClick = () => {
+
+    }
+
     return (
         <>
             <Card>
@@ -60,6 +71,17 @@ const LoanReport = (props) => {
                         <Grid item xs={12} md={6} >
                             {total && <SummaryReport data={total} />}
                         </Grid>
+                        <Grid item xs={12} md={6} >
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                onClick={onCompareClick}
+                                className={cardClasses.submitButton}>
+                                Compare
+                            </Button>
+                        </Grid>
+                       
                     </Grid>
                 </CardContent>
             </Card>
