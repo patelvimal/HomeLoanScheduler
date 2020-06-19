@@ -22,7 +22,6 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
         });
         currentMonth.setMonth(currentMonth.getMonth() + 2, 0);
     }
-    console.table(result);
     return result;
 };
 
@@ -58,10 +57,9 @@ export const getTotal = (jsonData,loanAmount) => {
                 interest: a.interest + b.interest
             }
         })
-        totalAmount.total = (totalAmount.interest + loanAmount).roundOf(0).addThousandSeperator();
-        totalAmount.principal = totalAmount.principal.roundOf(0).addThousandSeperator();
-        totalAmount.interest = totalAmount.interest.roundOf(0).addThousandSeperator();
-       
+        totalAmount.total = (totalAmount.interest + loanAmount).roundOf(0);
+        totalAmount.principal = totalAmount.principal.roundOf(0);
+        totalAmount.interest = totalAmount.interest.roundOf(0);
         return totalAmount;
     }
 }

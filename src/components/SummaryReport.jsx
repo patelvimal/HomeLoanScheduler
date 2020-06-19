@@ -41,7 +41,7 @@ const SummaryReport = (props) => {
                     Monthly EMI:
                 </Typography>
                 <Typography variant="subtitle1" display="inline">
-                    {emi}
+                    {emi.addThousandSeperator()}
                 </Typography>
             </div>
             <div className={classes.labelValue}>
@@ -49,7 +49,7 @@ const SummaryReport = (props) => {
                     Total Interest:
                 </Typography>
                 <Typography variant="subtitle1" display="inline">
-                    {interest}
+                    {interest.addThousandSeperator()}
                 </Typography>
             </div>
             <div className={classes.labelValue}>
@@ -57,7 +57,7 @@ const SummaryReport = (props) => {
                     Total Amount:
                 </Typography>
                 <Typography variant="subtitle1" display="inline" >
-                    {total}
+                    {total.addThousandSeperator()}
                 </Typography>
             </div>
             <div className={`${classes.labelValue} ${classes.completionDate}`}>

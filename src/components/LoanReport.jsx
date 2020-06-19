@@ -44,7 +44,6 @@ const useCardStyles = makeStyles((theme) => ({
         color: '#777474'
     },
     submitButton: {
-        float: 'right',
         padding: '6px 50px',
         margin: '15px 0',
     }
@@ -53,10 +52,6 @@ const useCardStyles = makeStyles((theme) => ({
 const LoanReport = (props) => {
     const cardClasses = useCardStyles();
     const { total, loanSummary, totalWithoutPrepayment } = props.loanInfo;
-
-    const onCompareClick = () => {
-
-    }
 
     return (
         <>
@@ -76,7 +71,7 @@ const LoanReport = (props) => {
                                 type="submit"
                                 variant="contained"
                                 color="primary"
-                                onClick={onCompareClick}
+                                onClick={props.onCompareClick}
                                 className={cardClasses.submitButton}>
                                 Compare
                             </Button>

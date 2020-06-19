@@ -68,8 +68,9 @@ const ScrollTop = (props) => {
   
 const App = () => {
     const [loanInfo, setLoanInfo] = useState(null);
+    const [calculatedLoanInfo, setLoanCalculation] = useState(null);
     const formClasses = useStyles();
-
+    const [loanComparisonInfo, setLoanComparison] = useState(null);
     const resultView = useRef(null);
 
     const onFormSubmit = (loanDetails) => {
@@ -78,21 +79,21 @@ const App = () => {
     }
 
     useEffect(() => {
-        if (loanInfo && isMobileOnly) {
+        if (calculatedLoanInfo && isMobileOnly) {
             resultView.current.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
             });
         }
         
-      }, [loanInfo]);
+      }, [calculatedLoanInfo]);
     
     const calculateHomeLoan = (loanDetails)=> {
         var loanInfo = convertToLongNumber(loanDetails);
         if (loanDetails.calculateEMI) {
             loanInfo.emi = calculateEMI(loanInfo.loanAmount, loanInfo.interestRate, loanInfo.loanTenure * 12);
         }
-    
+        setLoanInfo(loanInfo);
         const { loanAmount, emi, interestRate, prePayment } = loanInfo;
         const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
         const loanSummary = getSummary(loanDetail, "year");
@@ -109,14 +110,32 @@ const App = () => {
         var total = getTotal([...loanSummary],loanInfo.loanAmount);
         if (total) {
             total.completionDate = getCompletionDate(loanDetail);
-            total.emi = loanInfo.emi.roundOf(0).addThousandSeperator();
+            total.emi = loanInfo.emi.roundOf(0);
         }
 
-        setLoanInfo({
+        setLoanCalculation({
             total: total,
             loanSummary: loanSummary,
             totalWithoutPrepayment: totalWithoutPrepayment
         });
+    }
+
+    const loanComparison = () => {
+        var comparisons = [10,30,50];
+        var loanComparison = []
+        const { loanAmount, emi, interestRate } = loanInfo;
+        comparisons.map(compare=> {
+            const prePayment =  ((compare/100)* emi);
+            const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
+            var total = getTotal([...loanDetail],loanAmount);
+            loanComparison.push({
+                completionDate : getCompletionDate(loanDetail),
+                totalInterest : total.interest,
+                totalAmount:total.total,
+                prePayment : prePayment.roundOf(0),
+            });
+        })
+        console.log(loanComparison);
     }
 
     return (
@@ -125,12 +144,12 @@ const App = () => {
                 <LoanForm onFormSubmit={onFormSubmit} />
             </Grid>
             {
-                loanInfo ?
+                calculatedLoanInfo ?
                     <Grid item xs={12} md={8} className={formClasses.formContainer} >
                         {/* we cannot attached ref to functional component for that we need to forwardRefs
                         thats why added below div to attch ref*/}
                         <div ref={resultView}>
-                            <LoanResult loanInfo ={loanInfo}/>
+                            <LoanResult loanInfo ={calculatedLoanInfo} onCompareClick={loanComparison}/>
                         </div>
                         <ScrollTop >
                             <Fab color="secondary" size="small" aria-label="scroll back to top">
