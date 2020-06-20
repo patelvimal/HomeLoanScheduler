@@ -42,8 +42,9 @@ const useStyles = makeStyles({
 	  borderRadius: 4,
 	},
 	label: {
-		padding: '9px 0',
-		marginTop:4
+		padding: '6px 0',
+		marginTop: 4,
+		fontSize:'1.10rem'
 	},
 	inputContainer:{
 		// width:200,
@@ -61,7 +62,7 @@ const useStyles = makeStyles({
 		borderRadius: 4,
 		fontSize: '18px',
 		border: 'solid 1px rgb(223, 224, 228)',
-		width: 100,
+		width: 80,
 		background: '#a6daf23d'
 	}
 });
