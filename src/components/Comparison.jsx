@@ -21,12 +21,12 @@ const useTableStyles = makeStyles((theme)=>({
             padding: '8px 16px',
             textAlign: 'center',
             borderBottom: 'solid 1px rgb(185, 184, 184)',
-            background: 'rgb(255,255,255)',
-            background: '-moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%)',
-            background: '-webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%)',
-            background: 'linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%)',
-            filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=#ffffff, endColorstr=#e5e5e5,GradientType=0 )',
-            color: 'rgba(0, 0, 0, 0.74)',
+            //background: 'rgb(255,255,255)',
+            //background: '-moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%)',
+            //background: '-webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%)',
+            //background: 'linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%)',
+            //filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=#ffffff, endColorstr=#e5e5e5,GradientType=0 )',
+            color: 'rgba(0, 0, 0, 0.54)',
             fontWeight: 'bold'
         },
 
@@ -60,11 +60,10 @@ const ComparisonTable = (props) => {
             <Table stickyHeader>
                 <TableHead className={tableClasses.tableHeader}>
                     <TableRow>
-                        <TableCell width="5%">Monthly PrePayment </TableCell>
+                        <TableCell width="5%">Monthly Payment </TableCell>
                         <TableCell width="5%">Total Interest</TableCell>
                         <TableCell width="5%">Total Amount</TableCell>
                         <TableCell width="5%">Completion Date</TableCell>
-
                     </TableRow>
                 </TableHead>
                 <TableBody className={tableClasses.tableBody}>

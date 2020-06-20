@@ -17,6 +17,9 @@ const useStyles = makeStyles({
             margin: '5px 0px'
         }
     },
+    centerAlign: {
+        textAlign:'center'
+    },
     submitButton: {
         float: 'right',
         padding: '6px 50px',

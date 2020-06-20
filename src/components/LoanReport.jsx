@@ -47,13 +47,30 @@ const useCardStyles = makeStyles((theme) => ({
     submitButton: {
         padding: '6px 50px',
         margin: '15px 0',
+    },
+    centerAlign: {
+        textAlign:'center'
+    },
+    comparisonContent: {
+        margin: 0,
+        padding: 0
+    },
+    message: {
+        background: '#fff9c4',
+        borderRadius: 10,
+        padding: 10
+    },
+    tableMessage: {
+        padding:20,
+        textAlign:'center',
+        background: '#fff9c4'
     }
 }));
 
 const LoanReport = (props) => {
     const cardClasses = useCardStyles();
     const { total, loanSummary, totalWithoutPrepayment } = props.loanInfo;
-
+    const comparisonMessage = 'A comparison for loan payment. Along with monthly EMI if you pay additional payment then it will show how long will it take to completely pay off the loan.';
     return (
         <>
             <Card>
@@ -67,7 +84,7 @@ const LoanReport = (props) => {
                         <Grid item xs={12} md={6} >
                             {total && <SummaryReport data={total} />}
                         </Grid>
-                        <Grid item xs={12} md={6} >
+                        <Grid item xs={12} md={6} className={cardClasses.centerAlign}>
                             <Button
                                 type="submit"
                                 variant="contained"
@@ -76,6 +93,12 @@ const LoanReport = (props) => {
                                 className={cardClasses.submitButton}>
                                 Compare
                             </Button>
+                            {
+                                props.comparison ? null :
+                                <Typography className={cardClasses.message}>
+                                    {comparisonMessage}
+                                </Typography>
+                            }
                         </Grid>
                        
                     </Grid>
@@ -83,13 +106,16 @@ const LoanReport = (props) => {
             </Card>
             {
                 props.comparison ? 
-                    <Card>
-                        <CardHeader subheader="Loan Comparison For Extra PrePayment on Each Month" classes={{
+                    <Card> 
+                        <CardHeader subheader="Comparison For Additional Payment on Each Month" classes={{
                             root: cardClasses.header,
                             subheader: cardClasses.subHeader
                         }}>
                         </CardHeader>
-                        <CardContent className={cardClasses.content}>
+                        <Typography className={cardClasses.tableMessage}>
+                            {comparisonMessage}
+                        </Typography>
+                        <CardContent className={cardClasses.comparisonContent}>
                             <ComparisonTable loanInfo={props.comparison} />
                         </CardContent>
                     </Card> : null
@@ -107,7 +133,7 @@ const LoanReport = (props) => {
                 </CardContent>
             </Card>
             <Card>
-                <CardContent className={cardClasses.content}>
+                <CardContent className={cardClasses.comparisonContent}>
                     <DetailReport loanInfo={loanSummary} />
                 </CardContent>
             </Card>
