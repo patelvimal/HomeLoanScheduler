@@ -7,7 +7,7 @@ import RupeeIcon from '../components/RupeeIcon';
 
 const useStyles = makeStyles({
 	root:{
-		marginBottom: 5
+		marginBottom: 15
 	},
 	hide:{
 		display: 'none'
@@ -18,7 +18,8 @@ const useStyles = makeStyles({
 	sliderRoot: {
 		color: '#209ddb',
 		height: '8px',
-		padding: '10px 0'
+		padding: '10px 0',
+		//  marginBottom: 30
 	},
 
 	thumb: {
@@ -48,7 +49,7 @@ const useStyles = makeStyles({
 	},
 	inputContainer:{
 		// width:200,
-		padding: '4px 0'
+		padding: '3px 0'
 	},
 	rupeeIcon: {
 		width: 17,
@@ -64,6 +65,9 @@ const useStyles = makeStyles({
 		border: 'solid 1px rgb(223, 224, 228)',
 		width: 80,
 		background: '#a6daf23d'
+	},
+	markLabel: {
+		top: 30
 	}
 });
 
@@ -123,7 +127,8 @@ export default function InputSlider(props) {
 						track: classes.track,
 						thumb: classes.thumb,
 						active: classes.active,
-						valueLabel: classes.valueLabel
+						valueLabel: classes.valueLabel,
+						markLabel: classes.markLabel
 					}}
 					min={min}
 					max={max}
