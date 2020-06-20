@@ -107,7 +107,7 @@ const LoanReport = (props) => {
             {
                 props.comparison ? 
                     <Card> 
-                        <CardHeader subheader="Comparison For Additional Payment on Each Month" classes={{
+                        <CardHeader subheader="Comparison For Additional Payment" classes={{
                             root: cardClasses.header,
                             subheader: cardClasses.subHeader
                         }}>

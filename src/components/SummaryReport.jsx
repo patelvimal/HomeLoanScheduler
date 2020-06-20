@@ -15,20 +15,20 @@ const useSummaryStyles = makeStyles((theme) => ({
             '&:first-child': {
                 paddingLeft: 50,
                 textAlign: 'right',
+                [theme.breakpoints.down('sm')]: {
+                    width: '44%',
+                    paddingLeft: 0
+                }
             },
             '&:last-child': {
                 fontWeight: 'bold',
             }
-        },
-        [theme.breakpoints.down('sm')]: {
-            '& > h6': {
-                width: 'unset',
-            },
-            '&:last-child': {
-                marginBottom:10
-            }
         }
     },
+    emiInfo : {
+        background: '#ffeb3b8f',
+        borderRadius: 10
+    }
 }));
 
 const SummaryReport = (props) => {
@@ -36,7 +36,7 @@ const SummaryReport = (props) => {
     const classes = useSummaryStyles();
     return (
         <React.Fragment>
-            <div className={classes.labelValue}>
+            <div className={ `${classes.labelValue} ${classes.emiInfo}`}>
                 <Typography variant="subtitle1" display="inline">
                     Monthly EMI:
                 </Typography>
