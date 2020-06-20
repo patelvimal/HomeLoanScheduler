@@ -103,7 +103,7 @@ export default function InputSlider(props) {
 				<div className={classes.inputContainer}>
 				<RupeeIcon className={`${classes.rupeeIcon} ${props.hideIcon ? classes.visibility : ""}`}></RupeeIcon>
 					<input 
-						type="text" 
+						type="number" 
 						className={classes.input} 
 						value={value} onChange={handleInputChange}
 						disabled = {props.disabled}
