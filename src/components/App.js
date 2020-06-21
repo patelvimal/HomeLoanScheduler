@@ -17,19 +17,20 @@ import {
 } from 'react-native';
 
 import {
-  Header,
+  
   LearnMoreLinks,
   Colors,
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Header from './Header';
+
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <Text>Hello</Text>
+        <Header/>
       </SafeAreaView>
     </>
   );
