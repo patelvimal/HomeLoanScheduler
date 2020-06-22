@@ -162,7 +162,7 @@ const LoanForm = (props) => {
                         marks={intRateMarker}
                     />
                     <InputSlider
-                        label="Monthly Prepayment"
+                        label="Additional Payment (monthly)"
                         min={0}
                         max={100}
                         step={1}
