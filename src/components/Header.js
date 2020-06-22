@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-const Header = () => {
+import { Header } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
+
+const Menu = () => {
+    return(
+        <Icon name='menu'/>
+    )
+}
+
+const AppBar = () => {
 	return (
 		<View>
-			<Text>Home Loan EMI calculator</Text>
+			<Header
+				leftComponent={<Menu/>}
+				centerComponent={{ text: 'Home Loan EMI Calculator asd', style: { color: '#fff' } }}
+  				rightComponent={{ icon: 'home', color: '#fff' }}
+			/>
 		</View>
 	)
 }
 
-export default Header;
+export default AppBar;

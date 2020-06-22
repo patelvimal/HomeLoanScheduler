@@ -24,13 +24,13 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Header from './Header';
+import AppBar from './Header';
 
 const App = () => {
   return (
     <>
       <SafeAreaView>
-        <Header/>
+        <AppBar/>
       </SafeAreaView>
     </>
   );
