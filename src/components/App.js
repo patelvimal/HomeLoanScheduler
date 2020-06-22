@@ -25,12 +25,14 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import AppBar from './Header';
+import LoanForm from './LoanForm';
 
 const App = () => {
   return (
     <>
       <SafeAreaView>
         <AppBar/>
+        <LoanForm/>
       </SafeAreaView>
     </>
   );
