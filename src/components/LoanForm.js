@@ -5,7 +5,7 @@ import InputSlider from './InputSlider'
 const LoanForm = () => {
     return (
         <View>
-            <InputSlider/>
+            <InputSlider label="Outstanding Loan Amount"/>
         </View>
     )
 }
