@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import InputSlider from './InputSlider';
+import {Button} from 'react-native-elements';
 
-const LoanForm = () => {
+const LoanForm = (props) => {
   const LOAN_AMOUNT_DEFAULT_VALUE = 1;
   const MONTHLY_EMI_DEFAULT_VALUE = 50;
   const INTEREST_RATE_DEFAULT_VALUE = 9;
@@ -34,8 +35,6 @@ const LoanForm = () => {
     if (props.onFormSubmit && typeof props.onFormSubmit === 'function') {
       props.onFormSubmit(loanInfo);
     }
-    event.preventDefault();
-    event.stopPropagation();
   };
 
   return (
@@ -86,18 +85,39 @@ const LoanForm = () => {
         name="prePayment"
         markers={emiAmountMarker}
       />
-      <Button
+      {/* <Button
         type="submit"
         variant="contained"
         color="primary"
         onClick={onSubmit}
         title="Calculate"
+      /> */}
+      <Button
+        title="Calculate"
+        buttonStyle={styles.button}
+        titleStyle={styles.buttonTitle}
+        onPress={onSubmit}
       />
+      {/* <Button/>
+      <Button
+          title="Calculate"
+          style={styles.button}
+          onPress={() => Alert.alert('Simple Button pressed')}
+        /> */}
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  button: {
+    margin:30,
+    padding:10,
+    
+  },
+  buttonTitle:{
+    fontSize: 20,
+  }
+});
 
 const generateMarker = (suffix, maxValue, stepSize) => {
   var list = [];

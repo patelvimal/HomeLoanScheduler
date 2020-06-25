@@ -16,18 +16,17 @@ const InputSlider = props => {
     invokeCallback(value);
   };
 
-  const handleInputChange = textValue => {
-    setValue(textValue);
-    // if (value === '' || (regex.test(value) && (value >= min && value <= max))) {
-    //   const newValue =
-    //     value === ''
-    //       ? ''
-    //       : value.indexOf('.') == value.length - 1
-    //       ? value
-    //       : Number(value);
-    //   setValue(newValue);
-    //   invokeCallback(newValue);
-    // }
+  const handleInputChange = value => {
+    if (value === '' || (regex.test(value) && (value >= min && value <= max))) {
+      const newValue =
+        value === ''
+          ? min
+          : value.indexOf('.') == value.length - 1
+          ? Number(value)
+          : Number(value);
+      setValue(newValue);
+      invokeCallback(newValue);
+    }
   };
 
   const invokeCallback = newValue => {
@@ -40,6 +39,7 @@ const InputSlider = props => {
     <React.Fragment>
       <View style={styles.root}>
         <Text style={styles.label}>{props.label}</Text>
+        <Text>{value}</Text>
         <View style={styles.inputContainer}>
           <RupeeIcon />
           <Input
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   label: {
     padding: 6,
     marginTop: 2,
-    fontSize: 20,
+    fontSize: 18,
   },
   inputContainer:{
     marginLeft:45,

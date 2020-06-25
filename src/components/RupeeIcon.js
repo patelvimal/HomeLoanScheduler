@@ -7,8 +7,8 @@ const RupeeIcon = props => {
 
 const styles = StyleSheet.create({
     root : {
-        fontSize:30,
-        marginTop:2
+        fontSize:25,
+        marginTop:4
     }
 });
 export default RupeeIcon;
