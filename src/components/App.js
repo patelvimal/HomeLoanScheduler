@@ -32,7 +32,9 @@ const App = () => {
     <>
       <SafeAreaView>
         <AppBar/>
-        <LoanForm/>
+        <ScrollView>
+          <LoanForm/>
+        </ScrollView>
       </SafeAreaView>
     </>
   );

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import InputSlider from './InputSlider';
 
 const LoanForm = () => {
@@ -49,6 +49,61 @@ const LoanForm = () => {
         onChange={onChange}
         name="loanAmount"
         markers={loanAmountMarker}
+      />
+      <InputSlider
+        label="Monthly EMI"
+        min={0}
+        max={100}
+        step={1}
+        defaultValue={MONTHLY_EMI_DEFAULT_VALUE}
+        onChange={onChange}
+        suffix="K"
+        name="emi"
+        hide={loanInfo.calculateEMI}
+        markers={emiAmountMarker}
+      />
+      <InputSlider
+        hide={!loanInfo.calculateEMI}
+        label="Loan Tenure"
+        min={0}
+        max={30}
+        step={1}
+        defaultValue={LOAN_TENURE_DEFAULT_VALUE}
+        onChange={onChange}
+        name="loanTenure"
+        hideIcon={true}
+        suffix=""
+        markers={loanTenureMarker}
+      />
+      <InputSlider
+        label="Interest Rate"
+        min={0}
+        max={20}
+        step={0.1}
+        defaultValue={INTEREST_RATE_DEFAULT_VALUE}
+        onChange={onChange}
+        name="interestRate"
+        type="Decimal"
+        suffix="%"
+        markers={intRateMarker}
+      />
+      <InputSlider
+        label="Monthly Prepayment"
+        min={0}
+        max={100}
+        step={1}
+        defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
+        onChange={onChange}
+        suffix="K"
+        name="prePayment"
+        markers={emiAmountMarker}
+      />
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        onClick={onSubmit}
+        title="Calculate"
       />
     </View>
   );
