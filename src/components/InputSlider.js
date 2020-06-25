@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {Input, Slider} from 'react-native-elements';
+import Marker from './Marker';
+import RupeeIcon from './RupeeIcon';
 
 const InputSlider = props => {
-  const {min, max, step, defaultValue, marks, suffix, name} = props;
+  const {min, max, step, defaultValue, markers, suffix, name} = props;
   const [value, setValue] = React.useState(defaultValue || 0);
   const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
   const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
@@ -38,28 +40,32 @@ const InputSlider = props => {
     <React.Fragment>
       <View style={styles.root}>
         <Text style={styles.label}>{props.label}</Text>
-        <Input
-          value={value}
-          placeholder=""
-          keyboardType="numeric"
-          onChangeText={handleInputChange}
-          style={styles.input}
-        />
+        <View style={styles.inputContainer}>
+          <RupeeIcon />
+          <Input
+            value={value}
+            placeholder=""
+            keyboardType="numeric"
+            errorStyle={styles.errorStyle}
+            onChangeText={handleInputChange}
+            inputContainerStyle={styles.input}
+          />
+        </View>
       </View>
-      <View style={styles.sliderRoot}>
+      <View style={sliderStyle.sliderRoot}>
         <Slider
           value={value}
           onValueChange={handleSliderChange}
           minimumValue={min}
           maximumValue={max}
           step={step}
-          trackStyle={styles.track}
-          slider={styles.slider}
-          thumbTouchSize={styles.thumb}
-          thumbTintColor='#fff'
-          thumbStyle={styles.thumbStyle}
+          trackStyle={sliderStyle.track}
+          thumbTintColor="#fff"
+          thumbStyle={sliderStyle.thumbStyle}
+          maximumTrackTintColor="#64b3ef"
+          minimumTrackTintColor="#209ddb"
         />
-        <Text>hellos: {value}</Text>
+        <Marker values={markers} />
       </View>
     </React.Fragment>
   );
@@ -68,44 +74,53 @@ const InputSlider = props => {
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
+    marginTop: 10,
+    borderWidth: 0,
+    borderColor: 'red',
   },
   label: {
     padding: 6,
-    marginTop: 4,
+    marginTop: 2,
     fontSize: 20,
   },
+  inputContainer:{
+    marginLeft:45,
+    flexDirection:'row'
+  },
   input: {
-    padding: 8,
-    fontSize: 18,
-    width: 8,
+    borderWidth: 1,
+    borderColor: 'lightgrey',
+    borderRadius: 5,
+    padding: 0,
+    width: 90,
+    height:44
   },
-  sliderRoot: {
-    padding: 6,
+  errorStyle: {
+    display: 'none',
   },
-  track: {
-    padding:4,
-    borderRadius:50,
-    borderColor:'red',
-    borderWidth:5,
-    backgroundColor:'#fff',
-    color: '#fff'
-  },
-  slider:{
-    backgroundColor:'darkslateblue',
-    color:'darkslateblue'
-  },
-  thumb:{
-    width: 4000, height: 4000
-  },
-  thumbStyle : {
-    backgroundColor:'#fff',
-    padding:12,
-    borderStyle:'solid',
-    borderColor:'#4d4d4d',
-    borderWidth:2,
-    marginTop:2,
-    borderRadius:100
-  }
 });
 
+
+const sliderStyle = StyleSheet.create({
+  sliderRoot: {
+    padding: 6,
+    borderWidth: 0,
+    borderColor: 'lightgrey',
+  },
+  track: {
+    padding: 4,
+    borderRadius: 50,
+    backgroundColor: '#fff',
+    color: '#fff',
+  },
+  thumbStyle: {
+    backgroundColor: '#fff',
+    padding: 12,
+    borderStyle: 'solid',
+    borderColor: '#209ddb',
+    borderWidth: 2,
+    marginTop: 2,
+    borderRadius: 100,
+  }
+})
 export default InputSlider;
