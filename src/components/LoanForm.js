@@ -51,18 +51,6 @@ const LoanForm = () => {
         markers={loanAmountMarker}
       />
       <InputSlider
-        label="Monthly EMI"
-        min={0}
-        max={100}
-        step={1}
-        defaultValue={MONTHLY_EMI_DEFAULT_VALUE}
-        onChange={onChange}
-        suffix="K"
-        name="emi"
-        hide={loanInfo.calculateEMI}
-        markers={emiAmountMarker}
-      />
-      <InputSlider
         hide={!loanInfo.calculateEMI}
         label="Loan Tenure"
         min={0}

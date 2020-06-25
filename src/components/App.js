@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 
 import {
-  
   LearnMoreLinks,
   Colors,
   DebugInstructions,
@@ -31,10 +30,13 @@ const App = () => {
   return (
     <>
       <SafeAreaView>
-        <AppBar/>
-        <ScrollView>
-          <LoanForm/>
-        </ScrollView>
+        <AppBar />
+        <View >
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+            contentInsetAdjustmentBehavior="automatic">
+            <LoanForm />
+          </ScrollView>
+        </View>
       </SafeAreaView>
     </>
   );
@@ -42,7 +44,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    //backgroundColor: Colors.lighter,
+    backgroundColor: Colors.lighter,
   },
   engine: {
     position: 'absolute',
