@@ -43,7 +43,7 @@ const InputSlider = props => {
         <View style={styles.inputContainer}>
           <RupeeIcon />
           <Input
-            value={value}
+            value={String(value)}
             placeholder=""
             keyboardType="numeric"
             errorStyle={styles.errorStyle}
