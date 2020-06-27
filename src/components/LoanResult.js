@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import SummaryReport from './SummaryReport';
 import {Card, Button} from 'react-native-elements';
 import ComparisonTable from './Comparison';
+import LoanDetail from './LoanDetails';
 
 const LoanResult = props => {
   const {total, loanSummary, totalWithoutPrepayment} = props.loanInfo;
@@ -23,6 +24,9 @@ const LoanResult = props => {
       </Card>
       <Card title="Comparison For Additional Payment">
           <ComparisonTable loanInfo={props.comparison} />
+      </Card>
+      <Card title="Principal/Interest Distribution Each Year">
+        <LoanDetail loanInfo={loanSummary} />
       </Card>
     </View>
   );

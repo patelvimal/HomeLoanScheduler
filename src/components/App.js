@@ -112,11 +112,12 @@ const App = () => {
   return (
     <>
       <SafeAreaView>
-        <AppBar />
+        {/* <AppBar /> */}
         <View>
           <ScrollView
             contentContainerStyle={{flexGrow: 1}}
             contentInsetAdjustmentBehavior="automatic">
+            <AppBar /> 
             <LoanForm onFormSubmit={onFormSubmit} />
             {
               calculatedLoanInfo ? 
