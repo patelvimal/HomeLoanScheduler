@@ -24,34 +24,6 @@ const LoanResult = props => {
       <Card title="Comparison For Additional Payment">
           <ComparisonTable loanInfo={props.comparison} />
       </Card>
-      {[
-        1,
-        2,
-        3,
-        6,
-        4,
-        58,
-        8,
-        78,
-        78,
-        78,
-        7,
-        97,
-        9,
-        9,
-        41,
-        5223234,
-        2343434,
-        3445,
-        48,
-        87,
-        87,
-        415,
-        4524,
-        5,
-      ].map(a => {
-        return <Text>{a}</Text>;
-      })}
     </View>
   );
 };
