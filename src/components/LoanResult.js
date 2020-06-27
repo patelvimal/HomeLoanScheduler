@@ -4,6 +4,7 @@ import SummaryReport from './SummaryReport';
 import {Card, Button} from 'react-native-elements';
 import ComparisonTable from './Comparison';
 import LoanDetail from './LoanDetails';
+import CardLayout from './Card';
 
 const LoanResult = props => {
   const {total, loanSummary, totalWithoutPrepayment} = props.loanInfo;
@@ -12,37 +13,39 @@ const LoanResult = props => {
 
   return (
     <View>
-      <Card title="Summary">
+      <CardLayout title="Summary" >
         <SummaryReport data={total} />
-        <Button
-          title="Compare"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
-          onPress={props.onCompareClick}
-        />
-        <Text style={styles.compareText}>{comparisonMessage}</Text>
-      </Card>
-      <Card title="Comparison For Additional Payment">
+          <Button
+            title="Compare"
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonTitle}
+            onPress={props.onCompareClick}
+          />
+          <Text style={styles.compareText}>{comparisonMessage}</Text>
+      </CardLayout>
+      <CardLayout title="Comparison For Additional Payment" removeContentStyle>
           <ComparisonTable loanInfo={props.comparison} />
-      </Card>
-      <Card title="Principal/Interest Distribution Each Year">
+      </CardLayout>
+      <CardLayout title="Principal/Interest Distribution Each Year">
         <LoanDetail loanInfo={loanSummary} />
-      </Card>
+      </CardLayout>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    margin: 0,
+    marginLeft: 30,
+    marginRight:30,
     padding: 10,
-    marginBottom:10
+    marginTop:10,
+    marginBottom:10,
   },
   buttonTitle: {
     fontSize: 20,
   },
   compareText: {
-    backgroundColor: '#fff9c4',
+    // backgroundColor: '#fff9c4',
     borderRadius: 10,
     padding: 10,
     fontSize:15,

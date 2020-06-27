@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'react-native-elements';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 const CardLayout = props => {
   return (
@@ -8,7 +8,9 @@ const CardLayout = props => {
       title={props.title}
       containerStyle={style.container}
       titleStyle={style.title}>
-      {props.children}
+        <View style={props.removeContentStyle ? '' : style.content}>
+          {props.children}
+        </View>
     </Card>
   );
 };
@@ -30,6 +32,9 @@ const style = StyleSheet.create({
     // TO get rid of border of card uncommment below 2 lines
     // elevation:0,
     // backgroundColor:'#fff'
+  },
+  content : {
+    padding:20
   }
   
 });
