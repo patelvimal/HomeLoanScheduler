@@ -13,8 +13,10 @@
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-elements": "^2.0.2",
+    "react-native-svg": "^12.1.0",
     "react-native-table-component": "^1.2.1",
-    "react-native-vector-icons": "^6.6.0"
+    "react-native-vector-icons": "^6.6.0",
+    "victory-native": "^34.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

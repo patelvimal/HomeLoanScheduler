@@ -5,6 +5,7 @@ import {Card, Button} from 'react-native-elements';
 import ComparisonTable from './Comparison';
 import LoanDetail from './LoanDetails';
 import CardLayout from './Card';
+import Chart from './LineCharts';
 
 const LoanResult = props => {
   const {total, loanSummary, totalWithoutPrepayment} = props.loanInfo;
@@ -31,6 +32,11 @@ const LoanResult = props => {
         </CardLayout>
       ) : null}
 
+<CardLayout
+        title="Principal/Interest Distribution Each Year(Graph)"
+        removeContentStyle>
+          <Chart data={loanSummary}/>
+      </CardLayout>
       <CardLayout
         title="Principal/Interest Distribution Each Year"
         removeContentStyle>
