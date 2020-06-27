@@ -7,8 +7,9 @@ const CardLayout = props => {
     <Card
       title={props.title}
       containerStyle={style.container}
+      dividerStyle={style.divider}
       titleStyle={style.title}>
-        <View style={props.removeContentStyle ? '' : style.content}>
+        <View style={props.removeContentStyle ? style.bottomMargin : style.content}>
           {props.children}
         </View>
     </Card>
@@ -22,7 +23,7 @@ const style = StyleSheet.create({
     borderBottomColor: '#b2b1a9',
     borderBottomWidth: 2,
     borderStyle: 'dashed',
-    padding: 13,
+    padding: 12,
     margin: 0,
     fontSize: 17,
   },
@@ -34,7 +35,17 @@ const style = StyleSheet.create({
     // backgroundColor:'#fff'
   },
   content : {
-    padding:20
+    marginLeft:20,
+    marginRight:20,
+    marginBottom:20,
+    borderWidth:0,
+    borderColor:'red'
+  },
+  bottomMargin: {
+    marginBottom:20,
+  },
+  divider:{
+    display:'none'
   }
   
 });

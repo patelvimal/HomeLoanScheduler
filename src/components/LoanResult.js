@@ -13,20 +13,27 @@ const LoanResult = props => {
 
   return (
     <View>
-      <CardLayout title="Summary" >
+      <CardLayout title="Summary">
         <SummaryReport data={total} />
-          <Button
-            title="Compare"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonTitle}
-            onPress={props.onCompareClick}
-          />
-          <Text style={styles.compareText}>{comparisonMessage}</Text>
+        <Button
+          title="Compare"
+          buttonStyle={styles.button}
+          titleStyle={styles.buttonTitle}
+          onPress={props.onCompareClick}
+        />
+        <Text style={styles.compareText}>{comparisonMessage}</Text>
       </CardLayout>
-      <CardLayout title="Comparison For Additional Payment" removeContentStyle>
+      {props.comparison ? (
+        <CardLayout
+          title="Comparison For Additional Payment"
+          removeContentStyle>
           <ComparisonTable loanInfo={props.comparison} />
-      </CardLayout>
-      <CardLayout title="Principal/Interest Distribution Each Year">
+        </CardLayout>
+      ) : null}
+
+      <CardLayout
+        title="Principal/Interest Distribution Each Year"
+        removeContentStyle>
         <LoanDetail loanInfo={loanSummary} />
       </CardLayout>
     </View>
@@ -36,10 +43,10 @@ const LoanResult = props => {
 const styles = StyleSheet.create({
   button: {
     marginLeft: 30,
-    marginRight:30,
+    marginRight: 30,
     padding: 10,
-    marginTop:10,
-    marginBottom:10,
+    marginTop: 10,
+    marginBottom: 10,
   },
   buttonTitle: {
     fontSize: 20,
@@ -48,9 +55,9 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff9c4',
     borderRadius: 10,
     padding: 10,
-    fontSize:15,
-    textAlign:'center'
-},
+    fontSize: 15,
+    textAlign: 'center',
+  },
 });
 
 export default LoanResult;

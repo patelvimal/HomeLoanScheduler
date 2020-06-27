@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import { Table, TableWrapper, Row } from 'react-native-table-component';
+import TableLayout from './TableLayout';
 
 const LoanDetail = props => {
   const columns = ['Year','Principal','Interest','Total'];
@@ -8,25 +9,10 @@ const LoanDetail = props => {
         ([row.year,row.principal,row.interest,row.totalAmount])
     )
   return (
-    <View style={styles.container}>
-      <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-        <Row
-          data={columns}
-          style={styles.header}
-          textStyle={styles.text}
-        />
-      </Table>
-      <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-        {data && data.map((rowData, index) => (
-          <Row
-            key={index}
-            data={rowData}
-            style={[styles.row, index % 2 && {backgroundColor: '#F7F6E7'}]}
-            textStyle={styles.text}
-          />
-        ))}
-      </Table>
-    </View>
+    <TableLayout
+      columns = {columns}
+      data= {data}
+    />
   );
 };
 

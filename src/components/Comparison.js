@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import { Table, TableWrapper, Row } from 'react-native-table-component';
+import TableLayout from './TableLayout';
 
 const renderRow = row => {
   return (
@@ -41,37 +42,26 @@ const RenderHeader = () => {
 };
 
 const ComparisonTable = props => {
-  const columns = ['Monthly Payment','Total Interest','Total Amount','Completion Date'];
-  const data = props.loanInfo && props.loanInfo.map(row=>([row.prePayment,row.totalInterest,row.totalAmount,row.completionDate]))
+  const columns = ['Monthly Payment',"Total       Interest",'Total       Amount','Completion Date'];
+  const data = props.loanInfo && props.loanInfo.map(row=>([
+    row.prePayment,
+    row.totalInterest.addThousandSeperator(),
+    row.totalAmount.addThousandSeperator(),
+    row.completionDate]))
   return (
-    <View style={styles.container}>
-      <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-        <Row
-          data={columns}
-          style={styles.header}
-          textStyle={styles.text}
-        />
-      </Table>
-      <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-        {data && data.map((rowData, index) => (
-          <Row
-            key={index}
-            data={rowData}
-            style={[styles.row, index % 2 && {backgroundColor: '#F7F6E7'}]}
-            textStyle={styles.text}
-          />
-        ))}
-      </Table>
-    </View>
+    <TableLayout
+      columns = {columns}
+      data= {data}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff'},
-  header: {height: 50, backgroundColor: '#537791'},
-  text: {textAlign: 'center', fontWeight: '100'},
-  dataWrapper: {marginTop: -1},
-  row: {height: 40, backgroundColor: '#E7E6E1'},
+  container: {flex: 1, padding: 0, paddingTop: 0, backgroundColor: '#fff'},
+  header: {height: 50, backgroundColor: '#fff',flexDirection: 'row' ,borderBottomWidth:1,borderBottomColor:'darkgray'},
+  text: {textAlign: 'center'},
+  dataWrapper: {marginTop: 1},
+  row: {height: 40, backgroundColor: '#E7E6E1',flexDirection: 'row',borderBottomWidth:1,borderBottomColor:'darkgray'},
 });
 
 export default ComparisonTable;
