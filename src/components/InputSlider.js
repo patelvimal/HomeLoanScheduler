@@ -39,7 +39,6 @@ const InputSlider = props => {
     <React.Fragment>
       <View style={styles.root}>
         <Text style={styles.label}>{props.label}</Text>
-        <Text>{value}</Text>
         <View style={styles.inputContainer}>
           <RupeeIcon />
           <Input

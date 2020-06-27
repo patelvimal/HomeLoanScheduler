@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -26,19 +26,17 @@ const App = () => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [calculatedLoanInfo, setLoanCalculation] = useState(null);
   const [loanComparisonInfo, setLoanComparison] = useState(null);
-
+  const resultView = useRef(null);
+  
   const onFormSubmit = loanDetails => {
     calculateHomeLoan(loanDetails);
   };
 
-  // useEffect(() => {
-  //   if (calculatedLoanInfo && isMobileOnly) {
-  //     resultView.current.scrollIntoView({
-  //       behavior: 'smooth',
-  //       block: 'start',
-  //     });
-  //   }
-  // }, [calculatedLoanInfo]);
+  useEffect(() => {
+    if (calculatedLoanInfo && resultView)  {
+      resultView.current.scrollTo({y:650, animated: true})
+    }
+  }, [calculatedLoanInfo]);
 
   const calculateHomeLoan = loanDetails => {
     var loanInfo = convertToLongNumber(loanDetails);
@@ -116,6 +114,7 @@ const App = () => {
         <View>
           <ScrollView
             contentContainerStyle={{flexGrow: 1}}
+            ref={resultView}
             contentInsetAdjustmentBehavior="automatic">
             <AppBar /> 
             <LoanForm onFormSubmit={onFormSubmit} />
