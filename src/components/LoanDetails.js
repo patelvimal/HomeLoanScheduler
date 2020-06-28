@@ -1,18 +1,22 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import { Table, TableWrapper, Row } from 'react-native-table-component';
+import {Table, TableWrapper, Row} from 'react-native-table-component';
 import TableLayout from './TableLayout';
 
 const LoanDetail = props => {
-  const columns = ['Year','Principal','Interest','Total'];
-  const data = props.loanInfo && props.loanInfo.map( row=>
-        ([row.year,row.principal,row.interest,row.totalAmount])
-    )
+  const columns = ['Year', 'Principal', 'Interest', 'Total'];
+  const data =
+    props.loanInfo &&
+    props.loanInfo.map(row => [
+      row.year,
+      row.principal,
+      row.interest,
+      row.totalAmount,
+    ]);
   return (
-    <TableLayout
-      columns = {columns}
-      data= {data}
-    />
+    <View style={props.style}>
+      <TableLayout columns={columns} data={data} />
+    </View>
   );
 };
 

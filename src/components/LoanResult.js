@@ -34,15 +34,11 @@ const LoanResult = props => {
       ) : null}
 
       <CardLayout
-        title="Principal/Interest Distribution Each Year(Graph)"
+        title="Principal/Interest Distribution Each Year"
         removeContentStyle>
         <LineChart data={loanSummary} />
         <BarChart data={loanSummary} />
-      </CardLayout>
-      <CardLayout
-        title="Principal/Interest Distribution Each Year"
-        removeContentStyle>
-        <LoanDetail loanInfo={loanSummary} />
+        <LoanDetail loanInfo={loanSummary} style={styles.loanDetail}/>
       </CardLayout>
     </View>
   );
@@ -66,6 +62,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
+  loanDetail:{
+    marginTop:25
+  }
 });
 
 export default LoanResult;

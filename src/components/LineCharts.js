@@ -8,7 +8,7 @@ const Chart = props => {
     <VictoryChart theme={VictoryTheme.material}>
       <VictoryLine
         style={{
-          data: {stroke: '#309bff',
+          data: {stroke: '#08a308',
                 strokeWidth: 4, strokeLinecap: "round" ,
             }
         }}
@@ -18,7 +18,7 @@ const Chart = props => {
       />
       <VictoryLine
         style={{
-            data: {stroke: '#498910',
+            data: {stroke: '#ad0f98',
             strokeWidth: 4, strokeLinecap: "round" ,
           },
           parent: {border: '50px solid #ccc'},
@@ -30,13 +30,13 @@ const Chart = props => {
     <VictoryAxis
             label="Year"
             fixLabelOverlap
-            style={{axisLabel: { padding: 30 }}}
+            style={{axisLabel: { padding: 35,fontSize:15  }}}
     />
     <VictoryAxis dependentAxis
     label="Principal/Interest"
         tickFormat={(x) => (`${x / 100000}L`)}
       style={{
-        axisLabel: { padding: 40 }
+        axisLabel: { padding: 33, fontSize:15 }
       }}
     />
     </VictoryChart>

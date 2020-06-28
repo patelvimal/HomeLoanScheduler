@@ -19,7 +19,7 @@ const CardLayout = props => {
 const style = StyleSheet.create({
   title: {
     textTransform: 'capitalize',
-    backgroundColor: '#fff9c4',
+    backgroundColor: 'rgba(229,229,229,1)',
     borderBottomColor: '#b2b1a9',
     borderBottomWidth: 2,
     borderStyle: 'dashed',
