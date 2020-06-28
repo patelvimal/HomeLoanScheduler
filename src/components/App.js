@@ -6,6 +6,9 @@ import {
   View,
   Text,
   StatusBar,
+  TouchableWithoutFeedback,
+  Alert,
+  Dimensions
 } from 'react-native';
 
 import { calcHomeLoan, calculateEMI, getSummary, getTotal } from '../shared/calculate-service';
@@ -21,11 +24,14 @@ import {
 import AppBar from './Header';
 import LoanForm from './LoanForm';
 import LoanResult from './LoanResult';
+import Sidebar from './Sidebar';
 
 const App = () => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [calculatedLoanInfo, setLoanCalculation] = useState(null);
   const [loanComparisonInfo, setLoanComparison] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const resultView = useRef(null);
   
   const onFormSubmit = loanDetails => {
@@ -107,27 +113,46 @@ const App = () => {
     setLoanComparison(loanComparison);
   };
 
+  const toggleSidebar =() => {
+    setIsSidebarOpen(!isSidebarOpen);
+  }
+
+  const createTwoButtonAlert = () =>
+  Alert.alert(
+    "Alert Title",
+    "My Alert Msg",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ],
+    { cancelable: false }
+  );
   return (
     <>
       <SafeAreaView>
-        {/* <AppBar /> */}
-        <View>
+        <TouchableWithoutFeedback onPress={toggleSidebar}>
+          <View>
           <ScrollView
             contentContainerStyle={{flexGrow: 1}}
             ref={resultView}
             contentInsetAdjustmentBehavior="automatic">
-            <AppBar /> 
+            <AppBar onHamburgerClick={toggleSidebar} />
             <LoanForm onFormSubmit={onFormSubmit} />
-            {
-              calculatedLoanInfo ? 
-              <LoanResult loanInfo ={calculatedLoanInfo} 
-                comparison={loanComparisonInfo} 
+            {calculatedLoanInfo ? (
+              <LoanResult
+                loanInfo={calculatedLoanInfo}
+                comparison={loanComparisonInfo}
                 onCompareClick={loanComparison}
               />
-               : null 
-            }
+            ) : null}
+            <Sidebar isOpen={isSidebarOpen}/>
           </ScrollView>
-        </View>
+          </View>
+        </TouchableWithoutFeedback>
       </SafeAreaView>
     </>
   );
@@ -169,7 +194,7 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
-  },
+  }
 });
 
 export default App;
