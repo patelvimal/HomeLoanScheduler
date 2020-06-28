@@ -9,9 +9,9 @@ const LoanDetail = props => {
     props.loanInfo &&
     props.loanInfo.map(row => [
       row.year,
-      row.principal,
-      row.interest,
-      row.totalAmount,
+      row.principal.addThousandSeperator(),
+      row.interest.addThousandSeperator(),
+      row.totalAmount.addThousandSeperator(),
     ]);
   return (
     <View style={props.style}>

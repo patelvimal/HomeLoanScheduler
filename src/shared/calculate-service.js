@@ -99,5 +99,7 @@ Number.prototype.roundOf = function (decimals) {
 }
 
 Number.prototype.addThousandSeperator = function() {
-    return this.toLocaleString('en-IN') ;
+   // Below method is not working in react native
+   // return this.toLocaleString('en-IN'); 
+   return this.toString().replace(/(\d)(?=(\d{2})+[0-9]$)/g, '$1,');
 }
