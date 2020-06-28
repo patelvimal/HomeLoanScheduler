@@ -64,9 +64,9 @@ const LoanForm = (props) => {
       />
       <InputSlider
         label="Interest Rate"
-        min={0}
+        min={1}
         max={20}
-        step={0.1}
+        step={.5}
         defaultValue={INTEREST_RATE_DEFAULT_VALUE}
         onChange={onChange}
         name="interestRate"

@@ -12,8 +12,7 @@ const InputSlider = props => {
   const regex = props.type == 'Decimal' ? decimalRegex : integerRegex;
 
   const handleSliderChange = value => {
-    setValue(value);
-    invokeCallback(value);
+    updateValue(value);
   };
 
   const handleInputChange = value => {
@@ -24,10 +23,14 @@ const InputSlider = props => {
           : value.indexOf('.') == value.length - 1
           ? Number(value)
           : Number(value);
-      setValue(newValue);
-      invokeCallback(newValue);
+        updateValue(newValue);
     }
   };
+
+  const updateValue = (value) => {
+    setValue(value);
+    invokeCallback(value);
+  }
 
   const invokeCallback = newValue => {
     if (props.onChange && typeof props.onChange === 'function') {

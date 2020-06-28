@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     //borderBottomColor: 'darkgray',
     borderBottomColor: 'rgb(185, 184, 184)',
-    fontWeight:'bold'
   },
   text: {textAlign: 'center'},
   dataWrapper: {marginTop: 1},
