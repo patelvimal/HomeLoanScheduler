@@ -4,8 +4,8 @@ import {StyleSheet, View, Text} from 'react-native';
 const Marker = props => {
   return (
     <View style={styles.marker}>
-      {props.values.map(item => {
-        return <Text style={styles.markerItem}>{item.label}</Text>;
+      {props.values.map((item,index) => {
+        return <Text key={index} style={styles.markerItem}>{item.label}</Text>;
       })}
     </View>
   );

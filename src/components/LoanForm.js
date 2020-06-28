@@ -59,7 +59,6 @@ const LoanForm = (props) => {
         onChange={onChange}
         name="loanTenure"
         hideIcon={true}
-        suffix=""
         markers={loanTenureMarker}
       />
       <InputSlider
@@ -71,39 +70,24 @@ const LoanForm = (props) => {
         onChange={onChange}
         name="interestRate"
         type="Decimal"
-        suffix="%"
         markers={intRateMarker}
       />
       <InputSlider
-        label="Monthly Prepayment"
+        label="Additional Payment (monthly)"
         min={0}
         max={100}
         step={1}
         defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
         onChange={onChange}
-        suffix="K"
         name="prePayment"
         markers={emiAmountMarker}
       />
-      {/* <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        onClick={onSubmit}
-        title="Calculate"
-      /> */}
       <Button
         title="Calculate"
         buttonStyle={styles.button}
         titleStyle={styles.buttonTitle}
         onPress={onSubmit}
       />
-      {/* <Button/>
-      <Button
-          title="Calculate"
-          style={styles.button}
-          onPress={() => Alert.alert('Simple Button pressed')}
-        /> */}
     </View>
   );
 };

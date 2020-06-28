@@ -16,7 +16,7 @@ const TableLayout = props => {
             <Row
               key={index}
               data={rowData}
-              style={[styles.row, index % 2 && {backgroundColor: '#edece6'}]}
+              style={[styles.row, index % 2 && {backgroundColor: '#efefea'}]}
               textStyle={styles.text}
             />
           ))}

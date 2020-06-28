@@ -5,7 +5,7 @@ import Marker from './Marker';
 import RupeeIcon from './RupeeIcon';
 
 const InputSlider = props => {
-  const {min, max, step, defaultValue, markers, suffix, name} = props;
+  const {min, max, step, defaultValue, markers, name} = props;
   const [value, setValue] = React.useState(defaultValue || 0);
   const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
   const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
