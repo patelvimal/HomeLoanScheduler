@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AppTitle from './AppTitle';
 
 const AppBar = (props) => {
   return (
@@ -34,14 +35,6 @@ const style = StyleSheet.create({
 	}
 });
 
-const AppTitle = () => {
-  return <Text style={styles.title}>Home Loan EMI Calculator</Text>;
-};
 
-const styles = StyleSheet.create({
-  title: {
-    color: '#fff',
-    fontSize: 18,
-  },
-});
+
 export default AppBar;

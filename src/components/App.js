@@ -25,6 +25,8 @@ import AppBar from './Header';
 import LoanForm from './LoanForm';
 import LoanResult from './LoanResult';
 import Sidebar from './Sidebar';
+import { Button } from 'react-native-elements';
+import  Icon  from 'react-native-vector-icons/MaterialIcons';
 
 const App = () => {
   const [loanInfo, setLoanInfo] = useState(null);
@@ -116,7 +118,6 @@ const App = () => {
   const toggleSidebar =() => {
     setIsSidebarOpen(!isSidebarOpen);
   }
-
   const createTwoButtonAlert = () =>
   Alert.alert(
     "Alert Title",
@@ -134,23 +135,23 @@ const App = () => {
   return (
     <>
       <SafeAreaView>
-        <TouchableWithoutFeedback onPress={toggleSidebar}>
+        <TouchableWithoutFeedback>
           <View>
-          <ScrollView
-            contentContainerStyle={{flexGrow: 1}}
-            ref={resultView}
-            contentInsetAdjustmentBehavior="automatic">
-            <AppBar onHamburgerClick={toggleSidebar} />
-            <LoanForm onFormSubmit={onFormSubmit} />
-            {calculatedLoanInfo ? (
-              <LoanResult
-                loanInfo={calculatedLoanInfo}
-                comparison={loanComparisonInfo}
-                onCompareClick={loanComparison}
-              />
-            ) : null}
-            <Sidebar isOpen={isSidebarOpen}/>
-          </ScrollView>
+            <ScrollView
+              contentContainerStyle={{flexGrow: 1}}
+              ref={resultView}
+              contentInsetAdjustmentBehavior="automatic">
+              <AppBar onHamburgerClick={toggleSidebar} />
+              <LoanForm onFormSubmit={onFormSubmit} />
+              {calculatedLoanInfo ? (
+                <LoanResult
+                  loanInfo={calculatedLoanInfo}
+                  comparison={loanComparisonInfo}
+                  onCompareClick={loanComparison}
+                />
+              ) : null}
+              <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
+            </ScrollView>
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -161,6 +162,7 @@ const App = () => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
+    zIndex:0
   },
   engine: {
     position: 'absolute',
