@@ -86,14 +86,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   inputContainer:{
-    marginLeft:45,
+    marginLeft:40,
     flexDirection:'row',
     position:'absolute',
     right:0
   },
   input: {
     borderWidth: 1,
-    borderColor: 'lightgrey',
+    borderColor: 'grey',
     borderRadius: 5,
     padding: 0,
     width: 90,

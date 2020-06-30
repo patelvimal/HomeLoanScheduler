@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import InputSlider from './InputSlider';
+import InputSlider from '../components/InputSlider';
 import {Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const LoanForm = (props) => {
   const LOAN_AMOUNT_DEFAULT_VALUE = 30;
@@ -39,7 +39,7 @@ const LoanForm = (props) => {
   };
 
   return (
-    <View>
+    <View style={styles.root}>
       <InputSlider
         label="Outstanding Loan Amount"
         min={0}
@@ -84,6 +84,7 @@ const LoanForm = (props) => {
         markers={emiAmountMarker}
       />
       <Button
+        icon={<View style={styles.icon}><Icon name="calculator" size={18} color='#fff' /></View>}
         title="Calculate"
         buttonStyle={styles.button}
         titleStyle={styles.buttonTitle}
@@ -94,6 +95,10 @@ const LoanForm = (props) => {
 };
 
 const styles = StyleSheet.create({
+  root: {
+    marginLeft:10,
+    marginRight:10
+  },
   button: {
     margin:30,
     padding:10,
@@ -101,6 +106,9 @@ const styles = StyleSheet.create({
   },
   buttonTitle:{
     fontSize: 20,
+  },
+  icon : {
+    paddingRight:10
   }
 });
 

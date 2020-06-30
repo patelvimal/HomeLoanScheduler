@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import { Table, TableWrapper, Row } from 'react-native-table-component';
-import TableLayout from './TableLayout';
+import TableLayout from '../components/TableLayout';
 
 const renderRow = row => {
   return (

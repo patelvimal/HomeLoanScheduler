@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import SummaryReport from './SummaryReport';
+import SummaryReport from '../components/SummaryReport';
 import {Card, Button} from 'react-native-elements';
 import ComparisonTable from './Comparison';
 import LoanDetail from './LoanDetails';
-import CardLayout from './Card';
-import LineChart from './LineCharts';
-import BarChart from './BarChart';
+import CardLayout from '../components/Card';
+import LineChart from '../components/LineCharts';
+import BarChart from '../components/BarChart';
 
 const LoanResult = props => {
   const {total, loanSummary, totalWithoutPrepayment} = props.loanInfo;

@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   markerItem: {
     padding: 1,
     flex: 1,
-    color:'#4d4d4d'
+    color:'#4d4d4d',
+    fontSize:12
   },
 });
 

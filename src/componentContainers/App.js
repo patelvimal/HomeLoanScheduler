@@ -24,7 +24,7 @@ import {
 import AppBar from './Header';
 import LoanForm from './LoanForm';
 import LoanResult from './LoanResult';
-import Sidebar from './Sidebar';
+import Sidebar from '../components/Sidebar';
 import { Button } from 'react-native-elements';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
 

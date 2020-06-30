@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import AppTitle from './AppTitle';
+import AppTitle from '../components/AppTitle';
 
 const AppBar = (props) => {
   return (
