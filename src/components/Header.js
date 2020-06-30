@@ -11,11 +11,12 @@ const AppBar = (props) => {
         leftComponent={
           <Hamburger onHamburgerClick={() => props.onHamburgerClick()} />
         }
-        //leftComponent={{ icon: 'menu', color: '#fff'}}
         centerComponent={<AppTitle />}
         containerStyle={{
           backgroundColor: 'darkslateblue',
-          justifyContent: 'space-around',
+          justifyContent: 'center',
+          height:50,
+          paddingBottom:20
         }}
       />
     </View>
@@ -23,7 +24,6 @@ const AppBar = (props) => {
 };
 
 const Hamburger = (props) => {
- 
   const onHamburgerClick = () => {props.onHamburgerClick()};
   return <Icon name="menu" color="#fff" size={30} onPress={onHamburgerClick} containerStyle={style.icon}/>;
 };
@@ -31,10 +31,7 @@ const Hamburger = (props) => {
 const style = StyleSheet.create({
 	icon : {
 		fontSize:44,
-
 	}
 });
-
-
 
 export default AppBar;
