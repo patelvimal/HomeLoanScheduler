@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Dimensions, Linking, Alert} from 'react-native';
 import {Overlay, Button} from 'react-native-elements';
 import AppTitle from './AppTitle';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const {width, height} = Dimensions.get('window');
 
@@ -33,15 +33,16 @@ const Sidebar = ({isOpen,onClose}) => {
             </View>
             <View style={style.container}>
               <Button
-                icon={<Icon name="share" size={15} />}
+                icon={<View style={style.icon}><Icon name="share" size={18} color='#fff' /></View>}
                 title="Share"
                 buttonStyle={style.buttonStyle}
                 onPress={onShareClick}
               />
               <Button
-                icon={<Icon name="share" size={15} />}
+                icon={<View style={style.icon}><Icon name="star" size={18} color='#fff' /></View>}
                 title="Rate Us"
                 buttonStyle={style.buttonStyle}
+                iconContainerStyle={style.icon}
                 onPress={onRateUsClick}
               />
                {/* <Button
@@ -83,18 +84,12 @@ const style = StyleSheet.create({
     top: 0,
     width: width * 0.7,
     height: height,
-    // paddingTop: 0,
-    // paddingLeft: 0,
-    // paddingRight: 0,
-    // paddingBottom: 0,
-    // alignContent: 'flex-end',
-    // alignItems: 'stretch',
   },
   header: {
     backgroundColor: 'darkslateblue',
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: height * .4
   },
   version: {
     color: '#fff',
@@ -106,10 +101,13 @@ const style = StyleSheet.create({
     marginBottom: 20,
   },
   buttonStyle: {
-    margin: 10,
+    margin: 10
   },
   buttonContainer : {
     color:'blue'
+  },
+  icon : {
+    paddingRight:10
   }
 });
 export default Sidebar;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import InputSlider from './InputSlider';
 import {Button} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const LoanForm = (props) => {
   const LOAN_AMOUNT_DEFAULT_VALUE = 30;

@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   label: {
     padding: 6,
     marginTop: 2,
-    fontSize: 18,
+    fontSize: 16,
   },
   inputContainer:{
     marginLeft:45,
