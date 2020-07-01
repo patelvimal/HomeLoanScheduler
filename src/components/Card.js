@@ -26,10 +26,11 @@ const style = StyleSheet.create({
   },
   title: {
     textTransform: 'capitalize',
-    backgroundColor: 'rgba(229,229,229,1)',
+    backgroundColor: '#fff',
     borderBottomColor: '#b2b1a9',
     borderBottomWidth: 2,
     borderStyle: 'dashed',
+    color:'grey',
     padding: 12,
     margin: 0,
     fontSize: 17,
