@@ -66,6 +66,7 @@ const style = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     paddingTop: 20,
+    
   },
   overlay: {
     position: 'absolute',
@@ -74,6 +75,7 @@ const style = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'rgba(0,0,0,0.7)',
+    zIndex:1
   },
   root: {
     flex: 1,
@@ -84,6 +86,7 @@ const style = StyleSheet.create({
     top: 0,
     width: width * 0.7,
     height: height,
+    zIndex:1
   },
   header: {
     backgroundColor: 'darkslateblue',

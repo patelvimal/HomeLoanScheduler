@@ -42,7 +42,7 @@ const App = () => {
 
   useEffect(() => {
     if (calculatedLoanInfo && resultView)  {
-      resultView.current.scrollTo({y:650, animated: true})
+      resultView.current.scrollTo({y:610, animated: true})
     }
   }, [calculatedLoanInfo]);
 
@@ -122,10 +122,7 @@ const App = () => {
   return (
     <>
       <SafeAreaView>
-        <TouchableWithoutFeedback>
-          <View>
             <ScrollView
-              contentContainerStyle={{flexGrow: 1}}
               ref={resultView}
               contentInsetAdjustmentBehavior="automatic">
               <AppBar onHamburgerClick={toggleSidebar} />
@@ -139,10 +136,14 @@ const App = () => {
               ) : null}
               <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
             </ScrollView>
-          </View>
-        </TouchableWithoutFeedback>
       </SafeAreaView>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
 export default App;

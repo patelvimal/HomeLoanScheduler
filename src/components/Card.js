@@ -4,19 +4,26 @@ import {StyleSheet, View} from 'react-native';
 
 const CardLayout = props => {
   return (
-    <Card
-      title={props.title}
-      containerStyle={style.container}
-      dividerStyle={style.divider}
-      titleStyle={style.title}>
-        <View style={props.removeContentStyle ? style.bottomMargin : style.content}>
+    <View style={style.root}>
+      <Card
+        title={props.title}
+        containerStyle={style.container}
+        dividerStyle={style.divider}
+        wrapperStyle={style.root}
+        titleStyle={style.title}>
+        <View
+          style={props.removeContentStyle ? style.bottomMargin : style.content}>
           {props.children}
         </View>
-    </Card>
+      </Card>
+    </View>
   );
 };
 
 const style = StyleSheet.create({
+  root: {
+    zIndex: 0,
+  },
   title: {
     textTransform: 'capitalize',
     backgroundColor: 'rgba(229,229,229,1)',
@@ -31,22 +38,21 @@ const style = StyleSheet.create({
     padding: 0,
     margin: 0,
     // TO get rid of border of card uncommment below 2 lines
-    // elevation:0,
-    // backgroundColor:'#fff'
+    elevation:0,
+    backgroundColor:'#fff'
   },
-  content : {
-    marginLeft:20,
-    marginRight:20,
-    marginBottom:20,
-    borderWidth:0,
-    borderColor:'red'
+  content: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
+    borderWidth: 0,
+    borderColor: 'red',
   },
   bottomMargin: {
-    marginBottom:20,
+    marginBottom: 20,
   },
-  divider:{
-    display:'none'
-  }
-  
+  divider: {
+    display: 'none',
+  },
 });
 export default CardLayout;
