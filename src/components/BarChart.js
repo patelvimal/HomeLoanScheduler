@@ -20,13 +20,12 @@ const BarChart = props => {
       </VictoryGroup>
 
       <VictoryAxis
-        label="Year"
+        label="Principal/Interest(Yearly)"
         fixLabelOverlap
         style={{axisLabel: {padding: 35, fontSize: 15}}}
       />
       <VictoryAxis
         dependentAxis
-        label="Principal/Interest"
         tickFormat={x => `${x / 100000}L`}
         style={{
           axisLabel: {padding: 33, fontSize: 15},

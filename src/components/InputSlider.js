@@ -3,10 +3,12 @@ import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {Input, Slider} from 'react-native-elements';
 import Marker from './Marker';
 import RupeeIcon from './RupeeIcon';
+import { useEffect } from 'react';
 
 const InputSlider = props => {
   const {min, max, step, defaultValue, markers, name} = props;
   const [value, setValue] = React.useState(defaultValue || 0);
+  const [sliderValue, setSliderValue] = React.useState(defaultValue || 0);
   const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
   const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
   const regex = props.type == 'Decimal' ? decimalRegex : integerRegex;
@@ -16,16 +18,24 @@ const InputSlider = props => {
   };
 
   const handleInputChange = value => {
+     updateValue(value);
+  };
+  
+  useEffect(() => {
+    const newVal=isNumber(value) ? value : 0;
+    setSliderValue(Number(newVal));
+  }, [value])
+
+  const onBlur = ()=>{
     if (value === '' || (regex.test(value) && (value >= min && value <= max))) {
-      const newValue =
-        value === ''
-          ? min
-          : value.indexOf('.') == value.length - 1
-          ? Number(value)
-          : Number(value);
+        const newValue = value === '' ? min : Number(value);
         updateValue(newValue);
     }
-  };
+    else {
+      updateValue(0);
+    }
+    
+  }
 
   const updateValue = (value) => {
     setValue(value);
@@ -38,6 +48,10 @@ const InputSlider = props => {
     }
   };
 
+  const isNumber = n => {
+    return n != '' && typeof n != 'boolean' && !isNaN(n);
+  };
+
   return (
     <React.Fragment>
       <View style={styles.root}>
@@ -48,6 +62,7 @@ const InputSlider = props => {
             value={String(value)}
             placeholder=""
             keyboardType="numeric"
+            onBlur={onBlur}
             errorStyle={styles.errorStyle}
             onChangeText={handleInputChange}
             inputContainerStyle={styles.input}
@@ -56,7 +71,7 @@ const InputSlider = props => {
       </View>
       <View style={sliderStyle.sliderRoot}>
         <Slider
-          value={value}
+          value={sliderValue}
           onValueChange={handleSliderChange}
           minimumValue={min}
           maximumValue={max}
@@ -72,6 +87,7 @@ const InputSlider = props => {
     </React.Fragment>
   );
 };
+
 
 const styles = StyleSheet.create({
   root: {

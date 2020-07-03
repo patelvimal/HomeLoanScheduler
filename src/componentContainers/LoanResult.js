@@ -36,7 +36,6 @@ const LoanResult = props => {
       <CardLayout
         title="Principal/Interest Distribution Each Year"
         removeContentStyle>
-        <LineChart data={loanSummary} />
         <BarChart data={loanSummary} />
         <LoanDetail loanInfo={loanSummary} style={styles.loanDetail}/>
       </CardLayout>
