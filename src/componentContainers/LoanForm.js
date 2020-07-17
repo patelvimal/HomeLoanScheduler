@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import InputSlider from '../components/InputSlider';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import RupeeIcon from '../components/RupeeIcon';
 
 const LoanForm = (props) => {
   const LOAN_AMOUNT_DEFAULT_VALUE = 30;
@@ -49,6 +50,7 @@ const LoanForm = (props) => {
         onChange={onChange}
         name="loanAmount"
         markers={loanAmountMarker}
+        icon={<RupeeIcon/>}
       />
       <InputSlider
         hide={!loanInfo.calculateEMI}
@@ -59,7 +61,7 @@ const LoanForm = (props) => {
         defaultValue={LOAN_TENURE_DEFAULT_VALUE}
         onChange={onChange}
         name="loanTenure"
-        hideIcon={true}
+        icon={<Text style={styles.yearIcon}>Years</Text>}
         markers={loanTenureMarker}
       />
       <InputSlider
@@ -71,6 +73,7 @@ const LoanForm = (props) => {
         onChange={onChange}
         name="interestRate"
         type="Decimal"
+        icon={<Text style={styles.iconSymbol}>%</Text>}
         markers={intRateMarker}
       />
       <InputSlider
@@ -81,6 +84,7 @@ const LoanForm = (props) => {
         defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
         onChange={onChange}
         name="prePayment"
+        icon={<RupeeIcon/>}
         markers={emiAmountMarker}
       />
       <Button
@@ -109,7 +113,18 @@ const styles = StyleSheet.create({
   },
   icon : {
     paddingRight:10
+  },
+  iconSymbol: {
+    fontSize: 22,
+    marginTop: 6,
+    color: 'grey'
+  },
+  yearIcon :{
+    fontSize: 17,
+    marginTop: 8,
+    color: 'grey'
   }
+
 });
 
 const generateMarker = (suffix, maxValue, stepSize) => {

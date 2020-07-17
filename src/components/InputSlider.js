@@ -12,7 +12,6 @@ const InputSlider = props => {
   const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
   const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
   const regex = props.type == 'Decimal' ? decimalRegex : integerRegex;
-
   const handleSliderChange = value => {
     updateValue(value);
   };
@@ -57,7 +56,7 @@ const InputSlider = props => {
       <View style={styles.root}>
         <Text style={styles.label}>{props.label}</Text>
         <View style={styles.inputContainer}>
-          <RupeeIcon />
+          {props.icon}
           <Input
             value={String(value)}
             placeholder=""
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
   label: {
     padding: 6,
     marginTop: 2,
-    fontSize: 16,
+    fontSize: 18,
   },
   inputContainer:{
     marginLeft:40,
