@@ -7,6 +7,7 @@ import LoanDetail from './LoanDetails';
 import CardLayout from '../components/Card';
 import LineChart from '../components/LineCharts';
 import BarChart from '../components/BarChart';
+import GoogleAds from '../components/googleAds';
 
 const LoanResult = props => {
   const {total, loanSummary, totalWithoutPrepayment} = props.loanInfo;
@@ -37,6 +38,7 @@ const LoanResult = props => {
         title="Principal/Interest Distribution Each Year"
         removeContentStyle>
         <BarChart data={loanSummary} />
+        <GoogleAds/>
         <LoanDetail loanInfo={loanSummary} style={styles.loanDetail}/>
       </CardLayout>
     </View>
