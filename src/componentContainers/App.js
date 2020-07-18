@@ -121,7 +121,8 @@ const App = () => {
  
   return (
     <>
-      <SafeAreaView>
+      <SafeAreaView  style={styles.root}>
+      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
             <ScrollView
               ref={resultView}
               contentInsetAdjustmentBehavior="automatic">
@@ -134,7 +135,6 @@ const App = () => {
                   onCompareClick={loanComparison}
                 />
               ) : null}
-              <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
             </ScrollView>
       </SafeAreaView>
     </>
