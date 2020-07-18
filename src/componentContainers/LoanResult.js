@@ -18,18 +18,20 @@ const LoanResult = props => {
     <View>
       <CardLayout title="Summary">
         <SummaryReport data={total} />
-
+      </CardLayout>
+      <CardLayout
+        removeContentStyle>
+        <GoogleAds />
+      </CardLayout>
+      <CardLayout
+        title="Comparison">
+        <Text style={styles.compareText}>{comparisonMessage}</Text>
         <Button
           title="Compare"
           buttonStyle={styles.button}
           titleStyle={styles.buttonTitle}
           onPress={props.onCompareClick}
         />
-        <Text style={styles.compareText}>{comparisonMessage}</Text>
-      </CardLayout>
-      <CardLayout
-        removeContentStyle>
-        <GoogleAds />
       </CardLayout>
       {props.comparison ? (
         <CardLayout
@@ -42,6 +44,7 @@ const LoanResult = props => {
         removeContentStyle>
         <BarChart data={loanSummary} />
         <LoanDetail loanInfo={loanSummary} style={styles.loanDetail} />
+        <GoogleAds />
       </CardLayout>
     </View>
   );

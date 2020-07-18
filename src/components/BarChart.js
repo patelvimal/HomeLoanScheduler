@@ -14,13 +14,13 @@ const BarChart = props => {
     <VictoryChart
       theme={VictoryTheme.grayscale}
       padding={{ top: 10, left: 40, right: 10, bottom: 50 }}>
-      <VictoryGroup offset={10} colorScale={['#08a308', '#ad0f98']}>
+      <VictoryGroup offset={15} colorScale={['#08a308', '#ad0f98']}>
         <VictoryBar x="year" y="principal" barWidth={10} data={props.data}
           style={{
             data: {
               fill: "#08a308",
-              stroke: "#000000",
-              strokeWidth: 1
+              stroke: "#767677",
+              strokeWidth: 2
             }
           }}
         />
@@ -28,8 +28,8 @@ const BarChart = props => {
           style={{
             data: {
               fill: "#ad0f98",
-              stroke: "#000000",
-              strokeWidth: 1
+              stroke: "#767677",
+              strokeWidth: 2
             }
           }}
         />

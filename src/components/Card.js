@@ -50,7 +50,7 @@ const style = StyleSheet.create({
     borderColor: 'red',
   },
   bottomMargin: {
-    marginBottom: 20,
+    marginBottom: 25,
   },
   divider: {
     display: 'none',
