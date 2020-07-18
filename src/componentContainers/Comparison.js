@@ -42,7 +42,7 @@ const RenderHeader = () => {
 };
 
 const ComparisonTable = props => {
-  const columns = ['Monthly Payment',"Total       Interest",'Total       Amount','Completion Date'];
+  const columns = ['Monthly Payment',"Total Interest",'Total Amount','Completion Date'];
   const data = props.loanInfo && props.loanInfo.map(row=>([
     row.prePayment.addThousandSeperator(),
     row.totalInterest.addThousandSeperator(),

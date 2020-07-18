@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   },
   label: {
     padding: 6,
-    marginTop: 2,
-    fontSize: 18,
+    marginTop: 4,
+    fontSize: 15,
   },
   inputContainer:{
     marginLeft:40,

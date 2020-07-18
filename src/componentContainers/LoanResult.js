@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import SummaryReport from '../components/SummaryReport';
-import {Card, Button} from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import ComparisonTable from './Comparison';
 import LoanDetail from './LoanDetails';
 import CardLayout from '../components/Card';
@@ -10,7 +10,7 @@ import BarChart from '../components/BarChart';
 import GoogleAds from '../components/googleAds';
 
 const LoanResult = props => {
-  const {total, loanSummary, totalWithoutPrepayment} = props.loanInfo;
+  const { total, loanSummary, totalWithoutPrepayment } = props.loanInfo;
   const comparisonMessage =
     'A comparison for loan payment. Along with monthly EMI if you pay additional payment then it will show how long will it take to completely pay off the loan.';
 
@@ -18,6 +18,7 @@ const LoanResult = props => {
     <View>
       <CardLayout title="Summary">
         <SummaryReport data={total} />
+
         <Button
           title="Compare"
           buttonStyle={styles.button}
@@ -26,20 +27,21 @@ const LoanResult = props => {
         />
         <Text style={styles.compareText}>{comparisonMessage}</Text>
       </CardLayout>
+      <CardLayout
+        removeContentStyle>
+        <GoogleAds />
+      </CardLayout>
       {props.comparison ? (
         <CardLayout
-          title="Comparison For Additional Payment"
           removeContentStyle>
           <ComparisonTable loanInfo={props.comparison} />
         </CardLayout>
       ) : null}
-
       <CardLayout
         title="Principal/Interest Distribution Each Year"
         removeContentStyle>
         <BarChart data={loanSummary} />
-        <GoogleAds/>
-        <LoanDetail loanInfo={loanSummary} style={styles.loanDetail}/>
+        <LoanDetail loanInfo={loanSummary} style={styles.loanDetail} />
       </CardLayout>
     </View>
   );
@@ -63,8 +65,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
-  loanDetail:{
-    marginTop:25
+  loanDetail: {
+    marginTop: 25
   }
 });
 

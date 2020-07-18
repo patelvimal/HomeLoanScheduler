@@ -73,7 +73,7 @@ const LoanForm = (props) => {
         onChange={onChange}
         name="interestRate"
         type="Decimal"
-        icon={<Text style={styles.iconSymbol}>%</Text>}
+        icon={<Text style={styles.interestIcon}>%</Text>}
         markers={intRateMarker}
       />
       <InputSlider
@@ -120,8 +120,13 @@ const styles = StyleSheet.create({
     color: 'grey'
   },
   yearIcon :{
-    fontSize: 17,
-    marginTop: 8,
+    fontSize: 14,
+    marginTop: 11,
+    color: 'grey'
+  },
+  interestIcon : {
+    fontSize: 16,
+    marginTop: 10,
     color: 'grey'
   }
 

@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
   container: {flex: 1, padding: 0, paddingTop: 0, backgroundColor: '#fff'},
   header: {
     height: 50,
-    backgroundColor: '#ede4b1',
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    //borderBottomColor: 'darkgray',
-    borderBottomColor: 'rgb(185, 184, 184)',
+    backgroundColor: '#efefea',
+    borderBottomColor: '#b2b1a9',
+    borderBottomWidth: 2,
+    borderStyle: 'dashed'
   },
   text: {textAlign: 'center'},
   dataWrapper: {marginTop: 1},

@@ -15,7 +15,7 @@ const AppBar = (props) => {
         containerStyle={{
           backgroundColor: 'darkslateblue',
           justifyContent: 'center',
-          height:50,
+          height:60,
           paddingBottom:20
         }}
       />
