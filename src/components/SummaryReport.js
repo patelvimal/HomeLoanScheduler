@@ -11,7 +11,13 @@ const SummaryReport = props => {
         title="Monthly EMI"
         rightTitle={emi.addThousandSeperator()}
         rightIcon={<RupeeIcon style={styles.rupeeIcon} />}
-        containerStyle={styles.emiInfo}
+        containerStyle={styles.highlight}
+        rightTitleStyle={styles.labelValue}
+      />
+      <ListItem
+        title="Completion Date"
+        rightTitle={completionDate}
+        containerStyle={styles.highlight}
         rightTitleStyle={styles.labelValue}
       />
       <ListItem
@@ -26,19 +32,16 @@ const SummaryReport = props => {
         rightIcon={<RupeeIcon style={styles.rupeeIcon} />}
         rightTitleStyle={styles.labelValue}
       />
-      <ListItem
-        title="Completion Date"
-        rightTitle={completionDate}
-        rightTitleStyle={styles.labelValue}
-      />
+      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    emiInfo:{
+    highlight:{
         backgroundColor: '#ffeb3b8f',
-        borderRadius: 10
+        borderRadius: 10,
+        marginBottom:10,
     },
     labelValue:{
         color: '#545454',
