@@ -1,12 +1,12 @@
+import { BannerAd, BannerAdSize } from '@react-native-firebase/admob';
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { InterstitialAd, TestIds, BannerAd, BannerAdSize, RewardedAd, AdEventType, RewardedAdEventType } from '@react-native-firebase/admob';
+import { StyleSheet, View } from 'react-native';
 
 const GoogleAds = props => {
     return (
         <View style={styles.root}>
             <BannerAd
-                unitId={TestIds.BANNER}
+                unitId="ca-app-pub-4524015669776883/5947618296"
                 size={BannerAdSize.MEDIUM_RECTANGLE}
                 requestOptions={{
                     requestNonPersonalizedAdsOnly: true,
@@ -30,11 +30,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor:'#b2b1a9'
-        // borderBottomColor: '#b2b1a9',
-        // borderTopColor: '#b2b1a9',
-        // borderBottomWidth: 1,
-        // borderTopWidth: 1,
-        // borderStyle: 'dashed'
     }
 });
 
