@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 const AppTitle = () => {
-  return <Text style={styles.title}>Home Loan EMI Calculator</Text>;
+  return <Text style={styles.title}>Home Loan Scheduler</Text>;
 };
 
 const styles = StyleSheet.create({

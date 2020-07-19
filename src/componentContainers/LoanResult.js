@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   compareText: {
-    // backgroundColor: '#fff9c4',
     borderRadius: 10,
     padding: 10,
     fontSize: 15,

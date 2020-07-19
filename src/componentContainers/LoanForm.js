@@ -42,7 +42,7 @@ const LoanForm = (props) => {
   return (
     <View style={styles.root}>
       <InputSlider
-        label="Outstanding Loan Amount"
+        label="Loan Amount(In lakhs)"
         min={0}
         max={100}
         step={1}
@@ -87,6 +87,7 @@ const LoanForm = (props) => {
         icon={<RupeeIcon/>}
         markers={emiAmountMarker}
       />
+      <Text style={styles.message}>Along with EMI how much you can additional you can pay towards Loan Repayment</Text>
       <Button
         icon={<View style={styles.icon}><Icon name="calculator" size={18} color='#fff' /></View>}
         title="Calculate"
@@ -128,8 +129,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     color: 'grey'
-  }
-
+  },
+  message: {
+    borderRadius: 10,
+    padding: 10,
+    fontSize: 15,
+    textAlign: 'center',
+  },
 });
 
 const generateMarker = (suffix, maxValue, stepSize) => {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -26,7 +26,7 @@ import LoanForm from './LoanForm';
 import LoanResult from './LoanResult';
 import Sidebar from '../components/Sidebar';
 import { Button } from 'react-native-elements';
-import  Icon  from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const App = () => {
   const [loanInfo, setLoanInfo] = useState(null);
@@ -35,14 +35,14 @@ const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const resultView = useRef(null);
-  
+
   const onFormSubmit = loanDetails => {
     calculateHomeLoan(loanDetails);
   };
 
   useEffect(() => {
-    if (calculatedLoanInfo && resultView)  {
-      resultView.current.scrollTo({y:610, animated: true})
+    if (calculatedLoanInfo && resultView) {
+      resultView.current.scrollTo({ y: 610, animated: true })
     }
   }, [calculatedLoanInfo]);
 
@@ -56,7 +56,7 @@ const App = () => {
       );
     }
     setLoanInfo(loanInfo);
-    const {loanAmount, emi, interestRate, prePayment} = loanInfo;
+    const { loanAmount, emi, interestRate, prePayment } = loanInfo;
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail, 'year');
 
@@ -95,7 +95,7 @@ const App = () => {
   const loanComparison = () => {
     var comparisons = [10, 30, 50];
     var loanComparison = [];
-    const {loanAmount, emi, interestRate} = loanInfo;
+    const { loanAmount, emi, interestRate } = loanInfo;
     comparisons.map(compare => {
       const prePayment = (compare / 100) * emi;
       const loanDetail = calcHomeLoan(
@@ -115,27 +115,27 @@ const App = () => {
     setLoanComparison(loanComparison);
   };
 
-  const toggleSidebar =() => {
+  const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   }
- 
+
   return (
     <>
-      <SafeAreaView  style={styles.root}>
-      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
-            <ScrollView
-              ref={resultView}
-              contentInsetAdjustmentBehavior="automatic">
-              <AppBar onHamburgerClick={toggleSidebar} />
-              <LoanForm onFormSubmit={onFormSubmit} />
-              {calculatedLoanInfo ? (
-                <LoanResult
-                  loanInfo={calculatedLoanInfo}
-                  comparison={loanComparisonInfo}
-                  onCompareClick={loanComparison}
-                />
-              ) : null}
-            </ScrollView>
+      <SafeAreaView style={styles.root}>
+        <ScrollView
+          ref={resultView}
+          contentInsetAdjustmentBehavior="automatic">
+          <AppBar onHamburgerClick={toggleSidebar} />
+          <LoanForm onFormSubmit={onFormSubmit} />
+          {calculatedLoanInfo ? (
+            <LoanResult
+              loanInfo={calculatedLoanInfo}
+              comparison={loanComparisonInfo}
+              onCompareClick={loanComparison}
+            />
+          ) : null}
+        </ScrollView>
+        <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
       </SafeAreaView>
     </>
   );
