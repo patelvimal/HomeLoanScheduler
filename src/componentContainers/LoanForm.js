@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import InputSlider from '../components/InputSlider';
-import {Button} from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RupeeIcon from '../components/RupeeIcon';
+import * as Animatable from 'react-native-animatable';
 
 const LoanForm = (props) => {
   const LOAN_AMOUNT_DEFAULT_VALUE = 30;
@@ -41,98 +42,108 @@ const LoanForm = (props) => {
 
   return (
     <View style={styles.root}>
-      <InputSlider
-        label="Loan Amount(In lakhs)"
-        min={0}
-        max={100}
-        step={1}
-        defaultValue={LOAN_AMOUNT_DEFAULT_VALUE}
-        onChange={onChange}
-        name="loanAmount"
-        markers={loanAmountMarker}
-        icon={<RupeeIcon/>}
-      />
-      <InputSlider
-        hide={!loanInfo.calculateEMI}
-        label="Loan Tenure"
-        min={0}
-        max={30}
-        step={1}
-        defaultValue={LOAN_TENURE_DEFAULT_VALUE}
-        onChange={onChange}
-        name="loanTenure"
-        icon={<Text style={styles.yearIcon}>Years</Text>}
-        markers={loanTenureMarker}
-      />
-      <InputSlider
-        label="Interest Rate"
-        min={1}
-        max={20}
-        step={.5}
-        defaultValue={INTEREST_RATE_DEFAULT_VALUE}
-        onChange={onChange}
-        name="interestRate"
-        type="Decimal"
-        icon={<Text style={styles.interestIcon}>%</Text>}
-        markers={intRateMarker}
-      />
-      <InputSlider
-        label="Additional Payment (monthly)"
-        min={0}
-        max={100}
-        step={1}
-        defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
-        onChange={onChange}
-        name="prePayment"
-        icon={<RupeeIcon/>}
-        markers={emiAmountMarker}
-      />
-      <Text style={styles.message}>Along with EMI how much you can additional you can pay towards Loan Repayment</Text>
-      <Button
-        icon={<View style={styles.icon}><Icon name="calculator" size={18} color='#fff' /></View>}
-        title="Submit"
-        buttonStyle={styles.button}
-        titleStyle={styles.buttonTitle}
-        onPress={onSubmit}
-      />
+      <Animatable.View animation="slideInLeft" useNativeDriver={true}>
+        <InputSlider
+          label="Loan Amount(In lakhs)"
+          min={0}
+          max={100} 
+          step={1}
+          defaultValue={LOAN_AMOUNT_DEFAULT_VALUE}
+          onChange={onChange}
+          name="loanAmount"
+          markers={loanAmountMarker}
+          icon={<RupeeIcon />}
+        />
+      </Animatable.View>
+      <Animatable.View animation="slideInRight"  useNativeDriver={true}>
+        <InputSlider
+          hide={!loanInfo.calculateEMI}
+          label="Loan Tenure"
+          min={0}
+          max={30}
+          step={1}
+          defaultValue={LOAN_TENURE_DEFAULT_VALUE}
+          onChange={onChange}
+          name="loanTenure"
+          icon={<Text style={styles.yearIcon}>Years</Text>}
+          markers={loanTenureMarker}
+        />
+      </Animatable.View>
+      <Animatable.View animation="slideInLeft" useNativeDriver={true}>
+        <InputSlider
+          label="Interest Rate"
+          min={1}
+          max={20}
+          step={.5}
+          defaultValue={INTEREST_RATE_DEFAULT_VALUE}
+          onChange={onChange}
+          name="interestRate"
+          type="Decimal"
+          icon={<Text style={styles.interestIcon}>%</Text>}
+          markers={intRateMarker}
+        />
+      </Animatable.View>
+      <Animatable.View animation="slideInRight"  useNativeDriver={true}>
+        <InputSlider
+          label="Additional Payment (monthly)"
+          min={0}
+          max={100}
+          step={1}
+          defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
+          onChange={onChange}
+          name="prePayment"
+          icon={<RupeeIcon />}
+          markers={emiAmountMarker}
+        />
+      </Animatable.View>
+      <Animatable.View animation="slideInUp"  useNativeDriver={true}>
+        <Text style={styles.message}>Along with EMI how much you can additional you can pay towards Loan Repayment</Text>
+        <Button
+          icon={<View style={styles.icon}><Icon name="calculator" size={18} color='#fff' /></View>}
+          title="Submit"
+          buttonStyle={styles.button}
+          titleStyle={styles.buttonTitle}
+          onPress={onSubmit}
+        /></Animatable.View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    marginLeft:10,
-    marginRight:10,
-    borderWidth:1,
-    marginTop:10,
-    borderColor:'#c6c2c2',
-    borderRadius:4,
-    backgroundColor:'#fff',
+    marginLeft: 10,
+    marginRight: 10,
+    borderWidth: 1,
+    marginTop: 10,
+    borderColor: '#c6c2c2',
+    borderRadius: 4,
+    backgroundColor: '#fff',
     elevation: 5,
-    padding:10,
+    padding: 10,
+    marginBottom:20
   },
   button: {
-    margin:30,
-    padding:10,
-    
+    margin: 30,
+    padding: 10,
+    backgroundColor:'darkslateblue'
   },
-  buttonTitle:{
+  buttonTitle: {
     fontSize: 20,
   },
-  icon : {
-    paddingRight:10
+  icon: {
+    paddingRight: 10
   },
   iconSymbol: {
     fontSize: 22,
     marginTop: 6,
     color: 'grey'
   },
-  yearIcon :{
+  yearIcon: {
     fontSize: 14,
     marginTop: 11,
     color: 'grey'
   },
-  interestIcon : {
+  interestIcon: {
     fontSize: 16,
     marginTop: 10,
     color: 'grey'
