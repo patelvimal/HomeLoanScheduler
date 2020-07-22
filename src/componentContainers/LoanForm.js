@@ -90,7 +90,7 @@ const LoanForm = (props) => {
       <Text style={styles.message}>Along with EMI how much you can additional you can pay towards Loan Repayment</Text>
       <Button
         icon={<View style={styles.icon}><Icon name="calculator" size={18} color='#fff' /></View>}
-        title="Calculate"
+        title="Submit"
         buttonStyle={styles.button}
         titleStyle={styles.buttonTitle}
         onPress={onSubmit}
@@ -102,7 +102,14 @@ const LoanForm = (props) => {
 const styles = StyleSheet.create({
   root: {
     marginLeft:10,
-    marginRight:10
+    marginRight:10,
+    borderWidth:1,
+    marginTop:10,
+    borderColor:'#c6c2c2',
+    borderRadius:4,
+    backgroundColor:'#fff',
+    elevation: 5,
+    padding:10,
   },
   button: {
     margin:30,

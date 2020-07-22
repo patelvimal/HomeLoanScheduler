@@ -79,7 +79,7 @@ const InputSlider = props => {
           thumbTintColor="#fff"
           thumbStyle={sliderStyle.thumbStyle}
           maximumTrackTintColor="#64b3ef"
-          minimumTrackTintColor="#209ddb"
+          minimumTrackTintColor="darkslateblue"
         />
         <Marker values={markers} />
       </View>
