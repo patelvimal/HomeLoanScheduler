@@ -8,7 +8,7 @@ const AppTitle = () => {
 const styles = StyleSheet.create({
   title: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 21,
   },
 });
 
