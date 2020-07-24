@@ -40,6 +40,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // flexWrap: 'wrap',
     marginBottom: 15,
+    borderWidth:1,
+    borderTopColor:'#dddddd'
   },
   column: {
     // flex:1,

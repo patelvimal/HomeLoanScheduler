@@ -22,12 +22,14 @@ const SummaryReport = props => {
       </View>
       <ListItem
         title="Total Interest"
+        containerStyle={styles.item}
         rightTitle={interest.addThousandSeperator()}
         rightIcon={<RupeeIcon style={styles.rupeeIcon} />}
         rightTitleStyle={styles.labelValue}
       />
       <ListItem
         title="Total Amount"
+        containerStyle={styles.item}
         rightTitle={total.addThousandSeperator()}
         rightIcon={<RupeeIcon style={styles.rupeeIcon} />}
         rightTitleStyle={styles.labelValue}
@@ -102,5 +104,8 @@ const styles = StyleSheet.create({
     color:'darkmagenta',
     fontWeight:'bold'
   },
+  item:{
+    height:10
+  }
 })
 export default SummaryReport;
