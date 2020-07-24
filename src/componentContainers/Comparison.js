@@ -1,67 +1,92 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { Table, TableWrapper, Row } from 'react-native-table-component';
 import TableLayout from '../components/TableLayout';
 
-const renderRow = row => {
-  return (
-    <View style={{flex: 1, alignSelf: 'stretch', flexDirection: 'row'}}>
-      <View style={{flex: 1, alignSelf: 'stretch'}}>
-        <Text>{row.prePayment}</Text>
-      </View>
-      <View style={{flex: 1, alignSelf: 'stretch'}}>
-        <Text>{row.totalInterest.addThousandSeperator()}</Text>
-      </View>
-      <View style={{flex: 1, alignSelf: 'stretch'}}>
-        <Text>{row.totalAmount.addThousandSeperator()}</Text>
-      </View>
-      <View style={{flex: 1, alignSelf: 'stretch'}}>
-        <Text>{row.completionDate}</Text>
-      </View>
-    </View>
-  );
-};
-
-const RenderHeader = () => {
-  return (
-    <View style={{flexDirection: 'row'}}>
-      <View style={{flex: 1, textAlign: 'center'}}>
-        <Text>Monthly Payment</Text>
-      </View>
-      <View style={{flex: 1, textAlign: 'center'}}>
-        <Text>Total Interest</Text>
-      </View>
-      <View style={{flex: 1}}>
-        <Text>Total Amount</Text>
-      </View>
-      <View style={{flex: 1, textAlign: 'center'}}>
-        <Text>Completion Dates</Text>
-      </View>
-    </View>
-  );
-};
-
 const ComparisonTable = props => {
-  const columns = ['Monthly Payment',"Total Interest",'Total Amount','Completion Date'];
-  const data = props.loanInfo && props.loanInfo.map(row=>([
-    row.prePayment.addThousandSeperator(),
-    row.totalInterest.addThousandSeperator(),
-    row.totalAmount.addThousandSeperator(),
-    row.completionDate]))
+  console.clear();
+  console.log(props.loanInfo);
   return (
-    <TableLayout
-      columns = {columns}
-      data= {data}
-    />
+    <View>
+      {props.loanInfo &&
+        props.loanInfo.map((row, index) => (
+          <View
+            style={styles.row}
+            key={index}>
+              <View style={[styles.column, styles.date]}>
+                <Text style={[styles.dateText, styles.yearText]}>{row.completionYear}</Text>
+                <Text style={[styles.dateText]}>{row.completionMonth}</Text>
+              </View>
+              <View style={[styles.column, styles.payment]}>
+                <Text style={[styles.dateText, styles.paymentLabel]}>Payment</Text>
+                <Text style={[styles.dateText, styles.paymentText]}>{row.prePayment.addThousandSeperator()}</Text>
+              </View>
+              <View style={[styles.column, styles.amount]}>
+                <Text style={[styles.amountText]}>Interest : {row.totalInterest.addThousandSeperator()}</Text>
+                <Text style={[styles.amountText]}>Amount : {row.totalAmount.addThousandSeperator()}</Text>
+              </View>
+          </View>
+        ))}
+    </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 0, paddingTop: 0, backgroundColor: '#fff'},
-  header: {height: 50, backgroundColor: '#fff',flexDirection: 'row' ,borderBottomWidth:1,borderBottomColor:'darkgray'},
-  text: {textAlign: 'center'},
-  dataWrapper: {marginTop: 1},
-  row: {height: 40, backgroundColor: '#E7E6E1',flexDirection: 'row',borderBottomWidth:1,borderBottomColor:'darkgray'},
+  row: {
+    flex: 1,
+    //  alignSelf: 'stretch',
+    flexDirection: 'row',
+    // flexWrap: 'wrap',
+    marginBottom: 15,
+  },
+  column: {
+    // flex:1,
+    borderWidth: 0,
+    height: 85,
+    margin:2,
+    padding:2,
+    justifyContent: 'center',
+    borderRadius:5,
+    backgroundColor:'#fcfbf9',
+    // alignSelf: 'stretch'
+  },
+  date: {
+    // borderWidth:0,
+    width: '20%',
+    height: 85,
+    justifyContent: 'center'
+  },
+  payment: {
+    width: '25%',
+    backgroundColor:'yellow',
+    borderRadius:5
+  },
+  amount: {
+    width: '50%',
+  },
+  dateText: {
+    textAlign: 'center',
+    color: 'grey',
+  },
+  monthText: {
+
+  },
+  yearText: {
+    fontSize: 30,
+    color:'#4d4d4d'
+  },
+  paymentText: {
+    fontSize: 30,
+    fontWeight:'bold',
+    color:'#4f4e4e'
+  },
+  amountText: {
+    fontSize: 17,
+    lineHeight: 30,
+    paddingLeft: 10
+  }
 });
 
 export default ComparisonTable;

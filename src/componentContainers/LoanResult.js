@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
   },
   compareText: {
     borderRadius: 10,
-    padding: 10,
-    fontSize: 15,
+    padding: 0,
+    fontSize: 17,
     textAlign: 'center',
   },
   loanDetail: {

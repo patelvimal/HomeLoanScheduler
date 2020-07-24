@@ -1,8 +1,7 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {ListItem, PricingCard} from 'react-native-elements';
+import { StyleSheet, Text, View } from 'react-native';
+import { ListItem } from 'react-native-elements';
 import RupeeIcon from './RupeeIcon';
-import HighlightedCard from './HighlighedCard';
 
 const SummaryReport = props => {
   const {total, completionDate, principal, interest, emi} = props.data;

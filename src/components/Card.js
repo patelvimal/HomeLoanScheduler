@@ -32,10 +32,10 @@ const style = StyleSheet.create({
   title: {
     textTransform: 'capitalize',
     color: 'grey',
-    paddingTop: 12,
+    paddingTop: 10,
     fontSize: 16,
     fontWeight:'400',
-    textAlign:'left',
+    textAlign:'center',
     letterSpacing:1,
     //marginTop:-14,
     //borderWidth:2,

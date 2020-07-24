@@ -93,7 +93,7 @@ const App = () => {
   };
 
   const loanComparison = () => {
-    var comparisons = [10, 30, 50];
+    var comparisons = [50, 30, 10];
     var loanComparison = [];
     const { loanAmount, emi, interestRate } = loanInfo;
     comparisons.map(compare => {
@@ -105,8 +105,10 @@ const App = () => {
         prePayment,
       );
       var total = getTotal([...loanDetail], loanAmount);
+      var completionDate =  getCompletionDate(loanDetail);
       loanComparison.push({
-        completionDate: getCompletionDate(loanDetail),
+        completionYear: completionDate.split(',')[1],
+        completionMonth: completionDate.split(',')[0],
         totalInterest: total.interest,
         totalAmount: total.total,
         prePayment: prePayment.roundOf(0),
