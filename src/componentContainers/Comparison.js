@@ -4,8 +4,6 @@ import { Table, TableWrapper, Row } from 'react-native-table-component';
 import TableLayout from '../components/TableLayout';
 
 const ComparisonTable = props => {
-  console.clear();
-  console.log(props.loanInfo);
   return (
     <View>
       {props.loanInfo &&
@@ -76,11 +74,11 @@ const styles = StyleSheet.create({
 
   },
   yearText: {
-    fontSize: 30,
+    fontSize: 26,
     color:'#4d4d4d'
   },
   paymentText: {
-    fontSize: 30,
+    fontSize: 26,
     fontWeight:'bold',
     color:'#4f4e4e'
   },

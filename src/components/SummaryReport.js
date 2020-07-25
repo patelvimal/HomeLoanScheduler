@@ -11,7 +11,8 @@ const SummaryReport = props => {
         <Text style={styles.emiLabel}>Monthly EMI</Text>
         <View style={styles.emiValue}>
             <RupeeIcon style={styles.rupeeIconBig}/>
-            <Text style={styles.emiValueText}>{emi.addThousandSeperator()}</Text>
+            {/* <Text style={styles.emiValueText}>{emi.addThousandSeperator()}</Text> */}
+            <Text style={styles.emiValueText}>4,00,000</Text>
         </View>
       </View>
       <View style={styles.completionInfo}>
@@ -52,57 +53,58 @@ const styles = StyleSheet.create({
   },
   rupeeIcon: {
     fontSize: 22,
-    marginTop: 0,
+    marginTop: -12,
     color: 'grey',
   },
   emiLabel: {
-    fontSize: 22,
+    fontSize: 20,
     color:'forestgreen',
-    fontWeight:'bold'
+    fontWeight:'bold',
+    textAlign:'center',
   },
   rupeeIconBig: {
-    fontSize:43,
-    paddingRight:15,
+    fontSize:40,
+    paddingRight:8,
+    paddingTop:0,
     color:'darkmagenta',
   },
   emiValue: {
-    flexDirection:'row',
     alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
+    justifyContent:'center',
+    borderWidth:0,
+    textAlign:'center',
+    flexDirection: 'row', 
   },
   emiValueText : {
-    fontSize:45,
+    borderWidth:0,
+    fontSize:35,
+    width:160,
     color:'darkmagenta',
     fontWeight:'bold'
   },
   emiInfo : {
-    // flexDirection:'row',
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
+    borderWidth:0,
     marginBottom:20,
     backgroundColor: '#ffeb3b8f',
     borderRadius: 10,
     padding:10
   },
   completionLabel: {
-    fontSize: 20,
+    fontSize: 19,
     color:'forestgreen',
-    fontWeight:'bold'
+    fontWeight:'bold',
+    textAlign: 'center',
   },
   completionInfo : {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
     marginBottom:20,
     elevation:0,
     borderWidth:0
   },
   completionValueText : {
-    fontSize:40,
+    fontSize:34,
     color:'darkmagenta',
-    fontWeight:'bold'
+    fontWeight:'bold',
+    textAlign: 'center',
   },
   item:{
     height:10
