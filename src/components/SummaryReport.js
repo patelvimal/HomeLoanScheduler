@@ -2,25 +2,29 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import RupeeIcon from './RupeeIcon';
+import * as Animatable from 'react-native-animatable';
 
 const SummaryReport = props => {
   const {total, completionDate, principal, interest, emi} = props.data;
   return (
     <View>
-      <View style={styles.emiInfo}>
-        <Text style={styles.emiLabel}>Monthly EMI</Text>
-        <View style={styles.emiValue}>
-            <RupeeIcon style={styles.rupeeIconBig}/>
-            {/* <Text style={styles.emiValueText}>{emi.addThousandSeperator()}</Text> */}
-            <Text style={styles.emiValueText}>4,00,000</Text>
+      <Animatable.View animation="slideInDown" useNativeDriver={true}>
+        <View style={styles.emiInfo}>
+          <Text style={styles.emiLabel}>Monthly EMI</Text>
+          <View style={styles.emiValue}>
+              <RupeeIcon style={styles.rupeeIconBig}/>
+              <Text style={styles.emiValueText}>{emi.addThousandSeperator()}</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.completionInfo}>
-        <Text style={styles.completionLabel}>Completion Date</Text>
-        <View style={styles.completionValue}>
-            <Text style={styles.completionValueText}>{completionDate}</Text>
+      </Animatable.View>
+      <Animatable.View animation="slideInUp"  useNativeDriver={true}>
+        <View style={styles.completionInfo}>
+          <Text style={styles.completionLabel}>Completion Date</Text>
+          <View style={styles.completionValue}>
+              <Text style={styles.completionValueText}>{completionDate}</Text>
+          </View>
         </View>
-      </View>
+      </Animatable.View>
       <ListItem
         title="Total Interest"
         containerStyle={styles.item}

@@ -12,7 +12,7 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
     
     //emi = Math.floor(emi);
     //emi = emi.roundOf(2);
-    console.log(emi);
+    //console.log(emi);
     var totalInt = 0;
     while( 0 < loanBalance ) {
         //var monthlyInterest =  Math.floor((loanBalance * ((interestRate / 100) / 12)));
@@ -34,7 +34,7 @@ export const calcHomeLoan = (loanAmount,emi,interestRate,prepayment) => {
         currentMonth.setMonth(currentMonth.getMonth() + 2, 0);
     }
     //console.table(result);
-    console.log(totalInt);
+    //console.log(totalInt);
     return result;
 };
 
@@ -91,7 +91,7 @@ export const calculateEMI = (loanAmount,interestRate,numberOfMonths)=> {
     const bottom = top - 1;
     const sp = top / bottom;
     const emi = ((loanAmount * monthlyInterestRatio) * sp);
-    console.log(emi);
+   // console.log(emi);
     return emi.roundOf(2);
 }
 Number.prototype.roundOf = function (decimals) {
