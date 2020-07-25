@@ -2,28 +2,31 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Table, TableWrapper, Row } from 'react-native-table-component';
 import TableLayout from '../components/TableLayout';
+import * as Animatable from 'react-native-animatable';
 
 const ComparisonTable = props => {
   return (
     <View>
       {props.loanInfo &&
         props.loanInfo.map((row, index) => (
-          <View
-            style={styles.row}
-            key={index}>
-              <View style={[styles.column, styles.date]}>
-                <Text style={[styles.dateText, styles.yearText]}>{row.completionYear}</Text>
-                <Text style={[styles.dateText]}>{row.completionMonth}</Text>
-              </View>
-              <View style={[styles.column, styles.payment]}>
-                <Text style={[styles.dateText, styles.paymentLabel]}>Payment</Text>
-                <Text style={[styles.dateText, styles.paymentText]}>{row.prePayment.addThousandSeperator()}</Text>
-              </View>
-              <View style={[styles.column, styles.amount]}>
-                <Text style={[styles.amountText]}>Interest : {row.totalInterest.addThousandSeperator()}</Text>
-                <Text style={[styles.amountText]}>Amount : {row.totalAmount.addThousandSeperator()}</Text>
-              </View>
-          </View>
+          <Animatable.View animation="slideInDown"  useNativeDriver={true}>
+            <View
+              style={styles.row}
+              key={index}>
+                <View style={[styles.column, styles.date]}>
+                  <Text style={[styles.dateText, styles.yearText]}>{row.completionYear}</Text>
+                  <Text style={[styles.dateText]}>{row.completionMonth}</Text>
+                </View>
+                <View style={[styles.column, styles.payment]}>
+                  <Text style={[styles.dateText, styles.paymentLabel]}>Payment</Text>
+                  <Text style={[styles.dateText, styles.paymentText]}>{row.prePayment.addThousandSeperator()}</Text>
+                </View>
+                <View style={[styles.column, styles.amount]}>
+                  <Text style={[styles.amountText]}>Interest : {row.totalInterest.addThousandSeperator()}</Text>
+                  <Text style={[styles.amountText]}>Amount : {row.totalAmount.addThousandSeperator()}</Text>
+                </View>
+            </View>
+          </Animatable.View>
         ))}
     </View>
   );
