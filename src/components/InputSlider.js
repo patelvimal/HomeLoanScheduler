@@ -6,9 +6,9 @@ import RupeeIcon from './RupeeIcon';
 import { useEffect } from 'react';
 
 const InputSlider = props => {
-  const {min, max, step, defaultValue, markers, name} = props;
-  const [value, setValue] = React.useState(defaultValue || 0);
-  const [sliderValue, setSliderValue] = React.useState(defaultValue || 0);
+  const {min, max, step, value, markers, name} = props;
+  const [inputValue, setValue] = React.useState(value || 0);
+  const [sliderValue, setSliderValue] = React.useState(value || 0);
   const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
   const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
   const regex = props.type == 'Decimal' ? decimalRegex : integerRegex;
@@ -21,13 +21,21 @@ const InputSlider = props => {
   };
   
   useEffect(() => {
-    const newVal=isNumber(value) ? value : 0;
+    const newVal=isNumber(inputValue) ? inputValue : 0;
     setSliderValue(Number(newVal));
+  }, [inputValue])
+
+  
+  useEffect(() => {
+    const newVal=isNumber(value) ? value : 0;
+    setValue(newVal);
+    //setSliderValue(Number(newVal));
   }, [value])
 
+
   const onBlur = ()=>{
-    if (value === '' || (regex.test(value) && (value >= min && value <= max))) {
-        const newValue = value === '' ? min : Number(value);
+    if (inputValue === '' || (regex.test(inputValue) && (inputValue >= min && inputValue <= max))) {
+        const newValue = inputValue === '' ? min : Number(inputValue);
         updateValue(newValue);
     }
     else {
@@ -58,7 +66,7 @@ const InputSlider = props => {
         <View style={styles.inputContainer}>
           {props.icon}
           <Input
-            value={String(value)}
+            value={String(inputValue)}
             placeholder=""
             keyboardType="numeric"
             onBlur={onBlur}
@@ -80,6 +88,7 @@ const InputSlider = props => {
           thumbStyle={sliderStyle.thumbStyle}
           maximumTrackTintColor="#64b3ef"
           minimumTrackTintColor="darkslateblue"
+          animateTransitions={true}
         />
         <Marker values={markers} />
       </View>

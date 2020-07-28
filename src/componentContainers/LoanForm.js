@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import InputSlider from '../components/InputSlider';
-import { Button } from 'react-native-elements';
+import { Button, ButtonGroup } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RupeeIcon from '../components/RupeeIcon';
 import * as Animatable from 'react-native-animatable';
@@ -15,13 +15,14 @@ const LoanForm = (props) => {
 
   const INITIAL_STATE = {
     loanAmount: LOAN_AMOUNT_DEFAULT_VALUE,
-    emi: MONTHLY_EMI_DEFAULT_VALUE,
+    emiAmount: MONTHLY_EMI_DEFAULT_VALUE,
     interestRate: INTEREST_RATE_DEFAULT_VALUE,
     prePayment: MONTHLY_PREPAYMENT_DEFAULT_VALUE,
     loanTenure: LOAN_TENURE_DEFAULT_VALUE,
     calculateEMI: true,
   };
   const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
+  const [selectedLoanType, setLoanType] = useState(0);
   const loanAmountMarker = generateMarker('L');
   const emiAmountMarker = generateMarker('K');
   const intRateMarker = generateMarker('%', 20, 2);
@@ -40,42 +41,71 @@ const LoanForm = (props) => {
     }
   };
 
+  const updateLoanType = selectedIndex => {
+    setLoanType(selectedIndex);
+  }
+
   return (
     <View style={styles.root}>
+      <Animatable.View animation="slideInDown" useNativeDriver={true}>
+        <ButtonGroup
+        onPress={updateLoanType}
+        selectedIndex={selectedLoanType}
+        buttons={["New Loan","Existing Loan"]}
+        selectedButtonStyle={styles.selectedGroupButton}
+        containerStyle={styles.buttonGroupContainer}
+        textStyle= {styles.buttonGroupTextStyle}
+        />
+      </Animatable.View>
       <Animatable.View animation="slideInLeft" useNativeDriver={true}>
         <InputSlider
-          label="Loan Amount(In lakhs)"
+          label= { selectedLoanType == 0 ? "Loan Amount(In lakhs)" : "Outstanding Loan(In lakhs)"}
           min={0}
           max={100} 
           step={1}
-          defaultValue={LOAN_AMOUNT_DEFAULT_VALUE}
+          value={LOAN_AMOUNT_DEFAULT_VALUE}
           onChange={onChange}
           name="loanAmount"
           markers={loanAmountMarker}
           icon={<RupeeIcon />}
         />
       </Animatable.View>
-      <Animatable.View animation="slideInRight"  useNativeDriver={true}>
-        <InputSlider
-          hide={!loanInfo.calculateEMI}
-          label="Loan Tenure"
-          min={0}
-          max={30}
-          step={1}
-          defaultValue={LOAN_TENURE_DEFAULT_VALUE}
-          onChange={onChange}
-          name="loanTenure"
-          icon={<Text style={styles.yearIcon}>Years</Text>}
-          markers={loanTenureMarker}
-        />
-      </Animatable.View>
+      {
+        selectedLoanType === 0 ?
+          <Animatable.View animation="slideInRight" useNativeDriver={true}>
+            <InputSlider
+              label="Loan Tenure"
+              min={0}
+              max={30}
+              step={1}
+              value={LOAN_TENURE_DEFAULT_VALUE}
+              onChange={onChange}
+              name="loanTenure"
+              icon={<Text style={styles.yearIcon}>Years</Text>}
+              markers={loanTenureMarker}
+            />
+          </Animatable.View> :
+          <Animatable.View animation="slideInRight" useNativeDriver={true}>
+            <InputSlider
+              label="EMI Amount"
+              min={0}
+              max={100}
+              step={1}
+              value={MONTHLY_EMI_DEFAULT_VALUE}
+              onChange={onChange}
+              name="emiAmount"
+              icon={<RupeeIcon />}
+              markers={emiAmountMarker}
+            />
+          </Animatable.View>
+      }
       <Animatable.View animation="slideInLeft" useNativeDriver={true}>
         <InputSlider
           label="Interest Rate"
           min={1}
           max={20}
           step={.5}
-          defaultValue={INTEREST_RATE_DEFAULT_VALUE}
+          value={INTEREST_RATE_DEFAULT_VALUE}
           onChange={onChange}
           name="interestRate"
           type="Decimal"
@@ -89,7 +119,7 @@ const LoanForm = (props) => {
           min={0}
           max={100}
           step={1}
-          defaultValue={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
+          value={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
           onChange={onChange}
           name="prePayment"
           icon={<RupeeIcon />}
@@ -126,6 +156,17 @@ const styles = StyleSheet.create({
     margin: 30,
     padding: 10,
     backgroundColor:'darkslateblue'
+  },
+  buttonGroupContainer: {
+    height:50,
+    marginBottom:10,
+    borderRadius:8
+  },
+  buttonGroupTextStyle: {
+    fontSize: 18,
+  },
+  selectedGroupButton: {
+    backgroundColor:'green',
   },
   buttonTitle: {
     fontSize: 20,
