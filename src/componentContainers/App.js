@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   },
   buttonGroupContainer: {
     height:50,
+    marginTop:15,
     marginBottom:10,
     borderRadius:8
   },

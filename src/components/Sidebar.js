@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions, Linking, Alert} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Linking, Alert, Image} from 'react-native';
 import {Overlay, Button} from 'react-native-elements';
 import AppTitle from './AppTitle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -31,6 +31,10 @@ const Sidebar = ({isOpen,onClose}) => {
               <AppTitle />
               <Text style={style.version}>v1.0.0</Text>
             </View>
+            <Image 
+              source={require('../assets/appLogo.png')}  
+              style={style.logo} 
+            />
             <View style={style.container}>
               <Button
                 icon={<View style={style.icon}><Icon name="share" size={18} color='#fff' /></View>}
@@ -66,7 +70,12 @@ const style = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     paddingTop: 20,
-    
+  },
+  logo: {
+    width:200,
+    height:200,
+    flexDirection:'row',
+    justifyContent:'center'
   },
   overlay: {
     position: 'absolute',
@@ -89,10 +98,11 @@ const style = StyleSheet.create({
     zIndex:1
   },
   header: {
-    backgroundColor: 'darkslateblue',
+    backgroundColor: 'darkgreen',
+    color:'black',
     justifyContent: 'center',
     alignItems: 'center',
-    height: height * .4
+    height: height * .15
   },
   version: {
     color: '#fff',
@@ -104,10 +114,11 @@ const style = StyleSheet.create({
     marginBottom: 20,
   },
   buttonStyle: {
-    margin: 10
+    margin: 10,
+    backgroundColor:'darkslateblue'
   },
   buttonContainer : {
-    color:'blue'
+    color:'yellow'
   },
   icon : {
     paddingRight:10
