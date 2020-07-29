@@ -5,20 +5,24 @@ import RupeeIcon from './RupeeIcon';
 import * as Animatable from 'react-native-animatable';
 
 const SummaryReport = props => {
-  const {total, completionDate, principal, interest, emi} = props.data;
+  const {total, completionDate, principal, interest, emi,loanType} = props.data;
   return (
     <View>
       <Animatable.View animation="slideInDown" useNativeDriver={true}>
-        <View style={styles.emiInfo}>
-          <Text style={styles.emiLabel}>Monthly EMI</Text>
-          <View style={styles.emiValue}>
-              <RupeeIcon style={styles.rupeeIconBig}/>
-              <Text style={styles.emiValueText}>{emi.addThousandSeperator()}</Text>
-          </View>
-        </View>
+        {
+          loanType == 0 ? 
+            <View style={styles.emiInfo}>
+              <Text style={styles.emiLabel}>Monthly EMI</Text>
+              <View style={styles.emiValue}>
+                <RupeeIcon style={styles.rupeeIconBig} />
+                <Text style={styles.emiValueText}>{emi.addThousandSeperator()}</Text>
+              </View>
+            </View>
+          : null
+        }
       </Animatable.View>
       <Animatable.View animation="slideInUp"  useNativeDriver={true}>
-        <View style={styles.completionInfo}>
+        <View style={ loanType == 1 ? styles.emiInfo : styles.completionInfo}>
           <Text style={styles.completionLabel}>Completion Date</Text>
           <View style={styles.completionValue}>
               <Text style={styles.completionValueText}>{completionDate}</Text>
@@ -111,6 +115,7 @@ const styles = StyleSheet.create({
   },
   item:{
     height:10
-  }
+  },
+  
 })
 export default SummaryReport;

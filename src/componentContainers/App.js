@@ -84,6 +84,7 @@ const App = () => {
     if (total) {
       total.completionDate = getCompletionDate(loanDetail);
       total.emi = loanInfo.emi.roundOf(0);
+      total.loanType = selectedLoanType;
     }
 
     setLoanCalculation({
@@ -125,7 +126,7 @@ const App = () => {
   const updateLoanType = selectedIndex => {
     setLoanType(selectedIndex);
   }
-  
+
   return (
     <>
       <SafeAreaView style={styles.root}>
