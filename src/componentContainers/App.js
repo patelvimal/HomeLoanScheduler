@@ -125,6 +125,7 @@ const App = () => {
   
   const updateLoanType = selectedIndex => {
     setLoanType(selectedIndex);
+    setLoanCalculation(null);
   }
 
   return (

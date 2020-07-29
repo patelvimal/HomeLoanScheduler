@@ -24,10 +24,18 @@ const LoanForm = (props) => {
   };
   const ANIMATION_DURATION = 500;
   const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
-  const loanAmountMarker = generateMarker('L');
-  const emiAmountMarker = generateMarker('K');
-  const intRateMarker = generateMarker('%', 20, 2);
-  const loanTenureMarker = generateMarker('', 30, 2);
+
+  const loanAmountConfig = { min: 5, max: 100, step: 1 };
+  const loanTenureConfig = { min: 5, max: 30, step: 1 };
+  const interestRateConfig = { min: 5, max: 20, step: .5 };
+  const emiConfig = { min: 10, max: 100, step: 1 };
+  const prePaymentConfig ={ min: 0, max: 100, step: 1 };
+
+  const loanAmountMarker = generateMarker('L', loanAmountConfig.min, loanAmountConfig.max);
+  const emiAmountMarker = generateMarker('K', emiConfig.min, emiConfig.max);
+  const intRateMarker = generateMarker('%', interestRateConfig.min,interestRateConfig.max, 2);
+  const loanTenureMarker = generateMarker('y', loanTenureConfig.min,loanTenureConfig.max, 2);
+  const prePaymentMarker = generateMarker('K', emiConfig.min, emiConfig.max);
 
   const onChange = (name, newValue) => {
     setLoanInfo(prevState => ({
@@ -51,9 +59,9 @@ const LoanForm = (props) => {
       <Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
         <InputSlider
           label= { selectedLoanType == 0 ? "Loan Amount(In lakhs)" : "Outstanding Loan(In lakhs)"}
-          min={0}
-          max={100} 
-          step={1}
+          min={loanAmountConfig.min}
+          max={loanAmountConfig.max}
+          step={loanAmountConfig.step}
           value={LOAN_AMOUNT_DEFAULT_VALUE}
           onChange={onChange}
           name="loanAmount"
@@ -66,9 +74,9 @@ const LoanForm = (props) => {
           <Animatable.View animation="slideInRight" useNativeDriver={true} duration={ANIMATION_DURATION}>
             <InputSlider
               label="Loan Tenure"
-              min={0}
-              max={30}
-              step={1}
+              min={loanTenureConfig.min}
+              max={loanTenureConfig.max}
+              step={loanTenureConfig.step}
               value={LOAN_TENURE_DEFAULT_VALUE}
               onChange={onChange}
               name="loanTenure"
@@ -79,9 +87,9 @@ const LoanForm = (props) => {
           <Animatable.View animation="slideInRight" useNativeDriver={true} duration={ANIMATION_DURATION}>
             <InputSlider
               label="EMI Amount"
-              min={0}
-              max={100}
-              step={1}
+              min={emiConfig.min}
+              max={emiConfig.max}
+              step={emiConfig.step}
               value={MONTHLY_EMI_DEFAULT_VALUE}
               onChange={onChange}
               name="emi"
@@ -93,9 +101,9 @@ const LoanForm = (props) => {
       <Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
         <InputSlider
           label="Interest Rate"
-          min={1}
-          max={20}
-          step={.5}
+          min={interestRateConfig.min}
+          max={interestRateConfig.max}
+          step={interestRateConfig.step}
           value={INTEREST_RATE_DEFAULT_VALUE}
           onChange={onChange}
           name="interestRate"
@@ -107,14 +115,14 @@ const LoanForm = (props) => {
       <Animatable.View animation="slideInRight"  useNativeDriver={true} duration={ANIMATION_DURATION}>
         <InputSlider
           label="Additional Payment (monthly)"
-          min={0}
-          max={100}
-          step={1}
+          min={prePaymentConfig.min}
+          max={prePaymentConfig.max}
+          step={prePaymentConfig.step}
           value={MONTHLY_PREPAYMENT_DEFAULT_VALUE}
           onChange={onChange}
           name="prePayment"
           icon={<RupeeIcon />}
-          markers={emiAmountMarker}
+          markers={prePaymentMarker}
         />
       </Animatable.View>
       <Animatable.View animation="slideInUp"  useNativeDriver={true} duration={ANIMATION_DURATION}> 
@@ -188,11 +196,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const generateMarker = (suffix, maxValue, stepSize) => {
+const generateMarker = (suffix, minValue, maxValue, stepSize) => {
   var list = [];
   maxValue = maxValue || 100;
   stepSize = stepSize || 10;
-  for (var i = 0; i <= maxValue; i += stepSize) {
+  minValue = minValue || 0;
+  for (var i = minValue; i <= maxValue; i += stepSize) {
     list.push({
       value: i,
       label: i !== 0 ? `${i}${suffix}` : 0,
