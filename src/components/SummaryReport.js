@@ -76,13 +76,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
     borderWidth:0,
-    textAlign:'center',
     flexDirection: 'row', 
   },
   emiValueText : {
     borderWidth:0,
     fontSize:35,
-    width:160,
+    //width:160,
     color:'darkmagenta',
     fontWeight:'bold'
   },
