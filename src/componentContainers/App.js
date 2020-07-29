@@ -25,7 +25,7 @@ import AppBar from './Header';
 import LoanForm from './LoanForm';
 import LoanResult from './LoanResult';
 import Sidebar from '../components/Sidebar';
-import { Button } from 'react-native-elements';
+import { Button, ButtonGroup } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const App = () => {
@@ -33,6 +33,7 @@ const App = () => {
   const [calculatedLoanInfo, setLoanCalculation] = useState(null);
   const [loanComparisonInfo, setLoanComparison] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [selectedLoanType, setLoanType] = useState(0);
 
   const resultView = useRef(null);
 
@@ -120,7 +121,11 @@ const App = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   }
-
+  
+  const updateLoanType = selectedIndex => {
+    setLoanType(selectedIndex);
+  }
+  
   return (
     <>
       <SafeAreaView style={styles.root}>
@@ -128,7 +133,15 @@ const App = () => {
           ref={resultView}
           contentInsetAdjustmentBehavior="automatic">
           <AppBar onHamburgerClick={toggleSidebar} />
-          <LoanForm onFormSubmit={onFormSubmit} />
+          <ButtonGroup
+            onPress={updateLoanType}
+            selectedIndex={selectedLoanType}
+            buttons={["New Loan", "Existing Loan"]}
+            selectedButtonStyle={styles.selectedGroupButton}
+            containerStyle={styles.buttonGroupContainer}
+            textStyle={styles.buttonGroupTextStyle}
+          />
+          <LoanForm key={selectedLoanType} onFormSubmit={onFormSubmit} loanType={selectedLoanType}/>
           {calculatedLoanInfo ? (
             <LoanResult
               loanInfo={calculatedLoanInfo}
@@ -147,6 +160,17 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor:'#f9fcef'
+  },
+  buttonGroupContainer: {
+    height:50,
+    marginBottom:10,
+    borderRadius:8
+  },
+  buttonGroupTextStyle: {
+    fontSize: 18,
+  },
+  selectedGroupButton: {
+    backgroundColor:'green',
   },
 });
 export default App;

@@ -7,6 +7,7 @@ import RupeeIcon from '../components/RupeeIcon';
 import * as Animatable from 'react-native-animatable';
 
 const LoanForm = (props) => {
+  const selectedLoanType = props.loanType;
   const LOAN_AMOUNT_DEFAULT_VALUE = 30;
   const MONTHLY_EMI_DEFAULT_VALUE = 50;
   const INTEREST_RATE_DEFAULT_VALUE = 9;
@@ -15,14 +16,14 @@ const LoanForm = (props) => {
 
   const INITIAL_STATE = {
     loanAmount: LOAN_AMOUNT_DEFAULT_VALUE,
-    emiAmount: MONTHLY_EMI_DEFAULT_VALUE,
+    emi: MONTHLY_EMI_DEFAULT_VALUE,
     interestRate: INTEREST_RATE_DEFAULT_VALUE,
     prePayment: MONTHLY_PREPAYMENT_DEFAULT_VALUE,
     loanTenure: LOAN_TENURE_DEFAULT_VALUE,
-    calculateEMI: true,
+    calculateEMI: selectedLoanType == 0 ? true : false,
   };
+  const ANIMATION_DURATION = 500;
   const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
-  const [selectedLoanType, setLoanType] = useState(0);
   const loanAmountMarker = generateMarker('L');
   const emiAmountMarker = generateMarker('K');
   const intRateMarker = generateMarker('%', 20, 2);
@@ -47,17 +48,7 @@ const LoanForm = (props) => {
 
   return (
     <View style={styles.root}>
-      <Animatable.View animation="slideInDown" useNativeDriver={true}>
-        <ButtonGroup
-        onPress={updateLoanType}
-        selectedIndex={selectedLoanType}
-        buttons={["New Loan","Existing Loan"]}
-        selectedButtonStyle={styles.selectedGroupButton}
-        containerStyle={styles.buttonGroupContainer}
-        textStyle= {styles.buttonGroupTextStyle}
-        />
-      </Animatable.View>
-      <Animatable.View animation="slideInLeft" useNativeDriver={true}>
+      <Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
         <InputSlider
           label= { selectedLoanType == 0 ? "Loan Amount(In lakhs)" : "Outstanding Loan(In lakhs)"}
           min={0}
@@ -72,7 +63,7 @@ const LoanForm = (props) => {
       </Animatable.View>
       {
         selectedLoanType === 0 ?
-          <Animatable.View animation="slideInRight" useNativeDriver={true}>
+          <Animatable.View animation="slideInRight" useNativeDriver={true} duration={ANIMATION_DURATION}>
             <InputSlider
               label="Loan Tenure"
               min={0}
@@ -85,7 +76,7 @@ const LoanForm = (props) => {
               markers={loanTenureMarker}
             />
           </Animatable.View> :
-          <Animatable.View animation="slideInRight" useNativeDriver={true}>
+          <Animatable.View animation="slideInRight" useNativeDriver={true} duration={ANIMATION_DURATION}>
             <InputSlider
               label="EMI Amount"
               min={0}
@@ -93,13 +84,13 @@ const LoanForm = (props) => {
               step={1}
               value={MONTHLY_EMI_DEFAULT_VALUE}
               onChange={onChange}
-              name="emiAmount"
+              name="emi"
               icon={<RupeeIcon />}
               markers={emiAmountMarker}
             />
           </Animatable.View>
       }
-      <Animatable.View animation="slideInLeft" useNativeDriver={true}>
+      <Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
         <InputSlider
           label="Interest Rate"
           min={1}
@@ -113,7 +104,7 @@ const LoanForm = (props) => {
           markers={intRateMarker}
         />
       </Animatable.View>
-      <Animatable.View animation="slideInRight"  useNativeDriver={true}>
+      <Animatable.View animation="slideInRight"  useNativeDriver={true} duration={ANIMATION_DURATION}>
         <InputSlider
           label="Additional Payment (monthly)"
           min={0}
@@ -126,7 +117,7 @@ const LoanForm = (props) => {
           markers={emiAmountMarker}
         />
       </Animatable.View>
-      <Animatable.View animation="slideInUp"  useNativeDriver={true}>
+      <Animatable.View animation="slideInUp"  useNativeDriver={true} duration={ANIMATION_DURATION}> 
         <Text style={styles.message}>Along with EMI how much you can additional you can pay towards Loan Repayment</Text>
         <Button
           icon={<View style={styles.icon}><Icon name="calculator" size={18} color='#fff' /></View>}
