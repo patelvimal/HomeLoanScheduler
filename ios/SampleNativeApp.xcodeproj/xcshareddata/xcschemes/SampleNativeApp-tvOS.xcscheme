@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "SampleNativeApp-tvOS.app"
-               BlueprintName = "SampleNativeApp-tvOS"
-               ReferencedContainer = "container:SampleNativeApp.xcodeproj">
+               BuildableName = "HomeLoanScheduler-tvOS.app"
+               BlueprintName = "HomeLoanScheduler-tvOS"
+               ReferencedContainer = "container:HomeLoanScheduler.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "SampleNativeApp-tvOSTests.xctest"
-               BlueprintName = "SampleNativeApp-tvOSTests"
-               ReferencedContainer = "container:SampleNativeApp.xcodeproj">
+               BuildableName = "HomeLoanScheduler-tvOSTests.xctest"
+               BlueprintName = "HomeLoanScheduler-tvOSTests"
+               ReferencedContainer = "container:HomeLoanScheduler.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "SampleNativeApp-tvOS.app"
-            BlueprintName = "SampleNativeApp-tvOS"
-            ReferencedContainer = "container:SampleNativeApp.xcodeproj">
+            BuildableName = "HomeLoanScheduler-tvOS.app"
+            BlueprintName = "HomeLoanScheduler-tvOS"
+            ReferencedContainer = "container:HomeLoanScheduler.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "SampleNativeApp-tvOS.app"
-            BlueprintName = "SampleNativeApp-tvOS"
-            ReferencedContainer = "container:SampleNativeApp.xcodeproj">
+            BuildableName = "HomeLoanScheduler-tvOS.app"
+            BlueprintName = "HomeLoanScheduler-tvOS"
+            ReferencedContainer = "container:HomeLoanScheduler.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
