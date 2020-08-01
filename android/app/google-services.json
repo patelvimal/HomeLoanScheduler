@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "309739477373",
+    "firebase_url": "https://home-loan-scheduler.firebaseio.com",
+    "project_id": "home-loan-scheduler",
+    "storage_bucket": "home-loan-scheduler.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309739477373:android:515119ced4802f230c5414",
+        "android_client_info": {
+          "package_name": "com.homeloanscheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309739477373-9c443jmkp4bscdu4uovm6t2cfjoujg5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsEcbXy3QUKTI7hrS1108Kf6z_uEtItGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309739477373-9c443jmkp4bscdu4uovm6t2cfjoujg5f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

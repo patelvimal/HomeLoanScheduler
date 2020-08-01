@@ -1,6 +1,7 @@
 {
     "react-native": {
         "admob_android_app_id": "ca-app-pub-4524015669776883~2391516667",
-        "admob_ios_app_id": "ca-app-pub-4524015669776883~2391516667"
+        "admob_ios_app_id": "ca-app-pub-4524015669776883~2391516667",
+        "database_persistence_enabled": true
     }
 }

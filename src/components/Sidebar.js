@@ -1,23 +1,33 @@
-import React from 'react';
-import {View, Text, StyleSheet, Dimensions, Linking, Alert, Image} from 'react-native';
-import {Overlay, Button} from 'react-native-elements';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Dimensions, Linking, Alert, Image } from 'react-native';
+import { Overlay, Button } from 'react-native-elements';
 import AppTitle from './AppTitle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import FeedbackForm from './feedback';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-const Sidebar = ({isOpen,onClose}) => {
-  const playStoreLink = 'market://details?id=com.whatsapp';
-  const whatsAppLink='https://api.whatsapp.com/send?text=https://home-loan-calculator.netlify.app/"'
+const Sidebar = ({ isOpen, onClose }) => {
+  const playStoreLink = 'market://details?id=com.homeloanscheduler';
+  const whatsAppLink = 'https://api.whatsapp.com/send?text="market://details?id=com.homeloanscheduler"'
 
-  const onShareClick=()=>{
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+
+  const onShareClick = () => {
     Linking.openURL(whatsAppLink);
   }
 
-  const onRateUsClick=()=>{
+  const onRateUsClick = () => {
     Linking.openURL(playStoreLink);
   }
-  
+
+  const onFeedbackClick = () => {
+    setShowFeedbackForm(true);
+  }
+  const onFormClosed = () => {
+    setShowFeedbackForm(false);
+  }
+
   return (
     <React.Fragment>
       {isOpen ? (
@@ -31,11 +41,17 @@ const Sidebar = ({isOpen,onClose}) => {
               <AppTitle />
               <Text style={style.version}>v1.0.0</Text>
             </View>
-            <Image 
-              source={require('../assets/appLogo.png')}  
-              style={style.logo} 
+            <Image
+              source={require('../assets/appLogo.png')}
+              style={style.logo}
             />
             <View style={style.container}>
+            <Button
+                icon={<View style={style.icon}><Icon name="feedback" size={15} color='#fff' /></View>}
+                title="Feedback"
+                buttonStyle={style.buttonStyle}
+                onPress={onFeedbackClick}
+              />
               <Button
                 icon={<View style={style.icon}><Icon name="share" size={18} color='#fff' /></View>}
                 title="Share"
@@ -49,13 +65,11 @@ const Sidebar = ({isOpen,onClose}) => {
                 iconContainerStyle={style.icon}
                 onPress={onRateUsClick}
               />
-               {/* <Button
-                icon={<Icon name="menu" size={15} />}
-                title="Feedback"
-                buttonStyle={style.buttonStyle}
-                onPress={onRateUsClick}
-              /> */}
+           
             </View>
+            {
+              showFeedbackForm && <FeedbackForm onClose={onFormClosed}></FeedbackForm>
+            }
           </View>
         </>
       ) : null}
@@ -72,10 +86,10 @@ const style = StyleSheet.create({
     paddingTop: 20,
   },
   logo: {
-    width:200,
-    height:200,
-    flexDirection:'row',
-    justifyContent:'center'
+    width: 200,
+    height: 200,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   overlay: {
     position: 'absolute',
@@ -84,7 +98,7 @@ const style = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'rgba(0,0,0,0.7)',
-    zIndex:1
+    zIndex: 1
   },
   root: {
     flex: 1,
@@ -95,11 +109,11 @@ const style = StyleSheet.create({
     top: 0,
     width: width * 0.7,
     height: height,
-    zIndex:1
+    zIndex: 1
   },
   header: {
-    backgroundColor: 'darkgreen',
-    color:'black',
+    backgroundColor: 'darkslategrey',
+    color: 'black',
     justifyContent: 'center',
     alignItems: 'center',
     height: height * .15
@@ -115,13 +129,13 @@ const style = StyleSheet.create({
   },
   buttonStyle: {
     margin: 10,
-    backgroundColor:'darkslateblue'
+    backgroundColor: 'darkslateblue'
   },
-  buttonContainer : {
-    color:'yellow'
+  buttonContainer: {
+    color: 'yellow'
   },
-  icon : {
-    paddingRight:10
+  icon: {
+    paddingRight: 10
   }
 });
 export default Sidebar;
