@@ -56,10 +56,10 @@ const FeedbackForm = (props) => {
         <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
             <View>
                 <Header
-                    centerComponent={{ text: 'Share Your Feedback', style: { fontSize: 20 } }}
+                    centerComponent={{ text: 'Share Your Feedback', style: { fontSize: 20,fontWeight:'bold' } }}
                     rightComponent={<Icon name="close" size={30} onPress={toggleOverlay}/>}
                     containerStyle={{
-                        backgroundColor: '#fff',
+                        backgroundColor: '#add8e6',
                         height: 50,
                         paddingTop: 0
                     }}

@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   selectedGroupButton: {
-    backgroundColor:'green',
+    backgroundColor:'#4b0082',
   },
 });
 export default App;
