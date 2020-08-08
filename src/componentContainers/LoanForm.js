@@ -126,7 +126,7 @@ const LoanForm = (props) => {
         />
       </Animatable.View>
       <Animatable.View animation="slideInUp"  useNativeDriver={true} duration={ANIMATION_DURATION}> 
-        <Text style={styles.message}>Along with EMI how much you can additional you can pay towards Loan Repayment</Text>
+        <Text style={styles.message}>Along with EMI how much additional amount (per month) you can pay towards Loan Repayment</Text>
         <Button
           icon={<View style={styles.icon}><Icon name="calculator" size={18} color='#fff' /></View>}
           title="Submit"
