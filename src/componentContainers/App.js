@@ -33,7 +33,7 @@ const App = () => {
   const [calculatedLoanInfo, setLoanCalculation] = useState(null);
   const [loanComparisonInfo, setLoanComparison] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [selectedLoanType, setLoanType] = useState(0);
+  const [selectedLoanType, setLoanType] = useState(1);
 
   const resultView = useRef(null);
 
@@ -48,7 +48,9 @@ const App = () => {
   }, [calculatedLoanInfo]);
 
   const calculateHomeLoan = loanDetails => {
-    var loanInfo = convertToLongNumber(loanDetails);
+    //var loanInfo = selectedLoanType == 0 ? convertToLongNumber(loanDetails) : loanDetails;
+    var loanInfo = loanDetails;
+
     if (loanDetails.calculateEMI) {
       loanInfo.emi = calculateEMI(
         loanInfo.loanAmount,
@@ -57,6 +59,7 @@ const App = () => {
       );
     }
     setLoanInfo(loanInfo);
+
     const { loanAmount, emi, interestRate, prePayment } = loanInfo;
     const loanDetail = calcHomeLoan(loanAmount, emi, interestRate, prePayment);
     const loanSummary = getSummary(loanDetail, 'year');

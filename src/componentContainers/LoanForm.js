@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import InputSlider from '../components/InputSlider';
+import InputSliderExtended from '../components/InputSliderExtended';
 import { Button, ButtonGroup } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RupeeIcon from '../components/RupeeIcon';
@@ -8,9 +8,9 @@ import * as Animatable from 'react-native-animatable';
 
 const LoanForm = (props) => {
   const selectedLoanType = props.loanType;
-  const LOAN_AMOUNT_DEFAULT_VALUE = 30;
-  const MONTHLY_EMI_DEFAULT_VALUE = 50;
-  const INTEREST_RATE_DEFAULT_VALUE = 9;
+  const LOAN_AMOUNT_DEFAULT_VALUE = 5000000;
+  const MONTHLY_EMI_DEFAULT_VALUE = 50000;
+  const INTEREST_RATE_DEFAULT_VALUE = 8;
   const LOAN_TENURE_DEFAULT_VALUE = 10;
   const MONTHLY_PREPAYMENT_DEFAULT_VALUE = 0;
 
@@ -25,17 +25,17 @@ const LoanForm = (props) => {
   const ANIMATION_DURATION = 500;
   const [loanInfo, setLoanInfo] = useState(INITIAL_STATE);
 
-  const loanAmountConfig = { min: 5, max: 100, step: 1 };
+  const loanAmountConfig = { min: 1000000, max: 10000000, step: 100000 };
   const loanTenureConfig = { min: 5, max: 30, step: 1 };
-  const interestRateConfig = { min: 5, max: 20, step: .5 };
-  const emiConfig = { min: 10, max: 100, step: 1 };
-  const prePaymentConfig ={ min: 0, max: 100, step: 1 };
+  const interestRateConfig = { min: 5.00, max: 20.00, step: .5 };
+  const emiConfig = { min: 10000, max: 100000, step: 1000 };
+  const prePaymentConfig = { min: 0, max: 100000, step: 1000 };
 
-  const loanAmountMarker = generateMarker('L', loanAmountConfig.min, loanAmountConfig.max);
-  const emiAmountMarker = generateMarker('K', emiConfig.min, emiConfig.max);
-  const intRateMarker = generateMarker('%', interestRateConfig.min,interestRateConfig.max, 2);
+  const loanAmountMarker = generateMarker('L', 10, 100, 10);;
+  const emiAmountMarker = generateMarker('K', 10, 100, 10);
+  const intRateMarker = generateMarker('%', interestRateConfig.min, interestRateConfig.max, 2);
   const loanTenureMarker = generateMarker('y', loanTenureConfig.min,loanTenureConfig.max, 2);
-  const prePaymentMarker = generateMarker('K', emiConfig.min, emiConfig.max);
+  const prePaymentMarker = generateMarker('K', 0, 100, 10);
 
   const onChange = (name, newValue) => {
     setLoanInfo(prevState => ({
@@ -57,7 +57,7 @@ const LoanForm = (props) => {
   return (
     <View style={styles.root}>
       <Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
-        <InputSlider
+        <InputSliderExtended
           label= { selectedLoanType == 0 ? "Loan Amount(In lakhs)" : "Outstanding Loan(In lakhs)"}
           min={loanAmountConfig.min}
           max={loanAmountConfig.max}
@@ -72,7 +72,7 @@ const LoanForm = (props) => {
       {
         selectedLoanType === 0 ?
           <Animatable.View animation="slideInRight" useNativeDriver={true} duration={ANIMATION_DURATION}>
-            <InputSlider
+            <InputSliderExtended
               label="Loan Tenure"
               min={loanTenureConfig.min}
               max={loanTenureConfig.max}
@@ -85,7 +85,7 @@ const LoanForm = (props) => {
             />
           </Animatable.View> :
           <Animatable.View animation="slideInRight" useNativeDriver={true} duration={ANIMATION_DURATION}>
-            <InputSlider
+            <InputSliderExtended
               label="EMI Amount"
               min={emiConfig.min}
               max={emiConfig.max}
@@ -99,7 +99,7 @@ const LoanForm = (props) => {
           </Animatable.View>
       }
       <Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
-        <InputSlider
+        <InputSliderExtended
           label="Interest Rate"
           min={interestRateConfig.min}
           max={interestRateConfig.max}
@@ -113,7 +113,7 @@ const LoanForm = (props) => {
         />
       </Animatable.View>
       <Animatable.View animation="slideInRight"  useNativeDriver={true} duration={ANIMATION_DURATION}>
-        <InputSlider
+        <InputSliderExtended
           label="Additional Payment (monthly)"
           min={prePaymentConfig.min}
           max={prePaymentConfig.max}

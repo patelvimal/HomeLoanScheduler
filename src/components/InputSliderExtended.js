@@ -1,0 +1,159 @@
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { Input, Slider } from 'react-native-elements';
+import Marker from './Marker';
+import RupeeIcon from './RupeeIcon';
+import { useEffect } from 'react';
+
+const InputSliderExtended = props => {
+	const { min, max, step, value, markers, name } = props;
+	const [inputValue, setValue] = React.useState(value || 0);
+	const [sliderValue, setSliderValue] = React.useState(value || 0);
+	const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
+	const decimalRegex = /^((?:|1|[1-9]\d?|100)(?:\.\d{0,2})?)$/;
+	const regex = props.type == 'Decimal' ? decimalRegex : decimalRegex;
+
+	const handleSliderChange = value => {
+		updateValue(value);
+	};
+
+	const handleInputChange = value => {
+		updateValue(value);
+	};
+
+	useEffect(() => {
+		const newVal = isNumber(inputValue) ? inputValue : 0;
+		setSliderValue(Number(newVal));
+	}, [inputValue])
+
+
+	useEffect(() => {
+		const newVal = isNumber(value) ? value : 0;
+		setValue(newVal);
+		setSliderValue(Number(newVal));
+	}, [value])
+
+
+	const onBlur = () => {
+		console.log(`min ${min} max ${max} value ${inputValue} result ${regex.test(inputValue)}`);
+		if (inputValue === '' || (inputValue >= min && inputValue <= max)) {
+			const newValue = inputValue === '' ? min : Number(inputValue);
+			updateValue(newValue);
+		}
+		else {
+			updateValue(0);
+		}
+
+	}
+
+	const updateValue = (value) => {
+		setValue(value);
+		invokeCallback(value);
+	}
+
+	const invokeCallback = newValue => {
+		if (props.onChange && typeof props.onChange === 'function') {
+			props.onChange(name, newValue);
+		}
+	};
+
+	const isNumber = n => {
+		return n != '' && typeof n != 'boolean' && !isNaN(n);
+	};
+
+	const addThousandSeperator = input => {
+		return input.toString().replace(/,/gi,"").replace(/(\d)(?=(\d{2})+[0-9]$)/g, '$1,');
+	}
+
+	return (
+		<React.Fragment>
+			<View style={styles.root}>
+				<Text style={styles.label}>{props.label}</Text>
+				<View style={styles.inputContainer}>
+					{props.icon}
+					<Input
+						value={String(inputValue)}
+						placeholder=""
+						keyboardType="numeric"
+						onBlur={onBlur}
+						errorStyle={styles.errorStyle}
+						onChangeText={handleInputChange}
+						inputContainerStyle={styles.input}
+					/>
+				</View>
+			</View>
+			<View style={sliderStyle.sliderRoot}>
+				<Slider
+					value={sliderValue}
+					onValueChange={handleSliderChange}
+					minimumValue={min}
+					maximumValue={max}
+					step={step}
+					trackStyle={sliderStyle.track}
+					thumbTintColor="#fff"
+					thumbStyle={sliderStyle.thumbStyle}
+					maximumTrackTintColor="#64b3ef"
+					minimumTrackTintColor="darkslateblue"
+				/>
+				<Marker values={markers} />
+			</View>
+		</React.Fragment>
+	);
+};
+
+
+const styles = StyleSheet.create({
+	root: {
+		flexDirection: 'row',
+		marginTop: 10,
+		borderWidth: 0,
+		borderColor: 'red',
+	},
+	label: {
+		padding: 6,
+		marginTop: 4,
+		fontSize: 15,
+	},
+	inputContainer: {
+		marginLeft: 40,
+		flexDirection: 'row',
+		position: 'absolute',
+		right: 0
+	},
+	input: {
+		borderWidth: 1,
+		borderColor: 'grey',
+		borderRadius: 5,
+		padding: 0,
+		width: 110,
+		height: 44
+	},
+	errorStyle: {
+		display: 'none',
+	},
+});
+
+
+const sliderStyle = StyleSheet.create({
+	sliderRoot: {
+		padding: 6,
+		borderWidth: 0,
+		borderColor: 'lightgrey',
+	},
+	track: {
+		padding: 4,
+		borderRadius: 50,
+		backgroundColor: '#fff',
+		color: '#fff',
+	},
+	thumbStyle: {
+		backgroundColor: '#fff',
+		padding: 12,
+		borderStyle: 'solid',
+		borderColor: '#209ddb',
+		borderWidth: 2,
+		marginTop: 2,
+		borderRadius: 100,
+	}
+})
+export default InputSliderExtended;
