@@ -32,7 +32,7 @@ const LoanForm = (props) => {
 	const [formState, setFormState] = useState(INITIAL_FORM_STATE);
 
 	const loanAmountConfig = { min: 1000000, max: 10000000, step: 100000 };
-	const loanTenureConfig = { min: 5, max: 30, step: 1 };
+	const loanTenureConfig = { min: 3, max: 30, step: 1 };
 	const interestRateConfig = { min: 3.00, max: 20.00, step: .5 };
 	const emiConfig = { min: 10000, max: 100000, step: 1000 };
 	const prePaymentConfig = { min: 0, max: 100000, step: 1000 };
@@ -40,7 +40,7 @@ const LoanForm = (props) => {
 	const loanAmountMarker = generateMarker('L', 10, 100, 10);;
 	const emiAmountMarker = generateMarker('K', 10, 100, 10);
 	const intRateMarker = generateMarker('%', interestRateConfig.min, interestRateConfig.max, 2);
-	const loanTenureMarker = generateMarker('y', loanTenureConfig.min, loanTenureConfig.max, 2);
+	const loanTenureMarker = generateMarker('Y', loanTenureConfig.min, loanTenureConfig.max, 3);
 	const prePaymentMarker = generateMarker('K', 0, 100, 10);
 
 	const onChange = (name, newValue) => {
@@ -107,7 +107,7 @@ const LoanForm = (props) => {
 		<View style={styles.root}>
 			{
 				!formState.isFormValid && <Header
-				placement="left"
+					placement="left"
 					centerComponent={<ErrorMessage message={formState.message}/>}
 					leftComponent={<Icon name="warning" size={22} color="#fff" />}
 					containerStyle={{

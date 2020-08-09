@@ -145,6 +145,7 @@ const App = () => {
             selectedButtonStyle={styles.selectedGroupButton}
             containerStyle={styles.buttonGroupContainer}
             textStyle={styles.buttonGroupTextStyle}
+            selectedTextStyle={styles.selectedTextStyle}
           />
           <LoanForm key={selectedLoanType} onFormSubmit={onFormSubmit} loanType={selectedLoanType}/>
           {calculatedLoanInfo ? (
@@ -170,13 +171,21 @@ const styles = StyleSheet.create({
     height:50,
     marginTop:15,
     marginBottom:10,
-    borderRadius:8
+    borderRadius:8,
+    borderWidth:0,
+    backgroundColor:'#f9fcef'
   },
   buttonGroupTextStyle: {
     fontSize: 18,
   },
   selectedGroupButton: {
-    backgroundColor:'#4b0082',
+    backgroundColor:'#f9fcef',
   },
+  selectedTextStyle:{
+    color:'darkmagenta',
+    fontWeight:'bold',
+    fontSize:20,
+    textDecorationLine:'underline',
+  }
 });
 export default App;
