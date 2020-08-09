@@ -51,6 +51,16 @@ const LoanForm = (props) => {
 	};
 
 	const onSubmit = event => {
+		var monthlyInterest = (loanInfo.loanAmount * ((loanInfo.interestRate / 100) / 12)).roundOf(0);
+		console.log(monthlyInterest);
+		if (selectedLoanType == 1 && loanInfo.emi <= monthlyInterest) {
+			setFormState({
+				isFormValid: false,
+				message: `For the entered Loan Amount and Interest Rate,EMI should be more than ${monthlyInterest.addThousandSeperator()}`
+			});
+			return;
+		} 
+
 		if (props.onFormSubmit && typeof props.onFormSubmit === 'function') {
 			props.onFormSubmit(loanInfo);
 		}
@@ -58,7 +68,6 @@ const LoanForm = (props) => {
 
 	useEffect(() => {
 		const formState = getFormState();
-		console.log(formState);
 		setFormState(formState);
 	}, [loanInfo])
 
@@ -68,21 +77,25 @@ const LoanForm = (props) => {
 		if (selectedLoanType == 0) {
 			if (loanInfo.loanAmount == 0) {
 				fieldName = "Loan Amount";
+				formValid = false;
 			} else if (loanInfo.loanTenure == 0) {
 				fieldName = "Loan Tenure";
+				formValid = false;
 			} else if (loanInfo.interestRate == 0) {
 				fieldName = "Interest Rate";
+				formValid = false;
 			}
-			formValid = !(loanInfo.loanAmount == 0 || loanInfo.loanTenure == 0 || loanInfo.interestRate == 0);
 		} else {
 			if (loanInfo.loanAmount == 0) {
 				fieldName = "Loan Amount";
+				formValid = false;
 			} else if (loanInfo.emi == 0) {
 				fieldName = "EMI";
+				formValid = false;
 			} else if (loanInfo.interestRate == 0) {
 				fieldName = "Interest Rate";
+				formValid = false;
 			}
-			formValid = !(loanInfo.loanAmount == 0 || loanInfo.emi == 0 || loanInfo.interestRate == 0);
 		}
 		return {
 			isFormValid: formValid,
@@ -94,7 +107,8 @@ const LoanForm = (props) => {
 		<View style={styles.root}>
 			{
 				!formState.isFormValid && <Header
-					centerComponent={{ text: formState.message, style: { fontSize: 17, color: '#fff' } }}
+				placement="left"
+					centerComponent={<ErrorMessage message={formState.message}/>}
 					leftComponent={<Icon name="warning" size={22} color="#fff" />}
 					containerStyle={{
 						backgroundColor: 'red',
@@ -186,6 +200,14 @@ const LoanForm = (props) => {
 		</View>
 	);
 };
+
+const ErrorMessage = (props) => {
+	return <Text style={errorStyles.root} numberOfLines={2}>{props.message}</Text>;
+};
+
+const errorStyles = StyleSheet.create({
+	root:{ fontSize: 15, color: '#fff',borderWidth:0 },
+});
 
 const styles = StyleSheet.create({
 	root: {

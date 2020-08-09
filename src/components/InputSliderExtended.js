@@ -22,38 +22,43 @@ const InputSliderExtended = props => {
 	};
 
 	useEffect(() => {
-		const newVal = isNumber(inputValue) ? inputValue : 0;
+		const numericValue = stripThousandSeperator(inputValue);
+		const newVal = isNumber(numericValue) ? numericValue : 0;
 		setSliderValue(Number(newVal));
 	}, [inputValue])
 
 
 	useEffect(() => {
-		const newVal = isNumber(value) ? value : 0;
-		setValue(newVal);
+		const numericValue = stripThousandSeperator(value);
+		const formattedValue = addThousandSeperator(numericValue);
+		const newVal = isNumber(numericValue) ? numericValue : 0;
+		setValue(formattedValue);
 		setSliderValue(Number(newVal));
 	}, [value])
 
 
 	const onBlur = () => {
-		console.log(`min ${min} max ${max} value ${inputValue} result ${regex.test(inputValue)}`);
-		if (inputValue === '' || (inputValue >= min && inputValue <= max)) {
-			const newValue = inputValue === '' ? min : Number(inputValue);
-			updateValue(newValue);
+		const numericValue = stripThousandSeperator(inputValue);
+		if (numericValue === '' || (numericValue >= min && numericValue <= max)) {
+			const formattedValue = addThousandSeperator(numericValue);
+			updateValue(formattedValue);
 		}
 		else {
-			updateValue(0);
+			updateValue(max);
 		}
 
 	}
 
 	const updateValue = (value) => {
-		setValue(value);
-		invokeCallback(value);
+		const numericValue = stripThousandSeperator(value);
+		const newValue = addThousandSeperator(numericValue);
+		setValue(newValue);
+		invokeCallback(numericValue);
 	}
 
 	const invokeCallback = newValue => {
 		if (props.onChange && typeof props.onChange === 'function') {
-			props.onChange(name, newValue);
+			props.onChange(name, Number(newValue));
 		}
 	};
 
@@ -62,7 +67,11 @@ const InputSliderExtended = props => {
 	};
 
 	const addThousandSeperator = input => {
-		return input.toString().replace(/,/gi,"").replace(/(\d)(?=(\d{2})+[0-9]$)/g, '$1,');
+		return input.toString().replace(/(\d)(?=(\d{2})+[0-9]$)/g, '$1,');
+	}
+
+	const stripThousandSeperator = input => {
+		return input.toString().replace(/,/gi,'');
 	}
 
 	return (
