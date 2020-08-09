@@ -120,13 +120,14 @@ const LoanForm = (props) => {
 			}
 			<Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
 				<InputSliderExtended
-					label={selectedLoanType == 0 ? "Loan Amount(In lakhs)" : "Outstanding Loan(In lakhs)"}
+					label={selectedLoanType == 0 ? "Loan Amount" : "Outstanding Loan(In lakhs)"}
 					min={loanAmountConfig.min}
 					max={loanAmountConfig.max}
 					step={loanAmountConfig.step}
 					value={LOAN_AMOUNT_DEFAULT_VALUE}
 					onChange={onChange}
 					name="loanAmount"
+					removeValidation={true}
 					markers={loanAmountMarker}
 					icon={<RupeeIcon />}
 				/>
@@ -141,6 +142,7 @@ const LoanForm = (props) => {
 							step={loanTenureConfig.step}
 							value={LOAN_TENURE_DEFAULT_VALUE}
 							onChange={onChange}
+							maxLength={3}
 							name="loanTenure"
 							icon={<Text style={styles.yearIcon}>Years</Text>}
 							markers={loanTenureMarker}
@@ -169,6 +171,7 @@ const LoanForm = (props) => {
 					value={INTEREST_RATE_DEFAULT_VALUE}
 					onChange={onChange}
 					name="interestRate"
+					maxLength={5}
 					type="Decimal"
 					icon={<Text style={styles.interestIcon}>%</Text>}
 					markers={intRateMarker}

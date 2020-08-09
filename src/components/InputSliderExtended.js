@@ -6,7 +6,7 @@ import RupeeIcon from './RupeeIcon';
 import { useEffect } from 'react';
 
 const InputSliderExtended = props => {
-	const { min, max, step, value, markers, name } = props;
+	const { min, max, step, value, markers, name, maxLength, removeValidation } = props;
 	const [inputValue, setValue] = React.useState(value || 0);
 	const [sliderValue, setSliderValue] = React.useState(value || 0);
 	const integerRegex = /^((?:|1|[1-9]\d?|100)?)$/;
@@ -44,7 +44,7 @@ const InputSliderExtended = props => {
 			updateValue(formattedValue);
 		}
 		else {
-			updateValue(max);
+			removeValidation ? updateValue(numericValue): updateValue(max);
 		}
 
 	}
@@ -85,6 +85,7 @@ const InputSliderExtended = props => {
 						placeholder=""
 						keyboardType="numeric"
 						onBlur={onBlur}
+						maxLength={maxLength || 11}
 						errorStyle={styles.errorStyle}
 						onChangeText={handleInputChange}
 						inputContainerStyle={styles.input}
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
 	label: {
 		padding: 6,
 		marginTop: 4,
-		fontSize: 15,
+		fontSize: 16,
 	},
 	inputContainer: {
 		marginLeft: 40,

@@ -33,7 +33,7 @@ const App = () => {
   const [calculatedLoanInfo, setLoanCalculation] = useState(null);
   const [loanComparisonInfo, setLoanComparison] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [selectedLoanType, setLoanType] = useState(1);
+  const [selectedLoanType, setLoanType] = useState(0);
 
   const resultView = useRef(null);
 
