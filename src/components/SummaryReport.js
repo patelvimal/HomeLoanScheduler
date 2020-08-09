@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import RupeeIcon from './RupeeIcon';
+
 import * as Animatable from 'react-native-animatable';
+import RupeeIconWithText from './RupeeIconWithText';
 
 const SummaryReport = props => {
   const {total, completionDate, principal, interest, emi,loanType} = props.data;
@@ -14,8 +16,7 @@ const SummaryReport = props => {
             <View style={styles.emiInfo}>
               <Text style={styles.emiLabel}>Monthly EMI</Text>
               <View style={styles.emiValue}>
-                <RupeeIcon style={styles.rupeeIconBig} />
-                <Text style={styles.emiValueText}>{emi.addThousandSeperator()}</Text>
+                 <RupeeIconWithText style={styles.rupeeIconBig} text={emi.addThousandSeperator()}/>
               </View>
             </View>
           : null
@@ -72,9 +73,12 @@ const styles = StyleSheet.create({
   },
   rupeeIconBig: {
     fontSize:40,
-    paddingRight:8,
+    paddingRight:0,
     paddingTop:0,
     color:'darkmagenta',
+    fontWeight:'bold',
+    flex:1,
+    textAlign:'center'
   },
   emiValue: {
     alignItems: 'center',
