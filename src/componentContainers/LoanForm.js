@@ -120,7 +120,7 @@ const LoanForm = (props) => {
 			}
 			<Animatable.View animation="slideInLeft" useNativeDriver={true} duration={ANIMATION_DURATION}>
 				<InputSliderExtended
-					label={selectedLoanType == 0 ? "Loan Amount" : "Outstanding Loan(In lakhs)"}
+					label={selectedLoanType == 0 ? "Loan Amount" : "Outstanding Loan"}
 					min={loanAmountConfig.min}
 					max={loanAmountConfig.max}
 					step={loanAmountConfig.step}
@@ -156,6 +156,7 @@ const LoanForm = (props) => {
 							step={emiConfig.step}
 							value={MONTHLY_EMI_DEFAULT_VALUE}
 							onChange={onChange}
+							removeValidation={true}
 							name="emi"
 							icon={<RupeeIcon />}
 							markers={emiAmountMarker}

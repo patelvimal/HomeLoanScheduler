@@ -21,7 +21,7 @@ const LoanResult = props => {
       </CardLayout>
       <CardLayout
         removeContentStyle>
-        <GoogleAds />
+         {props.showAds && <GoogleAds />}
       </CardLayout>
       <CardLayout
         title="Comparison">
@@ -44,7 +44,7 @@ const LoanResult = props => {
         removeContentStyle>
         <BarChart data={loanSummary} />
         <LoanDetail loanInfo={loanSummary} style={styles.loanDetail} />
-        <GoogleAds />
+        {props.showAds && <GoogleAds />}
       </CardLayout>
     </View>
   );
