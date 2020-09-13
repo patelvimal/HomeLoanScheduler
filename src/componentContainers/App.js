@@ -93,7 +93,15 @@ const App = () => {
 
         var loanSummaryWithoutPrepayment = null;
         var totalWithoutPrepayment = null;
-        if (prePayment > 0) {
+        var interestSaved = 0;
+        
+        var total = getTotal([...loanSummary], loanInfo.loanAmount);
+        if (total) {
+            total.completionDate = getCompletionDate(loanDetail);
+            total.emi = loanInfo.emi.roundOf(0);
+            total.loanType = selectedLoanType;
+        }
+        if (total && prePayment > 0) {
             const loanDetailWithoutPrepayment = calcHomeLoan(
                 loanAmount,
                 emi,
@@ -108,19 +116,14 @@ const App = () => {
             totalWithoutPrepayment.completionDate = getCompletionDate(
                 loanDetailWithoutPrepayment,
             );
-        }
-
-        var total = getTotal([...loanSummary], loanInfo.loanAmount);
-        if (total) {
-            total.completionDate = getCompletionDate(loanDetail);
-            total.emi = loanInfo.emi.roundOf(0);
-            total.loanType = selectedLoanType;
+            interestSaved = totalWithoutPrepayment.interest - total.interest;
         }
 
         setLoanCalculation({
             total: total,
             loanSummary: loanSummary,
             totalWithoutPrepayment: totalWithoutPrepayment,
+            interestSaved : interestSaved
         });
     };
 

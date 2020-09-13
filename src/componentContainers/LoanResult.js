@@ -10,14 +10,13 @@ import BarChart from '../components/BarChart';
 import GoogleAds from '../components/googleAds';
 
 const LoanResult = props => {
-  const { total, loanSummary, totalWithoutPrepayment } = props.loanInfo;
+  const { total, loanSummary, totalWithoutPrepayment,interestSaved } = props.loanInfo;
   const comparisonMessage =
     'A comparison for loan payment. Along with monthly EMI if you pay additional payment then it will show how long will it take to completely pay off the loan.';
-
   return (
     <View>
       <CardLayout title="Summary">
-        <SummaryReport data={total} />
+        <SummaryReport data={total} interestSaved={interestSaved}/>
       </CardLayout>
       <CardLayout
         removeContentStyle>
@@ -44,7 +43,7 @@ const LoanResult = props => {
         removeContentStyle>
         <BarChart data={loanSummary} />
         <LoanDetail loanInfo={loanSummary} style={styles.loanDetail} />
-        {props.showAds && <GoogleAds />}
+        {/* {props.showAds && <GoogleAds />} */}
       </CardLayout>
     </View>
   );

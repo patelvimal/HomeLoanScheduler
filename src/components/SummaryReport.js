@@ -22,6 +22,18 @@ const SummaryReport = props => {
           : null
         }
       </Animatable.View>
+      <Animatable.View animation="slideInDown" useNativeDriver={true}>
+        {
+          props.interestSaved !== 0 ? 
+            <View style={styles.emiInfo}>
+              <Text style={styles.emiLabel}>Total Interest Saving</Text>
+              <View style={styles.emiValue}>
+                 <RupeeIconWithText style={styles.rupeeIconBig} text={props.interestSaved.addThousandSeperator()}/>
+              </View>
+            </View>
+          : null
+        }
+      </Animatable.View>
       <Animatable.View animation="slideInUp"  useNativeDriver={true}>
         <View style={ loanType == 1 ? styles.emiInfo : styles.completionInfo}>
           <Text style={styles.completionLabel}>Completion Date</Text>
