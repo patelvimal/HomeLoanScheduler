@@ -9,7 +9,7 @@ const { width, height } = Dimensions.get('window');
 
 const Sidebar = ({ isOpen, onClose }) => {
   const playStoreLink = 'market://details?id=com.homeloanscheduler';
-  const whatsAppLink = 'https://api.whatsapp.com/send?text="https://play.google.com/store/apps/details?id=com.homeloanscheduler"'
+  const whatsAppLink = 'https://api.whatsapp.com/send?text= *_Home Loan Scheduler_*  \nhttps://play.google.com/store/apps/details?id=com.homeloanscheduler'
 
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
