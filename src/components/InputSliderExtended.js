@@ -18,8 +18,15 @@ const InputSliderExtended = props => {
 	};
 
 	const handleInputChange = value => {
-		updateValue(value);
+		if (isNumeric(value)){
+			updateValue(value);
+		}
 	};
+
+	const isNumeric = input => {
+		var rgx = /^[0-9]*\.?[0-9]*$/;
+		return input.match(rgx);
+	}
 
 	useEffect(() => {
 		const numericValue = stripThousandSeperator(inputValue);
