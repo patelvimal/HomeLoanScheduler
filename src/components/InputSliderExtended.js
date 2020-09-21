@@ -24,7 +24,7 @@ const InputSliderExtended = props => {
 	};
 
 	const isNumeric = input => {
-		var rgx = /^[0-9]*\.?[0-9]*$/;
+		var rgx = /^[0-9,]*\.?[0-9,]*$/;
 		return input.match(rgx);
 	}
 
